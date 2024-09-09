@@ -1,0 +1,225 @@
+.settings {
+    max-width: 700px;
+    margin:  0 auto;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    & h3 {
+        font-size: 1.5rem;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;    
+    }
+
+    &__content {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+    }
+
+    &__image {
+        
+    }
+}
+
+.image {
+    position: relative;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    overflow: hidden;
+
+    &__toggle {
+        width: 130px;
+        height: 130px;
+        
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.color_blue {
+            background-color: rgba($color: #002aff, $alpha: 0.2);
+            
+            &:hover {
+                background-color: rgba($color: #002aff, $alpha: 0.3);     
+            }
+        }
+        &.color_blue {
+            background-color: rgba($color: #002aff, $alpha: 0.2);
+            
+            &:hover {
+                background-color: rgba($color: #002aff, $alpha: 0.3);     
+            }
+        }
+        &.color_green {
+            background-color: rgba($color: #00ff11, $alpha: 0.2);
+            
+            &:hover {
+                background-color: rgba($color: #00ff11, $alpha: 0.3);     
+            }
+        }
+        &.color_red {
+            background-color: rgba($color: #ff0000, $alpha: 0.2);
+            
+            &:hover {
+                background-color: rgba($color: #ff0000, $alpha: 0.3);     
+            }
+        }
+        &.color_yellow {
+            background-color: rgba($color: #ffff00, $alpha: 0.2);
+            
+            &:hover {
+                background-color: rgba($color: #ffff00, $alpha: 0.3);     
+            }
+        }
+
+
+        & span {
+            font-size: 2rem;
+        }
+        
+
+    }
+
+    &__icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        z-index: 1;
+        transform: translate(-50%, -50%);
+
+        width: 40px;
+        height: 40px;
+
+        fill: white;
+        stroke: white;
+    }
+
+    &__input, &__delete {
+        cursor: pointer;
+        opacity: 0;
+
+        display: block;
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+
+    &__upload {
+
+    }
+
+    &__picture {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+
+        &.darker {
+            filter: brightness(0.3);
+        }
+
+    }
+}
+
+.inputs {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.status {
+    font-size: 1rem;
+
+    span {
+        font-size: inherit;
+    }
+
+    &__error {
+        color: #ff5959;
+    }
+
+    &__success {
+        color: #7fffac;
+    }
+}
+
+.radios {
+    display: flex;
+    gap: 10px;
+
+    &__el {
+        position: relative;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 1px solid white;
+        background: black;
+        
+        &.BLUE {
+            background-color: #0d4a64;        
+            
+            &:has(input:checked) {
+                background-color: #37b2e7;
+            }
+        }
+
+        &.GREEN {
+            background-color: #316811;
+            
+            &:has(input:checked) {
+                background-color: #46e737;
+            }
+        }
+
+        &.RED {
+            background-color: #681111;
+            
+            &:has(input:checked) {
+                background-color: #e73737;
+            }
+        }
+
+        &.YELLOW {
+            background-color: #685c11;
+            
+            &:has(input:checked) {
+                background-color: #e7e737;
+            }
+        }
+
+
+
+
+        & input {
+            cursor: pointer;
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
+
+        input {
+            opacity: 0;
+        }
+    } 
+
+}

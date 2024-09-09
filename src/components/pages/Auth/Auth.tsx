@@ -1,0 +1,55 @@
+import { useEffect, useState } from "react";
+import classes from "./Auth.module.scss";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
+import { useNavigate } from "react-router-dom";
+import ButtonForm from "@/components/elements/Buttons/ButtonForm";
+import SignUpForm from "@/components/elements/Forms/SignUpForm/SignUpForm";
+import LogInForm from "@/components/elements/Forms/LogInForm/LogInForm";
+
+enum EnumToggleAuthState {
+  LOG_IN = "login",
+  SIGN_UP = "signup",
+}
+
+export default function () {
+  let user = useSelector((state: RootState) => state.authSlice.user);
+  let navigate = useNavigate();
+
+  let [activeState, setActiveState] = useState<EnumToggleAuthState>();
+
+  useEffect(() => {
+    console.log(user);
+
+    if (user) {
+      navigate("/profile");
+    }
+  }, [user]);
+
+  return (
+    <div className={classes.container}>
+      <section className={classes.auth__wrapper}>
+        <div className={classes.auth__content}>
+          <h2>Привет! ✌️</h2>
+          <p>Зайди или создай свой аккаунт, чтобы переписываться</p>
+
+          <div className={classes.auth__buttons}>
+            <ButtonForm
+              onClick={() => setActiveState(EnumToggleAuthState.LOG_IN)}
+            >
+              Войти
+            </ButtonForm>
+            <ButtonForm
+              onClick={() => setActiveState(EnumToggleAuthState.SIGN_UP)}
+            >
+              Зарегистрироваться
+            </ButtonForm>
+          </div>
+
+          {activeState == EnumToggleAuthState.LOG_IN ? <LogInForm /> : <></>}
+          {activeState == EnumToggleAuthState.SIGN_UP ? <SignUpForm /> : <></>}
+        </div>
+      </section>
+    </div>
+  );
+}
