@@ -14,6 +14,7 @@
     }
 
     &__content {
+        width: 100%;
         padding: 0 30px;
         flex: 1 0 auto;
 
@@ -35,7 +36,11 @@
         flex-direction: column;
     }
 
-    
+    &__headerWithBtn {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
 @media (max-width: 480px) {

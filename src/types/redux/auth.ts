@@ -65,6 +65,12 @@ export interface IDBUser {
 
 }
 
+export interface IDBLogOutResponse {
+    data: {
+        success: boolean
+    }
+}
+
 
 export interface IDBUserWithTokens {
     user: IDBUser,

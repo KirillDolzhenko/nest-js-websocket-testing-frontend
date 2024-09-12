@@ -7,6 +7,7 @@ import { ImAttachment } from "react-icons/im";
 import { BsEmojiSmile } from "react-icons/bs";
 import EmojiPicker, { Theme, EmojiClickData } from "emoji-picker-react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Tooltip } from "react-tooltip";
 
 export default function ({ className }: IPropsClassName) {
   let [activeEmoji, setActiveEmoji] = useState<boolean>(false);
@@ -92,7 +93,6 @@ export default function ({ className }: IPropsClassName) {
           ></textarea>
           <div className={classes.input__buttons}>
             <div ref={ref} className={classes.emojiPicker}>
-
               <EmojiPicker
                 style={{
                   width: "250px",
@@ -104,9 +104,20 @@ export default function ({ className }: IPropsClassName) {
                 open={activeEmoji}
               />
             </div>
+
+            <Tooltip
+              className="tooltip"
+              anchorSelect={`.${classes.input__emoji}`}
+              place="top"
+            >
+              Add emoji
+            </Tooltip>
             <button
               ref={refEmojiToggle}
-              className={classes.input__button}
+              className={classNames(
+                classes.input__button,
+                classes.input__emoji
+              )}
               onClick={() => {
                 setActiveEmoji(!activeEmoji);
               }}

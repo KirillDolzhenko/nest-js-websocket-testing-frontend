@@ -35,6 +35,11 @@ export interface IPropsButtonForm extends IPropsChildren {
     type?: string
 }
 
+export interface IPropsButtonAdd extends IPropsClassName {
+    onClick?: () => void;
+    type?: string
+}
+
 // ProfilePicture
 
 export interface IPropsProfilePicture extends IPropsClassName {
@@ -44,3 +49,11 @@ export interface IPropsProfilePicture extends IPropsClassName {
 }
 
 export interface IPropsUserInfo extends IPropsProfilePicture {}
+
+
+// Modal
+
+export interface IPropsModalTemplate extends IPropsChildren {
+    active: boolean,
+    setActive: (active: boolean) => void
+}

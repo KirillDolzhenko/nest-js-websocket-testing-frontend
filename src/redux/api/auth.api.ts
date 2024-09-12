@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { IDBUser, IDBUserWithTokens, IRTKQueryLogIn, IRTKQuerySignUp, IRTKQueryUpdateProfile } from '../../types/redux/auth';
+import { IDBLogOutResponse, IDBUser, IDBUserWithTokens, IRTKQueryLogIn, IRTKQuerySignUp, IRTKQueryUpdateProfile } from '../../types/redux/auth';
 import { baseQueryWithReauthGenerator } from './assets/baseQueryWithReauthGenerator.api';
 
 export const authApi = createApi({
@@ -95,6 +95,18 @@ export const authApi = createApi({
             return response
         },
       }),
+      logOut: builder.mutation<boolean, void>({
+        query: () => ({
+          url: `logout`,
+          method: "POST",
+          authLogic: true,
+          credentials: "include"
+        }),
+        transformResponse: (response: IDBLogOutResponse) => response.data.success,
+        transformErrorResponse: (response) => {
+            return response
+        },
+      }),
     }),
 
   })
@@ -104,6 +116,7 @@ export const {
   useUpdateProfileMutation,
   useLogInMutation, 
   useSignUpMutation,
+  useLogOutMutation,
   useRemovePicProfileMutation
 } = authApi;
   

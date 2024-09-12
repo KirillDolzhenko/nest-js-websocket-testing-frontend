@@ -1,0 +1,45 @@
+.block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__buttons {
+        display: flex;
+        gap: 15px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & button, a {
+            width: 20px;
+            height: 20px;
+
+
+            & svg {
+        vertical-align: top;
+
+                opacity: 0.6;
+                width: 100%;
+                height: 100%;
+                
+            transition: all ease 0.2s;
+            }
+
+            &:hover {
+                & svg {
+                    opacity: 0.8;
+                }
+
+            }
+        }
+    }
+}
+
+.button {
+    &__edit {
+        background: transparent;
+    }
+    &__exit {
+        background: transparent;
+    }
+}

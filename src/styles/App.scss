@@ -67,6 +67,19 @@
 
 body {
   background-color: $mainBg;
+
+  
+.react-tooltip {
+  font-size: 0.7rem;
+  --rt-color-dark: #{$inputBg};
+  border-radius: 5px;
+
+  .react-tooltip-arrow {
+    opacity: 0;
+  }
+  }
+
+
 }
 
 // input {

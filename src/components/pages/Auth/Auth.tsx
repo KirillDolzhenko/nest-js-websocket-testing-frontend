@@ -30,8 +30,8 @@ export default function () {
     <div className={classes.container}>
       <section className={classes.auth__wrapper}>
         <div className={classes.auth__content}>
-          <h2>Привет! ✌️</h2>
-          <p>Зайди или создай свой аккаунт, чтобы переписываться</p>
+          <h2>Hi! ✌️</h2>
+          <p>Log in or create your account for chatting</p>
 
           <div className={classes.auth__buttons}>
             <ButtonForm
