@@ -2,12 +2,13 @@
 
 .chatPlaceholder {
     padding: 50px;
-    flex: 1 0 auto;
+    flex: 1 1 auto;
 
     &__content {
         height: 100%;
         display: flex;
         flex-direction: column;
+        gap: 10px;
         
         align-items: center;
         justify-content: center;
@@ -17,11 +18,24 @@
     }
 
     &__message {
-        
-    & mark {
-        color: $highlightText;
+        font-size: 1.2rem;
+        & mark {
+            font-size: inherit;
+            color: $highlightText;
+        }
     }
-    }
+}
 
 
+@media (max-width: 768px) {
+    .chatPlaceholder {
+        padding: 50px 20px;
+
+        &__message {
+            font-size: 1rem;
+            & mark {
+                font-size: inherit;
+            }
+        }
+    }
 }

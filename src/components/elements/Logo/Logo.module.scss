@@ -1,0 +1,19 @@
+@import "../../../styles/vars/color.scss";
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+
+    svg {
+        fill: $highlightText
+    }
+}
+
+@media (max-width: 768px) {
+    
+    .logo {
+        font-size: 1.2rem;
+    }
+}

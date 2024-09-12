@@ -3,5 +3,42 @@
         display: flex;
         width: 100vw;
         height: 100vh;
+
+        // & .chat__content {
+        //     display: none;
+        // }
+
+        
+    }
+
+    & .chat__sidebar {
+        flex: 0 0 auto;
+
+        border-right: 1px solid rgba(#fff, 0.2);
+    }
+
+}
+
+@media (max-width: 768px) {
+    .chat {
+        &__container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+        }
+    }
+}
+
+
+@media (max-width: 480px) {
+    .chat {
+        & .chat__sidebar {
+            // width: 100%;
+            flex-grow: 1;
+            border-right: none;
+        }
+        & .chat__placeholder {
+            display: none;
+        }
     }
 }

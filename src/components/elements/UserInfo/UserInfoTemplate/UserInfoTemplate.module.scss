@@ -1,0 +1,13 @@
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &__username {
+        font-size: 1rem;
+    }
+
+    // &:hover {
+    //     background-color: rgba($color: #fff, $alpha: 0.2);
+    // }
+}

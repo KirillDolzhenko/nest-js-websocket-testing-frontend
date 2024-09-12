@@ -1,3 +1,5 @@
+@import "../../../../styles/vars/color.scss";
+
 .settings {
     max-width: 700px;
     margin:  0 auto;
@@ -49,38 +51,31 @@
         align-items: center;
 
         &.color_blue {
-            background-color: rgba($color: #002aff, $alpha: 0.2);
+            background-color: rgba($color: $profileBlue, $alpha: 0.2);
             
             &:hover {
-                background-color: rgba($color: #002aff, $alpha: 0.3);     
-            }
-        }
-        &.color_blue {
-            background-color: rgba($color: #002aff, $alpha: 0.2);
-            
-            &:hover {
-                background-color: rgba($color: #002aff, $alpha: 0.3);     
+                background-color: rgba($color: $profileBlue, $alpha: 0.3);     
             }
         }
         &.color_green {
-            background-color: rgba($color: #00ff11, $alpha: 0.2);
+            background-color: rgba($color: $profileGreen, $alpha: 0.2);
             
             &:hover {
-                background-color: rgba($color: #00ff11, $alpha: 0.3);     
+                background-color: rgba($color: $profileGreen, $alpha: 0.3);     
             }
         }
         &.color_red {
-            background-color: rgba($color: #ff0000, $alpha: 0.2);
+            background-color: rgba($color: $profileRed, $alpha: 0.2);
             
             &:hover {
-                background-color: rgba($color: #ff0000, $alpha: 0.3);     
+                background-color: rgba($color: $profileRed, $alpha: 0.3);     
             }
         }
         &.color_yellow {
-            background-color: rgba($color: #ffff00, $alpha: 0.2);
+            background-color: rgba($color: $profileYellow, $alpha: 0.2);
             
             &:hover {
-                background-color: rgba($color: #ffff00, $alpha: 0.3);     
+                background-color: rgba($color: $profileYellow, $alpha: 0.3);     
             }
         }
 
@@ -172,34 +167,34 @@
         background: black;
         
         &.BLUE {
-            background-color: #0d4a64;        
+            background-color: rgba($profileBlue, 0.5);
             
             &:has(input:checked) {
-                background-color: #37b2e7;
+                background-color: $profileBlue;
             }
         }
 
         &.GREEN {
-            background-color: #316811;
+            background-color: rgba($profileGreen, 0.5);
             
             &:has(input:checked) {
-                background-color: #46e737;
+                background-color: $profileGreen;
             }
         }
 
         &.RED {
-            background-color: #681111;
+            background-color: rgba($profileRed, 0.5);
             
             &:has(input:checked) {
-                background-color: #e73737;
+                background-color: $profileRed;
             }
         }
 
         &.YELLOW {
-            background-color: #685c11;
+            background-color: rgba($profileYellow, 0.5);
             
             &:has(input:checked) {
-                background-color: #e7e737;
+                background-color: $profileYellow;
             }
         }
 

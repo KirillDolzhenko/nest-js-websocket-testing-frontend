@@ -19,6 +19,9 @@ import HOKAuthCheckerForAuth from "./components/HOKs/HOKAuthCheckerForAuth";
 import Chat from "./components/pages/Chat/Chat";
 // import { RootState } from "@reduxjs/toolkit/query";
 
+import { Helmet } from "react-helmet";
+import { logoFire, logoPlanet } from "./config/icons";
+import Favicon from "react-favicon";
 // export const socket = io('http://localhost:3010', {
 //   autoConnect: false,
 // });
@@ -26,17 +29,22 @@ import Chat from "./components/pages/Chat/Chat";
 function App() {
   return (
     <div className="App">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <link rel="icon" href={logoFire} />
+      </Helmet>
       <BrowserRouter>
         <Routes>
           {/* <Route path="*" element={<div>ererer</div>} /> */}
-          <Route path="/auth" element={<HOKAuthCheckerForAuth />} />
-
           <Route
-            path="/profile"
+            path="/auth"
             element={
-              <HOKAuthChecker>
-                <Profile />
-              </HOKAuthChecker>
+              <>
+                <Helmet>
+                  <title>Авторизация</title>
+                </Helmet>
+                <HOKAuthCheckerForAuth />
+              </>
             }
           />
 
@@ -52,9 +60,16 @@ function App() {
           <Route
             path="/chat"
             element={
-              <HOKAuthChecker>
-                <Chat />
-              </HOKAuthChecker>
+              <>
+                {/* <Favicon url={logoFire} /> */}
+
+                <Helmet>
+                  <title>FireChat</title>
+                </Helmet>
+                <HOKAuthChecker>
+                  <Chat />
+                </HOKAuthChecker>
+              </>
             }
           />
 
@@ -62,7 +77,12 @@ function App() {
             path="/*"
             element={
               <HOKAuthChecker>
-                <Navigate to="/profile" />
+                <>
+                  <Helmet>
+                    <title>Мой профиль</title>
+                  </Helmet>
+                  <Navigate to="/profile" />
+                </>
               </HOKAuthChecker>
             }
           />

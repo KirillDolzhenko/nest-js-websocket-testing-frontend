@@ -34,3 +34,13 @@ export interface IPropsButtonForm extends IPropsChildren {
     onClick?: () => void;
     type?: string
 }
+
+// ProfilePicture
+
+export interface IPropsProfilePicture extends IPropsClassName {
+    url?: string,
+    color?: string,
+    username: string
+}
+
+export interface IPropsUserInfo extends IPropsProfilePicture {}

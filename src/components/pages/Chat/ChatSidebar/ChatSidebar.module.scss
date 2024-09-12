@@ -1,0 +1,46 @@
+@import "../../../../styles/vars/color.scss";
+
+.chatSidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    // padding: 30px;
+    gap: 10px;
+    width: 240px;
+    // padding-right: 70px;
+
+    .logo {
+        margin-bottom: 20px;
+    }
+
+    &__content {
+        padding: 0 30px;
+        flex: 1 0 auto;
+
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 15px;
+    }
+
+    &__logo {
+        padding: 30px 30px 0px;
+    }
+
+    &__user {
+        width: 100%;
+        gap: 10px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    
+}
+
+@media (max-width: 480px) {
+    .chatSidebar {
+        padding-right: 30px;
+        padding: 30px;
+    }
+}

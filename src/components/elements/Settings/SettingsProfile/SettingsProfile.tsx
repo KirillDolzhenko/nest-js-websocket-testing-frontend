@@ -120,7 +120,7 @@ export default function ({ user }: IPropsSettingsProfile) {
 
   return (
     <section className={classes.settings}>
-      <h3>Настройки страницы</h3>
+      <h3>Profile settings</h3>
       <form
         onSubmit={handleSubmitChangeProfile(onSumbitChangeProfile)}
         className={classes.settings__form}
@@ -167,7 +167,7 @@ export default function ({ user }: IPropsSettingsProfile) {
                     <button
                       type="button"
                       onClick={() => {
-                        dispatch(setPicProfile(null));
+                        dispatch(setPicProfile(undefined));
                         // setDeletedState(true);
                       }}
                       className={classes.image__delete}
@@ -178,7 +178,72 @@ export default function ({ user }: IPropsSettingsProfile) {
                 <></>
               )}
 
-              {user.picUrl ? (
+              {!user.picUrl ? (
+                !activeUpload ? (
+                  <span>{user.username.slice(0, 1).toUpperCase()}</span>
+                ) : (
+                  <></>
+                )
+              ) : (
+                <img
+                  className={classNames(
+                    classes.image__picture,
+                    activeUpload ? classes.darker : ""
+                  )}
+                  src={user.picUrl}
+                  alt="profilePicture"
+                />
+              )}
+
+              {/* {activeUpload ? (
+                !user.picUrl ? (
+                  <>
+                    <svg className={classes.image__icon}>
+                      <use href={`${iconPlus}#icon`} />
+                    </svg>
+                    <input
+                      className={classes.image__input}
+                      type="file"
+                      accept=".png,.jpg,.jpeg,.webp"
+                      onChange={(e: any) => {
+                        if (
+                          e.target.files[0] &&
+                          e.target.files[0].size < 5000000
+                        ) {
+                          uploadPicture({ file: e.target.files[0] });
+                        }
+                      }}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <svg className={classes.image__icon}>
+                      <use href={`${iconRemove}#icon`} />
+                    </svg>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        dispatch(setPicProfile(undefined));
+                        // setDeletedState(true);
+                      }}
+                      className={classes.image__delete}
+                    ></button>
+                  </>
+                )
+              ) : !user.picUrl ? (
+                <span>{user.username.slice(0, 1).toUpperCase()}</span>
+              ) : (
+                <img
+                  className={classNames(
+                    classes.image__picture,
+                    activeUpload ? classes.darker : ""
+                  )}
+                  src={user.picUrl}
+                  alt="profilePicture"
+                />
+              )} */}
+
+              {/* {user.picUrl ? (
                 <img
                   className={classNames(
                     classes.image__picture,
@@ -199,19 +264,19 @@ export default function ({ user }: IPropsSettingsProfile) {
                 )
               ) : (
                 <span>{user.username.slice(0, 1).toUpperCase()}</span>
-              )}
+              )} */}
             </div>
           </div>
           <div className={classes.inputs}>
             <InputText
               register={registerChangeProfile("username")}
               type="text"
-              placeholder="Ник"
+              placeholder="Nickname"
             />
             <InputText
               register={registerChangeProfile("email")}
               type="text"
-              placeholder="Почта"
+              placeholder="Email"
             />
 
             <Controller
@@ -307,14 +372,14 @@ export default function ({ user }: IPropsSettingsProfile) {
           </div>
         </div>
 
-        <ButtonForm type="submit">Изменить</ButtonForm>
+        <ButtonForm type="submit">Change</ButtonForm>
         <span className={classes.status}>
           {isLoadingUpdateProfile || isLoadingPicProfile ? (
-            <span>Загрузка...</span>
+            <span>Loading...</span>
           ) : isErrorUpdateProfile || isErrorPicProfile ? (
-            <span className={classes.status__error}>Произошла ошибка</span>
+            <span className={classes.status__error}>Error occured</span>
           ) : isSuccessUpdateProfile ? (
-            <span className={classes.status__success}>Сохранено</span>
+            <span className={classes.status__success}>Saved</span>
           ) : (
             ""
           )}
