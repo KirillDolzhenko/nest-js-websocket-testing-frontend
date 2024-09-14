@@ -12,6 +12,6 @@ export function RTKGetErrorMessage(error: unknown): string {
     console.log((error.data as any).message)
     return (error.data as any).message as string;
   } else {
-    return "Произошла ошибка";
+    return "Error occured";
   }
 }

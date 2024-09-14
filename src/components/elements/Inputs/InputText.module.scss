@@ -4,11 +4,14 @@
     min-width: 80%;
     font-size: 1rem;
     padding: 5px 15px;
-    background-color: $mainBg;
+    background-color: transparent;
     box-shadow: 0px 0px 2px 1px white;
     border-radius: 10px;
 }
 
 .error {
+    font-size: 0.8rem;
+    text-align: left;
     color: rgb(163, 37, 37);
+    margin-bottom: 5px
 }

@@ -19,9 +19,10 @@ export default function () {
     signup,
     {
       isError: isErrorSignUp,
-      // isSuccess: isSuccessSignUp,
-      // isLoading: isLoadingSignUp,
+      isSuccess: isSuccessSignUp,
+      isLoading: isLoadingSignUp,
       data: dataSignUp,
+      error,
     },
   ] = useSignUpMutation();
 
@@ -31,26 +32,23 @@ export default function () {
     formState: { errors: errorsSignUp },
   } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema) });
 
-  ///
-
-  ///
-
   useEffect(() => {
-    console.log(dataSignUp);
-
     if (dataSignUp) {
       dispatch(setUser(dataSignUp.user));
       dispatch(setTokens(dataSignUp.tokens));
     }
   }, [dataSignUp]);
 
-  ///
-
   let onSubmitSignUp = useCallback((data: SignUpSchemaType) => {
+    console.log("FFFF");
     signup(data);
-
-    console.log("s", data);
   }, []);
+
+  useEffect(() => {
+    // if (isErrorSignUp) {
+    console.log("error", isErrorSignUp);
+    // }
+  }, [isErrorSignUp]);
 
   return (
     <form
@@ -75,8 +73,8 @@ export default function () {
         placeholder="Пароль"
         error={errorsSignUp.password?.message}
       />
-      <ButtonForm>Зарегистрироваться</ButtonForm>
-      {errorsSignUp.root?.message || RTKGetErrorMessage(isErrorSignUp)}
+      <ButtonForm type="submit">Sign In</ButtonForm>
+      { isLoadingSignUp ? "Loading" : isSuccessSignUp ? "Account created" : isErrorSignUp ? RTKGetErrorMessage(error) : <></>}
     </form>
   );
 }

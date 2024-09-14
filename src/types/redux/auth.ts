@@ -50,6 +50,10 @@ export interface IRTKQueryUploadPicture {
     file: File
 }
 
+export interface IRTKQuerySearchUsers {
+    query: string,
+}
+
 export interface IDBPicture {
     file: {
         path: string

@@ -8,6 +8,10 @@ import { BsEmojiSmile } from "react-icons/bs";
 import EmojiPicker, { Theme, EmojiClickData } from "emoji-picker-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Tooltip } from "react-tooltip";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store";
+import UserInfoSmall from "@/components/elements/UserInfo/UserInfoSmall/UserInfoSmall";
+import { closeChat } from "@/redux/slice/chatSlice";
 
 export default function ({ className }: IPropsClassName) {
   let [activeEmoji, setActiveEmoji] = useState<boolean>(false);
@@ -25,11 +29,9 @@ export default function ({ className }: IPropsClassName) {
         ref.current &&
         e.target instanceof Node &&
         !ref.current.contains(e.target) &&
-        // refTextarea.current &&
         refEmojiToggle.current &&
         !refEmojiToggle.current.contains(e.target)
       ) {
-        console.log("JOOOOK");
         setActiveEmoji(false);
       }
     }
@@ -70,10 +72,24 @@ export default function ({ className }: IPropsClassName) {
     }
   }, [cursorPos]);
 
+  let chatType = useSelector((state: RootState) => state.chatSlice.chatType);
+  let chatData = useSelector((state: RootState) => state.chatSlice.chatData);
+
+  let dispatch = useDispatch<AppDispatch>();
+
   return (
     <div className={classNames(classes.chatContent, className)}>
       <div className={classes.chatContent__header}>
-        <button>
+        {chatData ? (
+          <UserInfoSmall
+            username={chatData.username}
+            color={chatData.picColor}
+            url={chatData.picUrl}
+          />
+        ) : (
+          <></>
+        )}
+        <button onClick={() => dispatch(closeChat())}>
           <IoClose />
         </button>
       </div>
@@ -86,7 +102,6 @@ export default function ({ className }: IPropsClassName) {
             ref={refTextarea}
             value={message}
             onChange={(e) => {
-              console.log("FFFF=-");
               setMessage(e.target.value);
             }}
             className={classes.input__textarea}

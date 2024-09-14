@@ -14,32 +14,12 @@ import { FiPlus } from "react-icons/fi";
 import ButtonAdd from "@/components/elements/Buttons/ButtonAdd/ButtonAdd";
 import { useEffect, useRef, useState } from "react";
 import ModalTemplate from "@/components/elements/Modal/ModalTemplate/ModalTemplate";
+import ModalFindUser from "@/components/elements/Modal/ModalFindUser/ModalFindUser";
 
 export default function ({ className }: IPropsClassName) {
   let user = useSelector((state: RootState) => state.authSlice.user);
 
   let [activeModal, setActiveModal] = useState<boolean>(false);
-  // let refModal = useRef<HTMLDivElement>(null);
-
-  // useEffect(() => {
-  //   function checkClick(e: MouseEvent) {
-  //     console.log("111111111111 - - - - - - - FFFeeF");
-  //     console.log(refModal.current, e.target instanceof Node, activeModal);
-  //     if (
-  //       refModal.current &&
-  //       e.target instanceof Node &&
-  //       activeModal &&
-  //       !refModal.current.contains(e.target)
-  //     ) {
-  //       // console.log("FFFF");
-  //       setActiveModal(false);
-  //     }
-  //   }
-
-  //   document.addEventListener("click", checkClick);
-
-  //   return () => document.removeEventListener("click", checkClick);
-  // }, [refModal, activeModal]);
 
   return (
     <div className={classNames(classes.chatSidebar, className)}>
@@ -49,9 +29,13 @@ export default function ({ className }: IPropsClassName) {
       {/* <LineBottom /> */}
       {/* <button>
       </button> */}
-      <ModalTemplate active={activeModal} setActive={setActiveModal}>
-        Find contact
-      </ModalTemplate>
+      {activeModal ? (
+        <ModalFindUser active={activeModal} setActive={setActiveModal}>
+          {/* Find contact */}
+        </ModalFindUser>
+      ) : (
+        <></>
+      )}
       <div className={classes.chatSidebar__content}>
         <span className={classes.chatSidebar__headerWithBtn}>
           <HeaderCategory>Messages</HeaderCategory>

@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./slice/authSlice";
+import chatSlice from "./slice/chatSlice";
 import { authApi } from "./api/auth.api";
 import { filesApi } from "./api/files.api";
 
@@ -7,7 +8,8 @@ export const store = configureStore({
     reducer: {
         [authApi.reducerPath]: authApi.reducer,
         [filesApi.reducerPath]: filesApi.reducer,
-        authSlice
+        authSlice,
+        chatSlice
     },
     middleware: getDefaultMiddleware => 
         getDefaultMiddleware().concat(authApi.middleware, filesApi.middleware),

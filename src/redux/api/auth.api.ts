@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { IDBLogOutResponse, IDBUser, IDBUserWithTokens, IRTKQueryLogIn, IRTKQuerySignUp, IRTKQueryUpdateProfile } from '../../types/redux/auth';
+import { IDBLogOutResponse, IDBUser, IDBUserWithTokens, IRTKQueryLogIn, IRTKQuerySearchUsers, IRTKQuerySignUp, IRTKQueryUpdateProfile } from '../../types/redux/auth';
 import { baseQueryWithReauthGenerator } from './assets/baseQueryWithReauthGenerator.api';
 
 export const authApi = createApi({
@@ -54,14 +54,7 @@ export const authApi = createApi({
         }),
         transformResponse: (response: {
           data: IDBUserWithTokens
-        }) => response.data,
-        transformErrorResponse: (response) => {
-            return response as {
-              data: {
-                message: string
-              }
-            }
-        },
+        }) => response.data
       }),
       updateProfile: builder.mutation<IDBUser, IRTKQueryUpdateProfile>({
         query: ({username, email, picColor, picUrl}) => ({
@@ -78,9 +71,6 @@ export const authApi = createApi({
         transformResponse: (response: {
           data: IDBUser
         }) => response.data,
-        transformErrorResponse: (response) => {
-            return response
-        },
       }),
       removePicProfile: builder.mutation<IDBUser, void>({
         query: () => ({
@@ -107,6 +97,23 @@ export const authApi = createApi({
             return response
         },
       }),
+      searchUsers: builder.mutation<IDBUser[], IRTKQuerySearchUsers>({
+        query: ({query}) => ({
+          url: `search`,
+          method: "POST",
+          authLogic: true,
+          params: {
+            query
+          },
+          credentials: "include"
+        }),
+        transformResponse: (response: {
+          data: IDBUser[]
+        }) => response.data,
+        transformErrorResponse: (response) => {
+            return response
+        },
+      }),
     }),
 
   })
@@ -117,6 +124,7 @@ export const {
   useLogInMutation, 
   useSignUpMutation,
   useLogOutMutation,
+  useSearchUsersMutation,
   useRemovePicProfileMutation
 } = authApi;
   

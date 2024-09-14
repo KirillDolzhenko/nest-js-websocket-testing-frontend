@@ -21,6 +21,8 @@ export interface IPropsSettingsProfile extends IPropsClassName {
 export interface IPropsInputText extends IPropsClassName {
     type: string;
     register?: any;
+
+    onChange?: () => void;
     
     placeholder?: string;
     value?: string;
@@ -31,6 +33,11 @@ export interface IPropsInputText extends IPropsClassName {
 // Buttons
 
 export interface IPropsButtonForm extends IPropsChildren {
+    onClick?: () => void;
+    type?: string
+}
+
+export interface IPropsOnClick extends IPropsClassName {
     onClick?: () => void;
     type?: string
 }
@@ -54,6 +61,12 @@ export interface IPropsUserInfo extends IPropsProfilePicture {}
 // Modal
 
 export interface IPropsModalTemplate extends IPropsChildren {
+    active: boolean,
+    setActive: (active: boolean) => void,
+    header: string
+}
+
+export interface IPropsModalFindUser extends IPropsClassName {
     active: boolean,
     setActive: (active: boolean) => void
 }

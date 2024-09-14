@@ -8,19 +8,21 @@ export default function ({
   register,
   className,
   type,
-  error
+  error,
+  onChange,
 }: IPropsInputText) {
   return (
     <>
-    <input
-      type={type}
-      value={value}
-      placeholder={placeholder}
-      {...register}
-      className={classNames(className, classes.input)}
-    ></input>
+      <input
+        onChange={onChange}
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        {...register}
+        className={classNames(className, classes.input)}
+      ></input>
 
-    {<div className={classes.error}>{error}</div>}
+      {<div className={classes.error}>{error}</div>}
     </>
   );
 }
