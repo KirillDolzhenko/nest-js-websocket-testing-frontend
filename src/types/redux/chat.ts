@@ -1,5 +1,5 @@
 import { FetchArgs } from "@reduxjs/toolkit/query"
-import { IDBUser } from "./auth"
+import { IDBMessage, IDBUser } from "./auth"
 
 
 export enum EnumChatType {
@@ -10,5 +10,6 @@ export enum EnumChatType {
 
 export interface IChatSliceState {
     chatType: undefined | EnumChatType,
-    chatData: undefined | IDBUser
+    chatData: undefined | IDBUser,
+    chatMessages: IDBMessage[],
 }

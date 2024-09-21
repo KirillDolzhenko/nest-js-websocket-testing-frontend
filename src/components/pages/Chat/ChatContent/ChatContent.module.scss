@@ -7,6 +7,8 @@
     padding: 0 10px;
 
     &__header {
+        padding: 15px 0;
+
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -35,7 +37,9 @@
     }
 
     &__messages {
-        flex: 1 0 auto;
+        flex: 1 1 auto;
+
+        overflow: hidden;
     }
 
     &__input {
@@ -166,4 +170,19 @@
         }
     }
 }
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+
+    & .sended {
+        align-self: end;
+    }
+
+    & .recieved {
+        align-self: start;
+    }
 }

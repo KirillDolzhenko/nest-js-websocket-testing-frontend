@@ -11,11 +11,17 @@ import { Tooltip } from "react-tooltip";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import UserInfoSmall from "@/components/elements/UserInfo/UserInfoSmall/UserInfoSmall";
-import { closeChat } from "@/redux/slice/chatSlice";
+import { closeChat, setNewMessage } from "@/redux/slice/chatSlice";
+import { useSocketContext } from "@/App";
+import { IDBMessage } from "@/types/redux/auth";
+import { EnumChatType } from "@/types/redux/chat";
+import { MessageBlock } from "@/components/elements/Message/Message";
 
 export default function ({ className }: IPropsClassName) {
   let [activeEmoji, setActiveEmoji] = useState<boolean>(false);
   let [message, setMessage] = useState<string>("");
+
+  let user = useSelector((state: RootState) => state.authSlice.user);
 
   let [cursorPos, setCursorPos] = useState<number>(0);
 
@@ -37,7 +43,7 @@ export default function ({ className }: IPropsClassName) {
     }
 
     document.addEventListener("mousedown", closeClickOutside);
-
+    console.log([ref, refTextarea, refEmojiToggle]);
     return () => document.removeEventListener("mousedown", closeClickOutside);
   }, [ref, refTextarea, refEmojiToggle]);
 
@@ -74,8 +80,63 @@ export default function ({ className }: IPropsClassName) {
 
   let chatType = useSelector((state: RootState) => state.chatSlice.chatType);
   let chatData = useSelector((state: RootState) => state.chatSlice.chatData);
+  let chatDataId = useSelector(
+    (state: RootState) => state.chatSlice.chatData?.id
+  );
 
   let dispatch = useDispatch<AppDispatch>();
+
+  //
+
+  //
+
+  //
+
+  let chatMessages = useSelector(
+    (state: RootState) => state.chatSlice.chatMessages
+  );
+
+  // useEffect(() => {
+  //   if (socket) {
+  //     console.log("INITED");
+  //     console.log(chatDataId, chatData);
+  //     socket.on("message", (data: IDBMessage) => {
+  //       console.log("message ws");
+  //       if (
+  //         chatType == data.messageType &&
+  //         ((chatDataId == data.sender.id && user?.id == data.recipient.id) ||
+  //           (chatDataId == data.recipient.id && user?.id == data.sender.id))
+  //       ) {
+  //         console.log(data);
+  //         console.log("Socket message");
+  //         dispatch(setNewMessage(data));
+  //       }
+  //     });
+  //     console.log("In2");
+  //   }
+
+  //   return () => {
+  //     if (socket) {
+  //       console.log("clear");
+  //       socket.off("message");
+  //     }
+  //   };
+  // }, [socket, chatDataId, user?.id]);
+  let socket = useSocketContext();
+
+  let sendMessage = useCallback(
+    (content: string) => {
+      if (chatType == EnumChatType.DIRECT && chatData) {
+        console.log(content, chatDataId);
+
+        socket?.emit("message", {
+          content,
+          recipient: chatDataId,
+        });
+      }
+    },
+    [socket, chatType, chatDataId]
+  );
 
   return (
     <div className={classNames(classes.chatContent, className)}>
@@ -94,7 +155,11 @@ export default function ({ className }: IPropsClassName) {
         </button>
       </div>
       <LineBottom />
-      <div className={classes.chatContent__messages}></div>
+      <div
+        className={classNames(classes.messages, classes.chatContent__messages)}
+      >
+        <MessageBlock content={chatMessages} />
+      </div>
       <LineBottom />
       <div className={classNames(classes.input, classes.chatContent__input)}>
         <div className={classes.input__content}>
@@ -144,7 +209,16 @@ export default function ({ className }: IPropsClassName) {
             </button>
           </div>
         </div>
-        <button className={classes.input__send}>
+        <button
+          onClick={() => {
+            console.log(chatData, user);
+
+            if (refTextarea.current?.value) {
+              sendMessage(refTextarea.current?.value);
+            }
+          }}
+          className={classes.input__send}
+        >
           <IoSend />
         </button>
       </div>

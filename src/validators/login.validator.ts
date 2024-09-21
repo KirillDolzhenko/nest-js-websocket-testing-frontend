@@ -7,7 +7,7 @@ export const LogInSchema = z.object({
         .email(),
     password: z
         .string()
-        .min(7)
+        .min(6)
         .max(100)
 });
 

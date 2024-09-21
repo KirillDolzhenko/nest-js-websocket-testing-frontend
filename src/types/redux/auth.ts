@@ -1,4 +1,5 @@
 import { FetchArgs } from "@reduxjs/toolkit/query"
+import { EnumChatType } from "./chat"
 
 
 export enum EnumDBUserColor {
@@ -66,7 +67,27 @@ export interface IDBUser {
     email: string,
     picColor: EnumDBUserColor;
     picUrl?: string,
+}
 
+enum IDBMessageType {
+    DIRECT = "DIRECT",
+    GROUP = "GROUP"
+}
+
+export interface IDBMessage {
+    id: string,
+
+    sender: IDBUser,
+    senderId: string,
+    
+    recipient: IDBUser,
+    recipientId: string,
+
+    messageType: EnumChatType,
+    content: string,
+
+    createdAt: string,
+    updatedAt: string,
 }
 
 export interface IDBLogOutResponse {
@@ -74,7 +95,6 @@ export interface IDBLogOutResponse {
         success: boolean
     }
 }
-
 
 export interface IDBUserWithTokens {
     user: IDBUser,

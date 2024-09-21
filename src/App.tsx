@@ -1,5 +1,4 @@
 import "./styles/App.scss";
-import { io } from "socket.io-client";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import {
   BrowserRouter,
@@ -11,7 +10,7 @@ import {
 import Auth from "./components/pages/Auth/Auth";
 import { AppDispatch, RootState, store } from "./redux/store";
 import { useAuthMeMutation } from "./redux/api/auth.api";
-import { useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { setAccessToken, setTokens, setUser } from "./redux/slice/authSlice";
 import HOKAuthChecker from "./components/HOKs/HOKAuthChecker";
 import Profile from "./components/pages/Profile/Profile";
@@ -26,69 +25,144 @@ import Favicon from "react-favicon";
 //   autoConnect: false,
 // });
 
-function App() {
+import { io, Socket } from "socket.io-client";
+import config from "./config/config";
+import { IPropsChildren } from "./types/props/props";
+import { setNewMessage } from "./redux/slice/chatSlice";
+import { IDBMessage } from "./types/redux/auth";
+
+const Context = createContext<Socket | null>(null);
+
+function ContextSocket({ children }: IPropsChildren) {
+  const [socket, setSocket] = useState<Socket>();
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  let user = useSelector((state: RootState) => state.authSlice.user);
+  let tokens = useSelector((state: RootState) => state.authSlice.tokens);
+
+  useEffect(() => {
+    console.log("SOMEEEEEEEEEEEEEEEEEEE");
+    if (user && tokens && tokens.access_token) {
+      async function socketio(tokenStr: string) {
+        let socket = io(config.websocket.url, {
+          auth: {
+            token: tokenStr,
+          },
+        });
+
+        setSocket(socket);
+
+        // if (socket) {
+        //   console.log("YEAsssshh");
+        //   socket.on("message", (data: IDBMessage) => {
+        //     console.log("Socket message");
+        //     dispatch(setNewMessage(data));
+        //   });
+        // }
+      }
+
+      socketio(tokens.access_token);
+    }
+
+    return () => {
+      setSocket(socket?.disconnect());
+    };
+  }, [user]);
+
+  // useEffect(() => {
+  //   console.log(socket);
+  //   if (socket && socket.connected) {
+  //     console.log("WOW");
+  //     socket.on("message", (response: any) => {
+  //       console.log(response);
+  //     });
+  //   } else if (socket && !socket.connected) {
+  //     console.log("Error!!!!");
+  //   }
+  // }, [socket, socket?.connected]);
+
   return (
-    <div className="App">
-      <Helmet>
-        <meta charSet="utf-8" />
-        <link rel="icon" href={logoFire} />
-      </Helmet>
-      <BrowserRouter>
-        <Routes>
-          {/* <Route path="*" element={<div>ererer</div>} /> */}
-          <Route
-            path="/auth"
-            element={
-              <>
-                <Helmet>
-                  <title>Авторизация</title>
-                </Helmet>
-                <HOKAuthCheckerForAuth />
-              </>
-            }
-          />
+    <Context.Provider value={socket ? socket : null}>
+      {children}
+    </Context.Provider>
+  );
+}
 
-          <Route
-            path="/profile"
-            element={
-              <HOKAuthChecker>
-                <Profile />
-              </HOKAuthChecker>
-            }
-          />
+export function useSocketContext() {
+  const context = useContext(Context);
 
-          <Route
-            path="/chat"
-            element={
-              <>
-                {/* <Favicon url={logoFire} /> */}
+  return context;
+}
 
-                <Helmet>
-                  <title>FireChat</title>
-                </Helmet>
-                <HOKAuthChecker>
-                  <Chat />
-                </HOKAuthChecker>
-              </>
-            }
-          />
-
-          <Route
-            path="/*"
-            element={
-              <HOKAuthChecker>
+function App() {
+  useEffect(() => {
+    console.log("render");
+  }, []);
+  return (
+    <ContextSocket>
+      <div className="App">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <link rel="icon" href={logoFire} />
+        </Helmet>
+        <BrowserRouter>
+          <Routes>
+            {/* <Route path="*" element={<div>ererer</div>} /> */}
+            <Route
+              path="/auth"
+              element={
                 <>
                   <Helmet>
-                    <title>Мой профиль</title>
+                    <title>Авторизация</title>
                   </Helmet>
-                  <Navigate to="/profile" />
+                  <HOKAuthCheckerForAuth />
                 </>
-              </HOKAuthChecker>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-    </div>
+              }
+            />
+
+            <Route
+              path="/profile"
+              element={
+                <HOKAuthChecker>
+                  <Profile />
+                </HOKAuthChecker>
+              }
+            />
+
+            <Route
+              path="/chat"
+              element={
+                <>
+                  {/* <Favicon url={logoFire} /> */}
+
+                  <Helmet>
+                    <title>FireChat</title>
+                  </Helmet>
+                  <HOKAuthChecker>
+                    <Chat />
+                  </HOKAuthChecker>
+                </>
+              }
+            />
+
+            <Route
+              path="/*"
+              element={
+                <HOKAuthChecker>
+                  <>
+                    <Helmet>
+                      <title>Мой профиль</title>
+                    </Helmet>
+                    <Navigate to="/profile" />
+                  </>
+                </HOKAuthChecker>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </ContextSocket>
   );
 }
 

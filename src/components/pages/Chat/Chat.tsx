@@ -6,6 +6,8 @@ import ChatContent from "./ChatContent/ChatContent";
 import ChatPlaceholder from "./ChatPlaceholder/ChatPlaceholder";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import { useSocketContext } from "@/App";
+import { useEffect } from "react";
 
 export default function () {
   let chatType = useSelector((state: RootState) => state.chatSlice.chatType);

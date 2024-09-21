@@ -1,6 +1,7 @@
+
 // Default
 
-import { IDBUser } from "../redux/auth";
+import { IDBMessage, IDBUser } from "../redux/auth";
 
 export interface IPropsClassName {
     className?: string;
@@ -69,4 +70,15 @@ export interface IPropsModalTemplate extends IPropsChildren {
 export interface IPropsModalFindUser extends IPropsClassName {
     active: boolean,
     setActive: (active: boolean) => void
+}
+
+// Messages 
+
+export interface IPropsMessage extends IPropsClassName {
+    content: IDBMessage;
+    sender: boolean;
+}
+
+export interface IPropsMessageBlock extends IPropsClassName {
+    content: IDBMessage[];
 }

@@ -81,6 +81,7 @@ export default function ({
   let dispatch = useDispatch<AppDispatch>();
 
   let onClickFoundedUser = useCallback((data: IDBUser) => {
+    console.log(data);
     dispatch(setDirectChat(data));
   }, []);
 

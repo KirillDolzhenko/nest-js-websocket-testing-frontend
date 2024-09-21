@@ -10,6 +10,11 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { removeUser } from "@/redux/slice/authSlice";
+import {
+  deleteChatSettings,
+  setDirectChat,
+  setNewMessage,
+} from "@/redux/slice/chatSlice";
 
 export default function ({ className, url, color, username }: IPropsUserInfo) {
   let [logOut, { isSuccess, isLoading, isError }] = useLogOutMutation();
@@ -18,6 +23,7 @@ export default function ({ className, url, color, username }: IPropsUserInfo) {
   useEffect(() => {
     if (isSuccess) {
       dispatch(removeUser());
+      dispatch(deleteChatSettings());
     }
   }, [isSuccess]);
 
