@@ -15,7 +15,7 @@ import { closeChat, setNewMessage } from "@/redux/slice/chatSlice";
 import { useSocketContext } from "@/App";
 import { IDBMessage } from "@/types/redux/auth";
 import { EnumChatType } from "@/types/redux/chat";
-import { MessageBlock } from "@/components/elements/Message/Message";
+import MessageBlock from "@/components/elements/Message/MessageBlock/MessageBlock";
 
 export default function ({ className }: IPropsClassName) {
   let [activeEmoji, setActiveEmoji] = useState<boolean>(false);
@@ -96,39 +96,11 @@ export default function ({ className }: IPropsClassName) {
     (state: RootState) => state.chatSlice.chatMessages
   );
 
-  // useEffect(() => {
-  //   if (socket) {
-  //     console.log("INITED");
-  //     console.log(chatDataId, chatData);
-  //     socket.on("message", (data: IDBMessage) => {
-  //       console.log("message ws");
-  //       if (
-  //         chatType == data.messageType &&
-  //         ((chatDataId == data.sender.id && user?.id == data.recipient.id) ||
-  //           (chatDataId == data.recipient.id && user?.id == data.sender.id))
-  //       ) {
-  //         console.log(data);
-  //         console.log("Socket message");
-  //         dispatch(setNewMessage(data));
-  //       }
-  //     });
-  //     console.log("In2");
-  //   }
-
-  //   return () => {
-  //     if (socket) {
-  //       console.log("clear");
-  //       socket.off("message");
-  //     }
-  //   };
-  // }, [socket, chatDataId, user?.id]);
   let socket = useSocketContext();
 
   let sendMessage = useCallback(
     (content: string) => {
       if (chatType == EnumChatType.DIRECT && chatData) {
-        console.log(content, chatDataId);
-
         socket?.emit("message", {
           content,
           recipient: chatDataId,

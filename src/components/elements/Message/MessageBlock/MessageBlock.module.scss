@@ -1,0 +1,23 @@
+
+.messageBlock {
+    flex-shrink: 1;
+    flex-grow: 1;
+
+    overflow-y: auto;
+
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    width: 100%;
+
+    &:not(:hover) {
+        &::-webkit-scrollbar-thumb {
+            cursor: pointer;
+            border-radius: 3px;
+            background-color: transparent;
+        }
+
+    }
+}
