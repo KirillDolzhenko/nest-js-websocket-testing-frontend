@@ -18,15 +18,25 @@ import { useGetMessagesDirectMutation } from "@/redux/api/chat.api";
 import { FaFile } from "react-icons/fa";
 import { IoMdDownload } from "react-icons/io";
 import { Tooltip } from "react-tooltip";
+import byteSize from "byte-size";
 
 export default function ({ className, content, sender }: IPropsMessage) {
+  // console.log(
+  //   "filesize: ",
+  //   byteSize(
+  //     content.messageType == EnumMessageType.FILE ? content.fileSize : 1
+  //   ).toString(),
+  //   content.messageType == EnumMessageType.FILE ? content.fileSize : 1
+  // );
+
   return (
     <>
       {content.messageType == EnumMessageType.TEXT ? (
         <div
           className={classNames(
             classes.message,
-            sender ? classes.sender : undefined
+            sender ? classes.sender : undefined,
+            className
           )}
         >
           <span className={classes.message__content}>{content.content}</span>
@@ -39,7 +49,8 @@ export default function ({ className, content, sender }: IPropsMessage) {
           className={classNames(
             classes.message,
             classes.image,
-            sender ? classes.sender : undefined
+            sender ? classes.sender : undefined,
+            className
           )}
         >
           <span className={classes.message__content}>
@@ -56,7 +67,8 @@ export default function ({ className, content, sender }: IPropsMessage) {
           className={classNames(
             classes.message,
             classes.file,
-            sender ? classes.sender : undefined
+            sender ? classes.sender : undefined,
+            className
           )}
         >
           <span className={classes.message__content}>
@@ -76,7 +88,10 @@ export default function ({ className, content, sender }: IPropsMessage) {
               <div className={classes.icon__file}>
                 <FaFile />
               </div>
-              <p>{content.content.split("/").pop()}</p>
+              <div className={classes.file__description}>
+                <p>{content.content.split("/").pop()}</p>
+                <span>{byteSize(content.fileSize).toString()}</span>
+              </div>
               {/* <IoMdDownload /> */}
             </a>
             {/* </span> */}

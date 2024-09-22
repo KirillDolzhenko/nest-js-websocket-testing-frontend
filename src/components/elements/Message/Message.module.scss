@@ -65,7 +65,7 @@
                 cursor: pointer;
                 color: $highlightText;
 
-                p {
+                p, span {
                     color: $highlightText;
                 }
 
@@ -76,19 +76,19 @@
 
             & .icon {
                 &__file {
-                    height: 60px;
+                    flex: 0 0 22px;
+                    // min-width: 22px;
                     height: 30px;
                     display: flex;
                     svg {
                         vertical-align: top;
                         width: 100%;
                         height: 100%;
-                        height: 100%;
                     }
                 }
             }
 
-            max-width: 300px;
+            max-width: 400px;
             display: flex;
             gap: 10px;
             align-items: center;
@@ -99,6 +99,19 @@
                 font-size: 0.8rem;
                 word-break: break-all;
             }
+
+        }
+
+        & .file__description {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            align-items: start;
+
+            & span {
+                font-size: 0.5rem;
+            }
+
 
         }
     }

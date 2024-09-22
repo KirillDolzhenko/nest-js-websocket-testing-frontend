@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@reduxjs/toolkit": "^2.2.7",
+    "@types/byte-size": "^8.1.2",
     "@types/lodash": "^4.17.7",
     "@types/react-helmet": "^6.1.11",
     "@types/socket.io": "^3.0.2",

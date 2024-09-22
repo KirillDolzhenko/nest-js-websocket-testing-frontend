@@ -81,7 +81,7 @@ enum IDBMessageType {
     GROUP = "GROUP"
 }
 
-export interface IDBMessage {
+export interface IDBMessageText {
     id: string,
 
     sender: IDBUser,
@@ -91,12 +91,19 @@ export interface IDBMessage {
     recipientId: string,
     recipientType: EnumChatType,
 
-    messageType: EnumMessageType,
+    messageType: EnumMessageType.TEXT,
     content: string,
 
     createdAt: string,
     updatedAt: string,
 }
+
+export interface IDBMessageFile extends Omit<IDBMessageText, "messageType"> {
+    messageType: EnumMessageType.FILE,
+    fileSize: number,
+}
+
+export type IDBMessage = IDBMessageFile | IDBMessageText;
 
 export interface IDBLogOutResponse {
     data: {
