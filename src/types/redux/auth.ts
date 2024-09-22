@@ -1,5 +1,5 @@
 import { FetchArgs } from "@reduxjs/toolkit/query"
-import { EnumChatType } from "./chat"
+import { EnumChatType, EnumMessageType } from "./chat"
 
 
 export enum EnumDBUserColor {
@@ -47,7 +47,7 @@ export interface IRTKQueryLogIn {
     email: string,
     password: string,
 }
-export interface IRTKQueryUploadPicture {
+export interface IRTKQueryUploadFile {
     file: File
 }
 
@@ -58,6 +58,13 @@ export interface IRTKQuerySearchUsers {
 export interface IDBPicture {
     file: {
         path: string
+    }
+}
+
+export interface IDBFile {
+    file: {
+        path: string,
+        filename: string
     }
 }
 
@@ -82,8 +89,9 @@ export interface IDBMessage {
     
     recipient: IDBUser,
     recipientId: string,
+    recipientType: EnumChatType,
 
-    messageType: EnumChatType,
+    messageType: EnumMessageType,
     content: string,
 
     createdAt: string,

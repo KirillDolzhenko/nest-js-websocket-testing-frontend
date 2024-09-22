@@ -1,6 +1,6 @@
 import { FetchArgs } from "@reduxjs/toolkit/query"
 import { EnumChatType } from "./chat"
-import { IDBMessage } from "./auth"
+import { IDBMessage, IDBUser } from "./auth"
 
 
 export enum EnumDBUserColor {
@@ -20,6 +20,11 @@ export interface IDBGetMessageDirect {
         content: IDBMessage[],
         user_sender: string,
         user_recipient: string,
+}
+
+export interface IDBContactDirect {
+    user: IDBUser,
+    lastMessage: string
 }
 
 

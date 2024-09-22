@@ -7,6 +7,10 @@ export enum EnumChatType {
     GROUP = "GROUP"
 }
 
+export enum EnumMessageType {
+    FILE = "FILE",
+    TEXT = "TEXT"
+}
 
 export interface IChatSliceState {
     chatType: undefined | EnumChatType,

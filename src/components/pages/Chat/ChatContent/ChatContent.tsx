@@ -16,98 +16,16 @@ import { useSocketContext } from "@/App";
 import { IDBMessage } from "@/types/redux/auth";
 import { EnumChatType } from "@/types/redux/chat";
 import MessageBlock from "@/components/elements/Message/MessageBlock/MessageBlock";
+import useAddEmoji from "@/components/hooks/HOKs/messages/useAddEmoji";
+import InputMessage from "@/components/elements/Inputs/InputMessage/InputMessage";
 
 export default function ({ className }: IPropsClassName) {
-  let [activeEmoji, setActiveEmoji] = useState<boolean>(false);
-  let [message, setMessage] = useState<string>("");
-
-  let user = useSelector((state: RootState) => state.authSlice.user);
-
-  let [cursorPos, setCursorPos] = useState<number>(0);
-
-  let ref = useRef<HTMLDivElement>(null);
-  let refTextarea = useRef<HTMLTextAreaElement>(null);
-  let refEmojiToggle = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    function closeClickOutside(e: MouseEvent) {
-      if (
-        ref.current &&
-        e.target instanceof Node &&
-        !ref.current.contains(e.target) &&
-        refEmojiToggle.current &&
-        !refEmojiToggle.current.contains(e.target)
-      ) {
-        setActiveEmoji(false);
-      }
-    }
-
-    document.addEventListener("mousedown", closeClickOutside);
-    console.log([ref, refTextarea, refEmojiToggle]);
-    return () => document.removeEventListener("mousedown", closeClickOutside);
-  }, [ref, refTextarea, refEmojiToggle]);
-
-  let addEmoji = useCallback((emoji: EmojiClickData) => {
-    if (refTextarea.current) {
-      let ref = refTextarea.current;
-
-      let [selectionStart, selectionEnd] = [
-        ref.selectionStart,
-        ref.selectionEnd,
-      ];
-
-      setMessage(
-        (message) =>
-          `${message.substring(0, selectionStart)}${
-            emoji.emoji
-          }${message.substring(selectionEnd)}`
-      );
-
-      setActiveEmoji(false);
-
-      setCursorPos(ref.selectionStart + 1);
-      ref.focus();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (refTextarea.current) {
-      refTextarea.current.selectionStart = cursorPos;
-
-      refTextarea.current.selectionEnd = cursorPos;
-    }
-  }, [cursorPos]);
-
-  let chatType = useSelector((state: RootState) => state.chatSlice.chatType);
-  let chatData = useSelector((state: RootState) => state.chatSlice.chatData);
-  let chatDataId = useSelector(
-    (state: RootState) => state.chatSlice.chatData?.id
-  );
-
   let dispatch = useDispatch<AppDispatch>();
 
-  //
-
-  //
-
-  //
+ let chatData = useSelector((state: RootState) => state.chatSlice.chatData);
 
   let chatMessages = useSelector(
     (state: RootState) => state.chatSlice.chatMessages
-  );
-
-  let socket = useSocketContext();
-
-  let sendMessage = useCallback(
-    (content: string) => {
-      if (chatType == EnumChatType.DIRECT && chatData) {
-        socket?.emit("message", {
-          content,
-          recipient: chatDataId,
-        });
-      }
-    },
-    [socket, chatType, chatDataId]
   );
 
   return (
@@ -133,67 +51,7 @@ export default function ({ className }: IPropsClassName) {
         <MessageBlock content={chatMessages} />
       </div>
       <LineBottom />
-      <div className={classNames(classes.input, classes.chatContent__input)}>
-        <div className={classes.input__content}>
-          <textarea
-            ref={refTextarea}
-            value={message}
-            onChange={(e) => {
-              setMessage(e.target.value);
-            }}
-            className={classes.input__textarea}
-          ></textarea>
-          <div className={classes.input__buttons}>
-            <div ref={ref} className={classes.emojiPicker}>
-              <EmojiPicker
-                style={{
-                  width: "250px",
-                  height: "300px",
-                }}
-                lazyLoadEmojis={true}
-                onEmojiClick={addEmoji}
-                theme={Theme.DARK}
-                open={activeEmoji}
-              />
-            </div>
-
-            <Tooltip
-              className="tooltip"
-              anchorSelect={`.${classes.input__emoji}`}
-              place="top"
-            >
-              Add emoji
-            </Tooltip>
-            <button
-              ref={refEmojiToggle}
-              className={classNames(
-                classes.input__button,
-                classes.input__emoji
-              )}
-              onClick={() => {
-                setActiveEmoji(!activeEmoji);
-              }}
-            >
-              <BsEmojiSmile className={classes.svg__emoji} />
-            </button>
-            <button className={classes.input__button}>
-              <ImAttachment className={classes.svg__attachment} />
-            </button>
-          </div>
-        </div>
-        <button
-          onClick={() => {
-            console.log(chatData, user);
-
-            if (refTextarea.current?.value) {
-              sendMessage(refTextarea.current?.value);
-            }
-          }}
-          className={classes.input__send}
-        >
-          <IoSend />
-        </button>
-      </div>
+      <InputMessage className={classes.chatContent__input} />
     </div>
   );
 }

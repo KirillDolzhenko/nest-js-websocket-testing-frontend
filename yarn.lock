@@ -661,6 +661,11 @@ braces@^3.0.3, braces@~3.0.2:
   dependencies:
     fill-range "^7.1.1"
 
+byte-size@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/byte-size/-/byte-size-9.0.0.tgz#ab0eaa699a5247d611ec806348ea4f1819a17d54"
+  integrity sha512-xrJ8Hki7eQ6xew55mM6TG9zHI852OoAHcPfduWWtR6yxk2upTuIZy13VioRBDyHReHDdbeDPifUboeNkK/sXXA==
+
 callsites@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/callsites/-/callsites-3.1.0.tgz#b3630abd8943432f54b3f0519238e33cd7df2f73"

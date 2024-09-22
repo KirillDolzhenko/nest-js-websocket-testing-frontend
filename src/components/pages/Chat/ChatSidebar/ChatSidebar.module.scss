@@ -9,14 +9,16 @@
     width: 240px;
     // padding-right: 70px;
 
+    // overflow: hidden;
     .logo {
         margin-bottom: 20px;
     }
 
     &__content {
         width: 100%;
-        padding: 0 30px;
-        flex: 1 0 auto;
+        flex: 1 1 auto;
+        
+        overflow: hidden;
 
         display: flex;
         flex-direction: column;
@@ -41,6 +43,27 @@
         display: flex;
         justify-content: space-between;
     }
+
+    &__header {
+        padding: 0 30px;
+    }
+}
+
+.usersList {
+    width: 100%;
+    
+    overflow-y: auto;
+
+    
+    &:not(:hover) {
+        &::-webkit-scrollbar-thumb {
+            cursor: pointer;
+            border-radius: 3px;
+            background-color: transparent;
+        }
+
+    }
+    // overflow-y: scroll;
 }
 
 @media (max-width: 480px) {

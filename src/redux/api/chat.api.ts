@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { IDBLogOutResponse, IDBUser, IDBUserWithTokens, IRTKQueryLogIn, IRTKQuerySearchUsers, IRTKQuerySignUp, IRTKQueryUpdateProfile } from '../../types/redux/auth';
 import { baseQueryWithReauthGenerator } from './assets/baseQueryWithReauthGenerator.api';
-import { IDBGetMessageDirect, IRTKGetMessageDirect } from '@/types/redux/auth copy';
+import { IDBContactDirect, IDBGetMessageDirect, IRTKGetMessageDirect } from '@/types/redux/auth copy';
 
 export const chatApi = createApi({
     reducerPath: 'chatApi',
@@ -20,7 +20,25 @@ export const chatApi = createApi({
         transformResponse: (response: {
           data: IDBGetMessageDirect
         }) => {
-          console.log("messge", response)
+          return response.data
+        },
+        transformErrorResponse: (response) => {
+            console.log(response)
+
+            return response
+        },
+      }),
+
+      getContactsDirect: builder.mutation<IDBContactDirect[], void>({
+        query: () => ({
+          url: `contacts/direct`,
+          method: "POST",
+          authLogic: true
+        }),
+        transformResponse: (response: {
+          data: IDBContactDirect[]
+        }) => {
+          console.log("contacts", response)
 
           return response.data
         },
@@ -35,5 +53,6 @@ export const chatApi = createApi({
 
 export const { 
   useGetMessagesDirectMutation,
+  useGetContactsDirectMutation
 } = chatApi;
   

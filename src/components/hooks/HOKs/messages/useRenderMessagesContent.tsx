@@ -5,12 +5,15 @@ import Message from "@components/elements/Message/Message";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import DateMessage from "@/components/elements/DateMessage/DateMessage";
+import { EnumMessageType } from "@/types/redux/chat";
 
 let useRenderMessagesContent: TUseRenderMessagesContent = (content) => {
   let userId = useSelector((state: RootState) => state.authSlice.user?.id);
 
   let renderMessagesContent = useCallback<() => JSX.Element[]>(() => {
     let lastDate = "";
+    let today = moment().format("YYYY-MM-DD");
+    let yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
 
     return content.map((el) => {
       let currentDate = moment(el.createdAt).format("YYYY-MM-DD");
@@ -21,14 +24,15 @@ let useRenderMessagesContent: TUseRenderMessagesContent = (content) => {
       return (
         <>
           {showDate && (
-            <DateMessage>{moment(el.createdAt).format("LL")}</DateMessage>
+            <DateMessage>
+              {currentDate == today
+                ? "Today"
+                : currentDate == yesterday
+                ? "Yesterday"
+                : moment(el.createdAt).format("LL")}
+            </DateMessage>
           )}
-          <Message
-            content={{
-              ...el,
-            }}
-            sender={el.sender.id == userId}
-          ></Message>
+          {<Message key={el.id} content={el} sender={el.sender.id == userId} />}
         </>
       );
     });

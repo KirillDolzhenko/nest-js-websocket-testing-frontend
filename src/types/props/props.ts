@@ -82,3 +82,9 @@ export interface IPropsMessage extends IPropsClassName {
 export interface IPropsMessageBlock extends IPropsClassName {
     content: IDBMessage[];
 }
+
+///
+
+export interface IPropsUserInfoMessages extends IPropsClassName {
+    users: IDBUser[]
+}

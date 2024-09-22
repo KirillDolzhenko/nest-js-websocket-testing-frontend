@@ -20,7 +20,7 @@ export default function () {
         if (socket && userId && chatDataId) {
           socket.on("message", (data: IDBMessage) => {
             if (
-              chatType == data.messageType &&
+              chatType == data.recipientType &&
               ((chatDataId == data.sender.id && userId == data.recipient.id) ||
                 (chatDataId == data.recipient.id && userId == data.sender.id))
             ) {

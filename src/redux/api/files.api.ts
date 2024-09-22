@@ -1,13 +1,13 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauthGenerator } from "./assets/baseQueryWithReauthGenerator.api";
-import { IDBPicture, IRTKQueryUploadPicture } from "@/types/redux/auth";
+import { IDBFile, IDBPicture, IRTKQueryUploadFile } from "@/types/redux/auth";
 
 export const filesApi = createApi({
     reducerPath: 'filesApi',
     baseQuery: baseQueryWithReauthGenerator("files"),
     tagTypes: ["files"],
     endpoints: (builder) => ({
-      uploadPicture: builder.mutation<IDBPicture, IRTKQueryUploadPicture>({
+      uploadPicture: builder.mutation<IDBPicture, IRTKQueryUploadFile>({
         query: ({ file }) => {
           let formData = new FormData();
           formData.append("file", file);
@@ -26,8 +26,30 @@ export const filesApi = createApi({
             return response
         },
       }),
+      uploadMessageFile: builder.mutation<IDBFile, IRTKQueryUploadFile>({
+        query: ({ file }) => {
+          let formData = new FormData();
+          formData.append("file", file);
+  
+          return {
+          url: `message/file`,
+          method: "POST",
+          authLogic: true,
+          body: formData
+        }
+      },
+        transformResponse: (response: {
+          data: IDBFile
+        }) => response.data,
+        transformErrorResponse: (response) => {
+            return response
+        },
+      }),
     })
   })
 
   
-export const { useUploadPictureMutation } = filesApi;  
+export const { 
+  useUploadPictureMutation,
+  useUploadMessageFileMutation
+} = filesApi;  

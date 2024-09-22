@@ -80,11 +80,6 @@ export default function ({
 
   let dispatch = useDispatch<AppDispatch>();
 
-  let onClickFoundedUser = useCallback((data: IDBUser) => {
-    console.log(data);
-    dispatch(setDirectChat(data));
-  }, []);
-
   return (
     <ModalTemplate
       className={className}
@@ -117,7 +112,7 @@ export default function ({
             {usersInfo.map((el) => (
               <button
                 onClick={() => {
-                  onClickFoundedUser(el);
+                  dispatch(setDirectChat(el));
                   setActive(false);
                 }}
               >

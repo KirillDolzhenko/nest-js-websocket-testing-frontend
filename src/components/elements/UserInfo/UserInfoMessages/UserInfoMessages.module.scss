@@ -1,0 +1,21 @@
+@import "../../../../styles/vars/color.scss";
+
+.usersList {
+    display: flex;
+    flex-direction: column;
+    // gap: 5px;
+
+
+    width: 100%;
+
+    &__el {
+        padding: 5px 30px;
+
+        &:hover, &.active {
+            width: 100%;
+            background-color: $highlightMessage;
+        }
+
+        
+    }
+}
