@@ -1,6 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauthGenerator } from "./assets/baseQueryWithReauthGenerator.api";
 import { IDBFile, IDBPicture, IRTKQueryUploadFile } from "@/types/redux/auth";
+import axios from "axios";
 
 export const filesApi = createApi({
     reducerPath: 'filesApi',
@@ -44,7 +45,7 @@ export const filesApi = createApi({
         transformErrorResponse: (response) => {
             return response
         },
-      }),
+      })
     })
   })
 

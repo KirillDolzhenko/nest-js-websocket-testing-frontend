@@ -72,6 +72,12 @@ export interface IPropsModalFindUser extends IPropsClassName {
     setActive: (active: boolean) => void
 }
 
+export interface IPropsModalImage extends IPropsClassName {
+    active: boolean,
+    setActive: (active: boolean) => void,
+    url: string
+}
+
 // Messages 
 
 export interface IPropsMessage extends IPropsClassName {

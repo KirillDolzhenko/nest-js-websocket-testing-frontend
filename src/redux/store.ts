@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./slice/authSlice";
 import chatSlice from "./slice/chatSlice";
+import fileSlice from "./slice/fileSlice";
 import { authApi } from "./api/auth.api";
 import { filesApi } from "./api/files.api";
 import { chatApi } from "./api/chat.api";
@@ -10,6 +11,7 @@ export const store = configureStore({
         [authApi.reducerPath]: authApi.reducer,
         [filesApi.reducerPath]: filesApi.reducer,
         [chatApi.reducerPath]: chatApi.reducer,
+        fileSlice,
         authSlice,
         chatSlice
     },

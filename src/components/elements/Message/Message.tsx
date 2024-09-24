@@ -19,6 +19,9 @@ import { FaFile } from "react-icons/fa";
 import { IoMdDownload } from "react-icons/io";
 import { Tooltip } from "react-tooltip";
 import byteSize from "byte-size";
+import ModalImage from "../Modal/ModalImage/ModalImage";
+import useDownloadFile from "@/components/hooks/useDownloadFile";
+import useCopyToBuffer from "@/components/hooks/useCopyToBuffer";
 
 export default function ({ className, content, sender }: IPropsMessage) {
   // console.log(
@@ -29,17 +32,27 @@ export default function ({ className, content, sender }: IPropsMessage) {
   //   content.messageType == EnumMessageType.FILE ? content.fileSize : 1
   // );
 
+  let [activeModal, setActiveModal] = useState<boolean>();
+
+  let downloadFile = useDownloadFile(content.content);
+
+  let copyToBufferMessage = useCopyToBuffer(content.content.trim());
+
   return (
     <>
       {content.messageType == EnumMessageType.TEXT ? (
         <div
           className={classNames(
             classes.message,
+            classes.message__text,
             sender ? classes.sender : undefined,
             className
           )}
+          onClick={copyToBufferMessage}
         >
-          <span className={classes.message__content}>{content.content}</span>
+          <span className={classes.message__content}>
+            {content.content.trim()}
+          </span>
           <span className={classes.message__time}>
             {moment(content.createdAt).format("LT")}
           </span>
@@ -53,9 +66,30 @@ export default function ({ className, content, sender }: IPropsMessage) {
             className
           )}
         >
+          {activeModal ? (
+            <ModalImage
+              active={activeModal}
+              url={content.content}
+              setActive={setActiveModal}
+            />
+          ) : (
+            <></>
+          )}
           <span className={classes.message__content}>
+            <Tooltip
+              className="tooltip"
+              anchorSelect={`.${classes.message__image}`}
+              place="top"
+            >
+              Open image
+            </Tooltip>
             <span className={classes.message__image}>
-              <img src={content.content} />
+              <img
+                onClick={() => {
+                  setTimeout(() => setActiveModal(!activeModal), 0);
+                }}
+                src={content.content}
+              />
             </span>
           </span>
           <span className={classes.message__time}>
@@ -72,7 +106,6 @@ export default function ({ className, content, sender }: IPropsMessage) {
           )}
         >
           <span className={classes.message__content}>
-            {/* <span > */}
             <Tooltip
               className="tooltip"
               anchorSelect={`.${classes.message__file}`}
@@ -80,11 +113,7 @@ export default function ({ className, content, sender }: IPropsMessage) {
             >
               Download file
             </Tooltip>
-            <a
-              className={classes.message__file}
-              href="content.content"
-              download
-            >
+            <a className={classes.message__file} onClick={downloadFile}>
               <div className={classes.icon__file}>
                 <FaFile />
               </div>
@@ -92,9 +121,7 @@ export default function ({ className, content, sender }: IPropsMessage) {
                 <p>{content.content.split("/").pop()}</p>
                 <span>{byteSize(content.fileSize).toString()}</span>
               </div>
-              {/* <IoMdDownload /> */}
             </a>
-            {/* </span> */}
           </span>
           <span className={classes.message__time}>
             {moment(content.createdAt).format("LT")}
@@ -105,7 +132,7 @@ export default function ({ className, content, sender }: IPropsMessage) {
   );
 }
 
-export function MessageImage({ className, content, sender }: IPropsMessage) {
+export function MessageImage({ content, sender }: IPropsMessage) {
   return (
     <div
       className={classNames(

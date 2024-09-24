@@ -69,9 +69,11 @@ export default function ({ className }: IPropsClassName) {
         e.target.files?.length
       ) {
         console.log("SMT");
-        uploadMessageFile({
-          file: e.target.files[0],
-        });
+        if (e.target.files[0].size < 50000000) {
+          uploadMessageFile({
+            file: e.target.files[0],
+          });
+        }
       }
     },
     []
@@ -121,6 +123,20 @@ export default function ({ className }: IPropsClassName) {
           >
             Add emoji
           </Tooltip>
+          <Tooltip
+            className="tooltip"
+            anchorSelect={`.${classes.input__send}`}
+            place="top"
+          >
+            Send message
+          </Tooltip>
+          <Tooltip
+            className="tooltip"
+            anchorSelect={`.${classes.button__attachment}`}
+            place="top"
+          >
+            Send file
+          </Tooltip>
           <button
             ref={refEmojiToggle}
             className={classNames(classes.input__button, classes.input__emoji)}
@@ -136,7 +152,10 @@ export default function ({ className }: IPropsClassName) {
                 refInputFile.current.click();
               }
             }}
-            className={classes.input__button}
+            className={classNames(
+              classes.input__button,
+              classes.button__attachment
+            )}
           >
             <input
               onChange={(e) => {
@@ -145,15 +164,6 @@ export default function ({ className }: IPropsClassName) {
               className={classes.inputFile}
               ref={refInputFile}
               type="file"
-
-              // onChange={(e: any) => {
-              //   if (
-              //     e.target.files[0] &&
-              //     e.target.files[0].size < 5000000
-              //   ) {
-              //     uploadPicture({ file: e.target.files[0] });
-              //   }
-              // }}
             />
             <ImAttachment className={classes.svg__attachment} />
           </button>

@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { IDBLogOutResponse, IDBUser, IDBUserWithTokens, IRTKQueryLogIn, IRTKQuerySearchUsers, IRTKQuerySignUp, IRTKQueryUpdateProfile } from '../../types/redux/auth';
 import { baseQueryWithReauthGenerator } from './assets/baseQueryWithReauthGenerator.api';
-import { IDBContactDirect, IDBGetMessageDirect, IRTKGetMessageDirect } from '@/types/redux/auth copy';
+import { IDBContactDirect, IDBGetMessageDirect, IRTKGetMessageDirect } from '@/types/redux/message';
 
 export const chatApi = createApi({
     reducerPath: 'chatApi',

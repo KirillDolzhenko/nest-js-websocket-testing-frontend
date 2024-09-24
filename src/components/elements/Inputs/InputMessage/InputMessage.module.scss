@@ -45,8 +45,6 @@
         margin-top: 5px;
         display: flex;
         gap: 15px;
-        
-        
     }
 
     &__button {
@@ -103,20 +101,23 @@
         --epr-search-input-bg-color: #{$inputBg};
         
         &:global(.epr-dark-theme) {
-
             input {
                 font-size: 0.8rem;
             }
 
-        
-
-        h2 {
-            background-color: $inputBg;
+            h2 {
+                background-color: $inputBg;
+            }
         }
     }
-}
 }
 
 .inputFile {
     display: none;
+}
+
+.button {
+    &__attachment{
+        opacity: 1;
+    }
 }

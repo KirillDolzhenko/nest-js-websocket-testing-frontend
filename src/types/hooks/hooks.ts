@@ -19,6 +19,25 @@ export type TUseToggleEmojiPicker = (
     setActiveEmoji: (prop: boolean) => void,
 ) => void
 
-//Socket
+// Socket
 
 export type TUseSocketSendMessage = () => (content: string) => void;
+
+// Modal
+
+export type TUseClickOutside = (  
+    refModal: React.RefObject<HTMLDivElement>,
+    active: boolean,
+    setActive: (prop: boolean) => void
+) => void
+
+// DownloadFile
+
+export type TUseDownloadFile = (  
+    content: string
+) => () => void
+
+
+export type TUseCopyToBuffer = (  
+    content: string
+) => () => void
