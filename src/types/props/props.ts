@@ -64,7 +64,8 @@ export interface IPropsUserInfo extends IPropsProfilePicture {}
 export interface IPropsModalTemplate extends IPropsChildren {
     active: boolean,
     setActive: (active: boolean) => void,
-    header: string
+    header: string,
+    overflow?: boolean
 }
 
 export interface IPropsModalFindUser extends IPropsClassName {

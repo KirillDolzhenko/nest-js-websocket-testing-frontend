@@ -19,11 +19,13 @@ import UserInfoSmall from "@/components/elements/UserInfo/UserInfoSmall/UserInfo
 import { EnumDBUserColor } from "@/types/redux/auth";
 import UserInfoMessages from "@/components/elements/UserInfo/UserInfoMessages/UserInfoMessages";
 import { useGetContactsDirectMutation } from "@/redux/api/chat.api";
+import ModalGroupCreation from "@/components/elements/Modal/ModalGroupCreation/ModalGroupCreation";
 
 export default function ({ className }: IPropsClassName) {
   let user = useSelector((state: RootState) => state.authSlice.user);
 
   let [activeModal, setActiveModal] = useState<boolean>(false);
+  let [activeModalGroup, setActiveModalGroup] = useState<boolean>(true);
 
   let [getContactsDirect, { isLoading, isError, isSuccess, data }] =
     useGetContactsDirectMutation();
@@ -37,16 +39,19 @@ export default function ({ className }: IPropsClassName) {
       <div className={classes.chatSidebar__logo}>
         <Logo className={classes.logo} />
       </div>
-      {/* <LineBottom /> */}
-      {/* <button>
-      </button> */}
+
       {activeModal ? (
-        <ModalFindUser active={activeModal} setActive={setActiveModal}>
-          {/* Find contact */}
-        </ModalFindUser>
+        <ModalFindUser active={activeModal} setActive={setActiveModal} />
       ) : (
         <></>
       )}
+
+      {activeModalGroup ? (
+        <ModalGroupCreation active={activeModal} setActive={setActiveModal} />
+      ) : (
+        <></>
+      )}
+
       <div className={classes.chatSidebar__content}>
         <span
           className={classNames(
@@ -62,8 +67,18 @@ export default function ({ className }: IPropsClassName) {
         <span className={classes.usersList}>
           <UserInfoMessages users={data ? data.map((el) => el.user) : []} />
         </span>
-        <span className={classes.chatSidebar__header}>
+        <span
+          className={classNames(
+            classes.chatSidebar__headerWithBtn,
+            classes.chatSidebar__header
+          )}
+        >
           <HeaderCategory>Groups</HeaderCategory>
+          <ButtonAdd
+            onClick={() =>
+              setTimeout(() => setActiveModalGroup(!activeModalGroup))
+            }
+          />
         </span>
       </div>
       {user ? (

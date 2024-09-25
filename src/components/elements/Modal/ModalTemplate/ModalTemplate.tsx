@@ -14,6 +14,7 @@ export default function ({
   active,
   children,
   setActive,
+  overflow = false,
 }: IPropsModalTemplate) {
   let refModal = useRef<HTMLDivElement>(null);
 
@@ -55,7 +56,9 @@ export default function ({
           />
         </div>
         <LineBottom />
-        <div className={classes.modal__children}>{children}</div>
+        <div className={classNames(classes.modal__children, classes.overflow)}>
+          {children}
+        </div>
       </div>
     </div>
   );

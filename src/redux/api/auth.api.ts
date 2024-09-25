@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { IDBLogOutResponse, IDBUser, IDBUserWithTokens, IRTKQueryLogIn, IRTKQuerySearchUsers, IRTKQuerySignUp, IRTKQueryUpdateProfile } from '../../types/redux/auth';
+import { IDBLogOutResponse, IDBUser, IDBUserWithTokens, IRTKMutationGetAllUsers, IRTKQueryLogIn, IRTKQuerySearchUsers, IRTKQuerySignUp, IRTKQueryUpdateProfile } from '../../types/redux/auth';
 import { baseQueryWithReauthGenerator } from './assets/baseQueryWithReauthGenerator.api';
 
 export const authApi = createApi({
@@ -104,9 +104,27 @@ export const authApi = createApi({
           authLogic: true,
           params: {
             query
-          },
-          credentials: "include"
+          }
         }),
+        transformResponse: (response: {
+          data: IDBUser[]
+        }) => response.data,
+        transformErrorResponse: (response) => {
+            return response
+        },
+      }),
+      getAllUsers: builder.mutation<IDBUser[], IRTKMutationGetAllUsers | void>({
+        query: ({arrId} = {arrId: []}) => {
+          console.log(arrId)
+
+          return {
+          url: `contacts/all`,
+          method: "POST",
+          authLogic: true,
+          body: {
+            arrId
+          }
+        }},
         transformResponse: (response: {
           data: IDBUser[]
         }) => response.data,
@@ -125,6 +143,7 @@ export const {
   useSignUpMutation,
   useLogOutMutation,
   useSearchUsersMutation,
-  useRemovePicProfileMutation
+  useRemovePicProfileMutation,
+  useGetAllUsersMutation
 } = authApi;
   

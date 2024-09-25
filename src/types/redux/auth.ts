@@ -55,6 +55,10 @@ export interface IRTKQuerySearchUsers {
     query: string,
 }
 
+export interface IRTKMutationGetAllUsers {
+    arrId?: string[],
+}
+
 export interface IDBPicture {
     file: {
         path: string
