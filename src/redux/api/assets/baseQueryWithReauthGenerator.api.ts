@@ -1,9 +1,9 @@
 import { BaseQueryApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
-import { FetchArgsWithReauth, IJWTTokens, IJWTTokensRefresh } from "../../../types/redux/auth";
+import { FetchArgsWithReauth, IJWTTokensRefresh } from "../../../types/redux/auth";
 import { RootState } from "../../store";
 import { removeUser, setTokens } from "../../slice/authSlice";
 
-import path from "path";
+import config from "@/config/config";
 
 function setTokenToHeader(args: FetchArgsWithReauth, api: BaseQueryApi) {
     let {
@@ -25,10 +25,9 @@ function setTokenToHeader(args: FetchArgsWithReauth, api: BaseQueryApi) {
     };
 }
 
-let configUrlCore = 'http://localhost:9000/';
 const baseQuery = fetchBaseQuery(
   { 
-    baseUrl: `${configUrlCore}`
+    baseUrl: `${config.http.url.core}`
   }
 );
 
@@ -74,7 +73,7 @@ export const baseQueryWithReauthGenerator = (pathCore: string = "") => {
         } else {
           api.dispatch(removeUser())
 
-          throw "Не удалось обработать токен"
+          throw "Invalid token"
         }
       }
 

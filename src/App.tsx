@@ -11,10 +11,6 @@ import Chat from "./components/pages/Chat/Chat";
 
 import { Helmet } from "react-helmet";
 import { logoFire } from "./config/icons";
-// export const socket = io('http://localhost:3010', {
-//   autoConnect: false,
-// });
-
 import { io, Socket } from "socket.io-client";
 import config from "./config/config";
 import { IPropsChildren } from "./types/props/props";

@@ -69,7 +69,7 @@ export default function () {
                   data: {
                     tokens: IJWTTokens
                   }
-                }> = await axios.get(`${config.localhost.core}/user/refresh_token`, {
+                }> = await axios.get(`${config.http.url.core}/user/refresh_token`, {
                   withCredentials: true
                 });
 

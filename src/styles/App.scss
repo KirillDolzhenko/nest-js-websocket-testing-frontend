@@ -47,43 +47,37 @@
   font-size: 1.3rem;
   color: white;
 
-  
-
   &::-webkit-scrollbar {
     max-height: 4px;
-    background-color: transparent;    /* color of the scroll thumb */
+    background-color: transparent; /* color of the scroll thumb */
     border-radius: 20px;
-    width: 5px;     
-}
+    width: 5px;
+  }
 
-&::-webkit-scrollbar-track {
-    background-color: transparent;    /* color of the tracking area */
-}
+  &::-webkit-scrollbar-track {
+    background-color: transparent; /* color of the tracking area */
+  }
 
-&::-webkit-scrollbar-thumb {
+  &::-webkit-scrollbar-thumb {
     cursor: pointer;
     border-radius: 3px;
     background-color: $highlightText;
-    }
+  }
 }
-
 
 body {
   background-color: $mainBg;
-  overflow: hidden;
+  // overflow: hidden;
 
-  
-.react-tooltip {
-  font-size: 0.7rem;
-  --rt-color-dark: #{$inputBg};
-  border-radius: 5px;
+  .react-tooltip {
+    font-size: 0.7rem;
+    --rt-color-dark: #{$inputBg};
+    border-radius: 5px;
 
-  .react-tooltip-arrow {
-    opacity: 0;
+    .react-tooltip-arrow {
+      opacity: 0;
+    }
   }
-  }
-
-
 }
 
 // input {
