@@ -11,6 +11,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AppDispatch } from "@/redux/store";
 import { RTKGetErrorMessage } from "@/redux/api/assets/RTKGetErrorMessage";
+import ErrorText from "../../Inputs/ErrorText/ErrorText";
+import LoadingText from "../../Inputs/LoadingText/LoadingText";
+import SuccessText from "../../Inputs/SuccessText/SuccessText";
 
 export default function () {
   let dispatch = useDispatch<AppDispatch>();
@@ -58,23 +61,32 @@ export default function () {
       <InputText
         type="text"
         register={registerSignUp("username")}
-        placeholder="Ник"
+        placeholder="Username"
         error={errorsSignUp.username?.message}
       />
       <InputText
         type="email"
         register={registerSignUp("email")}
-        placeholder="Почта"
+        placeholder="Email"
         error={errorsSignUp.email?.message}
       />
       <InputText
         type="password"
         register={registerSignUp("password")}
-        placeholder="Пароль"
+        placeholder="Password"
         error={errorsSignUp.password?.message}
       />
-      <ButtonForm type="submit">Sign In</ButtonForm>
-      { isLoadingSignUp ? "Loading" : isSuccessSignUp ? "Account created" : isErrorSignUp ? RTKGetErrorMessage(error) : <></>}
+      <ButtonForm type="submit">Registrate</ButtonForm>
+
+      {isLoadingSignUp ? (
+        <LoadingText />
+      ) : isSuccessSignUp ? (
+        <SuccessText>Account created</SuccessText>
+      ) : isErrorSignUp ? (
+        <ErrorText>{RTKGetErrorMessage(error)}</ErrorText>
+      ) : (
+        <></>
+      )}
     </form>
   );
 }

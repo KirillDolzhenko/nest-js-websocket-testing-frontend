@@ -3,9 +3,9 @@
 .settings {
     max-width: 700px;
     margin:  0 auto;
-    border: 1px solid white;
+    // border: 1px solid white;
     border-radius: 10px;
-    padding: 20px;
+    // padding: 20px;
 
     display: flex;
     flex-direction: column;
@@ -35,6 +35,8 @@
 }
 
 .image {
+    // flex-grow: 0;
+
     position: relative;
     cursor: pointer;
     border-radius: 50%;
@@ -51,31 +53,31 @@
         align-items: center;
 
         &.color_blue {
-            background-color: rgba($color: $profileBlue, $alpha: 0.2);
+            background-color: rgba($color: $profileBlue, $alpha: 0.1);
             
             &:hover {
-                background-color: rgba($color: $profileBlue, $alpha: 0.3);     
+                background-color: rgba($color: $profileBlue, $alpha: 0.15);     
             }
         }
         &.color_green {
-            background-color: rgba($color: $profileGreen, $alpha: 0.2);
+            background-color: rgba($color: $profileGreen, $alpha: 0.1);
             
             &:hover {
-                background-color: rgba($color: $profileGreen, $alpha: 0.3);     
+                background-color: rgba($color: $profileGreen, $alpha: 0.15);     
             }
         }
         &.color_red {
-            background-color: rgba($color: $profileRed, $alpha: 0.2);
+            background-color: rgba($color: $profileRed, $alpha: 0.1);
             
             &:hover {
-                background-color: rgba($color: $profileRed, $alpha: 0.3);     
+                background-color: rgba($color: $profileRed, $alpha: 0.15);     
             }
         }
         &.color_yellow {
-            background-color: rgba($color: $profileYellow, $alpha: 0.2);
+            background-color: rgba($color: $profileYellow, $alpha: 0.1);
             
             &:hover {
-                background-color: rgba($color: $profileYellow, $alpha: 0.3);     
+                background-color: rgba($color: $profileYellow, $alpha: 0.15);     
             }
         }
 
@@ -124,7 +126,7 @@
         height: 100%;
 
         &.darker {
-            filter: brightness(0.3);
+            filter: brightness(0.15);
         }
 
     }
@@ -167,34 +169,34 @@
         background: black;
         
         &.BLUE {
-            background-color: rgba($profileBlue, 0.5);
+            background-color: rgba($profileBlue, 0.1);
             
             &:has(input:checked) {
-                background-color: $profileBlue;
+                background-color: rgba($profileBlue, 0.5);
             }
         }
 
         &.GREEN {
-            background-color: rgba($profileGreen, 0.5);
+            background-color: rgba($profileGreen, 0.1);
             
             &:has(input:checked) {
-                background-color: $profileGreen;
+                background-color: rgba($profileGreen, 0.5);
             }
         }
 
         &.RED {
-            background-color: rgba($profileRed, 0.5);
+            background-color: rgba($profileRed, 0.1);
             
             &:has(input:checked) {
-                background-color: $profileRed;
+                background-color: rgba($profileRed, 0.5);
             }
         }
 
         &.YELLOW {
-            background-color: rgba($profileYellow, 0.5);
+            background-color: rgba($profileYellow, 0.1);
             
             &:has(input:checked) {
-                background-color: $profileYellow;
+                background-color: rgba($profileYellow, 0.5);
             }
         }
 
@@ -217,4 +219,27 @@
         }
     } 
 
+}
+
+
+//
+
+@media (max-width: 768px) {
+    .settings {
+        &__content {
+            align-items: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+
+    .radios {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .inputs {
+        gap: 10px;
+    }
+    
 }

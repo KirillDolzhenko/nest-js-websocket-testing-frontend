@@ -66,8 +66,17 @@
 }
 
 body {
+  // background-color: ;
+  background: 
+  // 100px 100px / 80px 80px repeat url("../assets/images/bg/firetr2.png"), 
+  linear-gradient(
+    180deg, 
+    rgba(red($mainBg), green($mainBg), blue($mainBg), 1) 0%, 
+    rgba(red($highlightMessage), green($highlightMessage), blue($highlightMessage), 0.09) 73%);
+  
+    // background-color: black;
   background-color: $mainBg;
-  // overflow: hidden;
+  
 
   .react-tooltip {
     font-size: 0.7rem;

@@ -5,7 +5,7 @@ export const CreateGroupSchema = z.object({
     members: z
         .string()
         .array()
-        .min(1)
+        .min(1, "You must select at least 1 member")
 });
 
 export type CreateGroupSchemaType = z.infer<typeof CreateGroupSchema>;

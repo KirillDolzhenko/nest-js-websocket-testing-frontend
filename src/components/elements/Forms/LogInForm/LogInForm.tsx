@@ -10,6 +10,7 @@ import { setTokens, setUser } from "@/redux/slice/authSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { RTKGetErrorMessage } from "@/redux/api/assets/RTKGetErrorMessage";
+import ErrorText from "../../Inputs/ErrorText/ErrorText";
 
 export default function () {
   let dispatch = useDispatch<AppDispatch>();
@@ -57,17 +58,23 @@ export default function () {
       <InputText
         type="email"
         register={registerLogIn("email")}
-        placeholder="Почта"
+        placeholder="Email"
         error={errorsLogIn.password?.message}
       />
       <InputText
         type="password"
         register={registerLogIn("password")}
-        placeholder="Пароль"
+        placeholder="Password"
         error={errorsLogIn.password?.message}
       />
-      <ButtonForm className={classes.auth__button}>Войти</ButtonForm>
-      {errorsLogIn.root?.message || (error ? RTKGetErrorMessage(error) : "")}
+      <ButtonForm className={classes.auth__button}>Enter</ButtonForm>
+      {errorsLogIn.root?.message || error ? (
+        <ErrorText>
+          {errorsLogIn.root?.message || RTKGetErrorMessage(error)}
+        </ErrorText>
+      ) : (
+        <></>
+      )}
     </form>
   );
 }

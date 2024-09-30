@@ -5,46 +5,36 @@ import { AppDispatch, RootState } from "../../../redux/store";
 import { removeUser } from "../../../redux/slice/authSlice";
 import SettingsProfile from "@/components/elements/Settings/SettingsProfile/SettingsProfile";
 import ButtonForm from "@/components/elements/Buttons/ButtonForm";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { MdExitToApp } from "react-icons/md";
+import { IoChatbox } from "react-icons/io5";
+import LineBottom from "@/components/elements/Lines/LineBottom";
 
 export default function () {
   let user = useSelector((state: RootState) => state.authSlice.user);
-  // let [settingsState, setSettingsState] = useState<boolean>(false);
   let dispatch = useDispatch<AppDispatch>();
 
   let navigate = useNavigate();
 
-  // useEffect(() => {
-  //   console.log(user);
-
-  //   if (!user) {
-  //     dispatch(setChatsDirect([]));
-  //     dispatch(setChatsGroup([]));
-
-  //     console.log("ud");
-  //     // useEffect(() => {
-  //     //   if (!user) {
-  //     //   }
-  //     // }, [user]);
-  //     navigate("/auth");
-  //   }
-  // }, [user]);
-
   return (
     <section className={classes.profile}>
       <div className={classes.profile__content}>
-        <h1>
-          Профиль пользователя <b>{user?.username}</b>
-        </h1>
-        {user && <SettingsProfile user={user} />}
         <div className={classes.profile__buttons}>
-          <ButtonForm onClick={() => dispatch(removeUser())}>Выйти</ButtonForm>
-          {/* <ButtonForm onClick={() => setSettingsState(!settingsState)}>
-            {settingsState ? "Скрыть редактор" : "Редактировать"}
-          </ButtonForm> */}
-          <ButtonForm onClick={() => navigate("/chat")}>Чат</ButtonForm>
+          <button onClick={() => dispatch(removeUser())}>
+            <MdExitToApp />
+          </button>
+          <button onClick={() => navigate("/chat")}>
+            <IoChatbox />
+          </button>
         </div>
+        <LineBottom></LineBottom>
+        <h1>
+          Ваш профиль
+          {/* <span className={classes.profile__username}>{user?.username}</span> */}
+        </h1>
+
+        <LineBottom></LineBottom>
+        {user && <SettingsProfile user={user} />}
       </div>
     </section>
   );

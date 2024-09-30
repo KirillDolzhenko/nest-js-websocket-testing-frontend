@@ -8,12 +8,13 @@ export const authApi = createApi({
     tagTypes: ["userAuth"],
     keepUnusedDataFor: 0,
     endpoints: (builder) => ({
-      authMe: builder.mutation<IDBUserWithTokens, void>({
+      authMe: builder.query<IDBUserWithTokens, void>({
         query: () => ({
           url: `auth_me`,
-          method: "POST",
+          method: "GET",
           authLogic: true,
         }),
+        providesTags: ["userAuth"],
         transformResponse: (response: {
           data: IDBUserWithTokens
         }) => response.data,
@@ -84,6 +85,7 @@ export const authApi = createApi({
             picUrl
           }
         }),
+        invalidatesTags: ["userAuth"],
         transformResponse: (response: {
           data: IDBUser
         }) => response.data,
@@ -154,7 +156,7 @@ export const authApi = createApi({
   })
 
 export const { 
-  useAuthMeMutation, 
+  useLazyAuthMeQuery, 
   useUpdateProfileMutation,
   useLogInMutation, 
   useSignUpMutation,

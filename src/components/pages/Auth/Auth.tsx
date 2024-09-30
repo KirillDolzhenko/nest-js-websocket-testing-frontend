@@ -37,12 +37,12 @@ export default function () {
             <ButtonForm
               onClick={() => setActiveState(EnumToggleAuthState.LOG_IN)}
             >
-              Войти
+              Log In
             </ButtonForm>
             <ButtonForm
               onClick={() => setActiveState(EnumToggleAuthState.SIGN_UP)}
             >
-              Зарегистрироваться
+              Sign Up
             </ButtonForm>
           </div>
 

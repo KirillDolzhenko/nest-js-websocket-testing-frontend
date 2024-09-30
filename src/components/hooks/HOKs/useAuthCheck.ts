@@ -1,4 +1,4 @@
-import { useAuthMeMutation } from "@/redux/api/auth.api";
+import { useLazyAuthMeQuery } from "@/redux/api/auth.api";
 import { setTokens, setUser } from "@/redux/slice/authSlice";
 import { AppDispatch, RootState } from "@/redux/store";
 import { useEffect } from "react";
@@ -14,7 +14,7 @@ export function useAuthCheck() {
     let [
       authMe,
       { isError: isErrorLogIn, isSuccess: isSuccessLogIn, data: dataAuthMe },
-    ] = useAuthMeMutation();
+    ] = useLazyAuthMeQuery();
 
     useEffect(() => {
       if (!user && access_token) {

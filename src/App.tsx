@@ -81,9 +81,9 @@ export function useSocketContext() {
 
 function App() {
   let userId = useSelector((state: RootState) => state.authSlice.user?.id);
-  let username = useSelector(
-    (state: RootState) => state.authSlice.user?.username
-  );
+  // let username = useSelector(
+  //   (state: RootState) => state.authSlice.user?.username
+  // );
 
   let dispatch = useDispatch<AppDispatch>();
 

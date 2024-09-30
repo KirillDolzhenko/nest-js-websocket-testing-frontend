@@ -22,6 +22,7 @@ import { AppDispatch } from "@/redux/store";
 import { setPicColor, setPicProfile } from "@/redux/slice/authSlice";
 import ErrorText from "../../Inputs/ErrorText/ErrorText";
 import SuccessText from "../../Inputs/SuccessText/SuccessText";
+import LoadingText from "../../Inputs/LoadingText/LoadingText";
 
 export default function ({ user }: IPropsSettingsProfile) {
   const dispatch = useDispatch<AppDispatch>();
@@ -122,7 +123,7 @@ export default function ({ user }: IPropsSettingsProfile) {
 
   return (
     <section className={classes.settings}>
-      <h3>Profile settings</h3>
+      {/* <h3>Profile settings</h3> */}
       <form
         onSubmit={handleSubmitChangeProfile(onSumbitChangeProfile)}
         className={classes.settings__form}
@@ -196,77 +197,6 @@ export default function ({ user }: IPropsSettingsProfile) {
                   alt="profilePicture"
                 />
               )}
-
-              {/* {activeUpload ? (
-                !user.picUrl ? (
-                  <>
-                    <svg className={classes.image__icon}>
-                      <use href={`${iconPlus}#icon`} />
-                    </svg>
-                    <input
-                      className={classes.image__input}
-                      type="file"
-                      accept=".png,.jpg,.jpeg,.webp"
-                      onChange={(e: any) => {
-                        if (
-                          e.target.files[0] &&
-                          e.target.files[0].size < 5000000
-                        ) {
-                          uploadPicture({ file: e.target.files[0] });
-                        }
-                      }}
-                    />
-                  </>
-                ) : (
-                  <>
-                    <svg className={classes.image__icon}>
-                      <use href={`${iconRemove}#icon`} />
-                    </svg>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        dispatch(setPicProfile(undefined));
-                        // setDeletedState(true);
-                      }}
-                      className={classes.image__delete}
-                    ></button>
-                  </>
-                )
-              ) : !user.picUrl ? (
-                <span>{user.username.slice(0, 1).toUpperCase()}</span>
-              ) : (
-                <img
-                  className={classNames(
-                    classes.image__picture,
-                    activeUpload ? classes.darker : ""
-                  )}
-                  src={user.picUrl}
-                  alt="profilePicture"
-                />
-              )} */}
-
-              {/* {user.picUrl ? (
-                <img
-                  className={classNames(
-                    classes.image__picture,
-                    activeUpload ? classes.darker : ""
-                  )}
-                  src={user.picUrl}
-                  alt="profilePicture"
-                />
-              ) : activeUpload ? (
-                !isLoadingUploadPicture ? (
-                  <>
-                    <svg className={classes.image__icon}>
-                      <use href={`${iconPlus}#icon`} />
-                    </svg>
-                  </>
-                ) : (
-                  "Загрузка..."
-                )
-              ) : (
-                <span>{user.username.slice(0, 1).toUpperCase()}</span>
-              )} */}
             </div>
           </div>
           <div className={classes.inputs}>
@@ -377,7 +307,7 @@ export default function ({ user }: IPropsSettingsProfile) {
         <ButtonForm type="submit">Change</ButtonForm>
         <span className={classes.status}>
           {isLoadingUpdateProfile || isLoadingPicProfile ? (
-            <span>Loading...</span>
+            <LoadingText />
           ) : isErrorUpdateProfile || isErrorPicProfile ? (
             <ErrorText>Error occured</ErrorText>
           ) : isSuccessUpdateProfile ? (
