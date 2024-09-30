@@ -1,11 +1,12 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { IDBLogOutResponse, IDBUser, IDBUserWithTokens, IRTKMutationGetAllUsers, IRTKQueryLogIn, IRTKQuerySearchUsers, IRTKQuerySignUp, IRTKQueryUpdateProfile } from '../../types/redux/auth';
+import { IDBLogOutResponse, IDBUser, IDBUserWithTokens, IJWTTokensRefresh, IRTKMutationGetAllUsers, IRTKQueryLogIn, IRTKQuerySearchUsers, IRTKQuerySignUp, IRTKQueryUpdateProfile } from '../../types/redux/auth';
 import { baseQueryWithReauthGenerator } from './assets/baseQueryWithReauthGenerator.api';
 
 export const authApi = createApi({
     reducerPath: 'authApi',
     baseQuery: baseQueryWithReauthGenerator("user"),
     tagTypes: ["userAuth"],
+    keepUnusedDataFor: 0,
     endpoints: (builder) => ({
       authMe: builder.mutation<IDBUserWithTokens, void>({
         query: () => ({
@@ -15,6 +16,21 @@ export const authApi = createApi({
         }),
         transformResponse: (response: {
           data: IDBUserWithTokens
+        }) => response.data,
+        transformErrorResponse: (response) => {
+            console.log(response)
+
+            return response
+        },
+      }),
+      refreshToken: builder.query<IJWTTokensRefresh, void>({
+        query: () => ({
+          url: `refresh_token`,
+          credentials: "include",
+          method: "GET",
+        }),
+        transformResponse: (response: {
+          data: IJWTTokensRefresh
         }) => response.data,
         transformErrorResponse: (response) => {
             console.log(response)
@@ -71,6 +87,10 @@ export const authApi = createApi({
         transformResponse: (response: {
           data: IDBUser
         }) => response.data,
+        transformErrorResponse: (response) => {
+            console.log(response)
+            return response
+        },
       }),
       removePicProfile: builder.mutation<IDBUser, void>({
         query: () => ({
@@ -114,17 +134,14 @@ export const authApi = createApi({
         },
       }),
       getAllUsers: builder.mutation<IDBUser[], IRTKMutationGetAllUsers | void>({
-        query: ({arrId} = {arrId: []}) => {
-          console.log(arrId)
-
-          return {
+        query: ({arrId} = {arrId: []}) => ({
           url: `contacts/all`,
           method: "POST",
           authLogic: true,
           body: {
             arrId
           }
-        }},
+        }),
         transformResponse: (response: {
           data: IDBUser[]
         }) => response.data,
@@ -141,6 +158,7 @@ export const {
   useUpdateProfileMutation,
   useLogInMutation, 
   useSignUpMutation,
+  useRefreshTokenQuery,
   useLogOutMutation,
   useSearchUsersMutation,
   useRemovePicProfileMutation,

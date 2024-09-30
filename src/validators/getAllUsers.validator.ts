@@ -1,10 +1,11 @@
 import { z } from 'zod';
 
-export const GetAllUsersSchema = z.object({
-    title: z.string(),
-    arrId: z
+export const CreateGroupSchema = z.object({
+    title: z.string().min(2),
+    members: z
         .string()
         .array()
+        .min(1)
 });
 
-export type GetAllUsersSchemaType = z.infer<typeof GetAllUsersSchema>;
+export type CreateGroupSchemaType = z.infer<typeof CreateGroupSchema>;

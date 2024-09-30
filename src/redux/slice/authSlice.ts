@@ -21,7 +21,7 @@ const authSlice = createSlice({
         setTokens(state, action: PayloadAction<IJWTTokens>) {
             state.tokens = action.payload; 
 
-            console.log(action.payload.access_token, "AAACC")
+            // console.log(action.payload.access_token, "AAACC")
 
             localStorage.setItem("access_token", action.payload.access_token);
         },

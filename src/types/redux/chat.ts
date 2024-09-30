@@ -1,5 +1,6 @@
 import { FetchArgs } from "@reduxjs/toolkit/query"
 import { IDBMessage, IDBUser } from "./auth"
+import { IDBContactDirect, IDBGroup, IDBGroupBasic } from "./message"
 
 
 export enum EnumChatType {
@@ -12,8 +13,17 @@ export enum EnumMessageType {
     TEXT = "TEXT"
 }
 
-export interface IChatSliceState {
-    chatType: undefined | EnumChatType,
+interface IChatSliceState_DirectSettings {
+    chatType: undefined | EnumChatType.DIRECT,
     chatData: undefined | IDBUser,
+}
+interface IChatSliceState_GroupSettings {
+    chatType: undefined | EnumChatType.GROUP,
+    chatData: undefined | IDBGroupBasic,
+}
+
+export type IChatSliceState = (IChatSliceState_DirectSettings | IChatSliceState_GroupSettings) & {
     chatMessages: IDBMessage[],
+    chatsDirect: IDBContactDirect[],
+    chatsGroup: IDBGroupBasic[]
 }

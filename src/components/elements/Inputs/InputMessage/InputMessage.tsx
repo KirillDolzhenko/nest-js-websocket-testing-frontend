@@ -16,10 +16,9 @@ import {
 import useSocketSendMessage from "@/components/hooks/HOKs/socket/useSocketSendMessage";
 import useAddEmoji from "@/components/hooks/HOKs/messages/useAddEmoji";
 import useToggleEmojiPicker from "@/components/hooks/HOKs/input/useToggleEmojiPicker";
-import { EnumChatType, EnumMessageType } from "@/types/redux/chat";
+import { EnumMessageType } from "@/types/redux/chat";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { isArray } from "lodash";
 import { useUploadMessageFileMutation } from "@/redux/api/files.api";
 
 export default function ({ className }: IPropsClassName) {
@@ -68,7 +67,6 @@ export default function ({ className }: IPropsClassName) {
         e.target instanceof HTMLInputElement &&
         e.target.files?.length
       ) {
-        console.log("SMT");
         if (e.target.files[0].size < 50000000) {
           uploadMessageFile({
             file: e.target.files[0],
@@ -80,9 +78,7 @@ export default function ({ className }: IPropsClassName) {
   );
 
   useEffect(() => {
-    console.log("SM2T");
     if (isSuccess && data && chatDataId && chatType) {
-      console.log("SMT1000");
       sendMessage({
         content: data.file.path,
         recipient: chatDataId,
@@ -104,18 +100,22 @@ export default function ({ className }: IPropsClassName) {
           className={classes.input__textarea}
         ></textarea>
         <div className={classes.input__buttons}>
-          <div ref={ref} className={classes.emojiPicker}>
-            <EmojiPicker
-              style={{
-                width: "250px",
-                height: "300px",
-              }}
-              lazyLoadEmojis={true}
-              onEmojiClick={addEmoji}
-              theme={Theme.DARK}
-              open={activeEmoji}
-            />
-          </div>
+          {activeEmoji ? (
+            <div ref={ref} className={classes.emojiPicker}>
+              <EmojiPicker
+                style={{
+                  width: "250px",
+                  height: "300px",
+                }}
+                lazyLoadEmojis={true}
+                onEmojiClick={addEmoji}
+                theme={Theme.DARK}
+                open={activeEmoji}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
           <Tooltip
             className="tooltip"
             anchorSelect={`.${classes.input__emoji}`}

@@ -121,6 +121,7 @@ export default function ({
                   username={el.username}
                   color={el.picColor}
                   url={el.picUrl}
+                  desc={el.email}
                 />
               </button>
             ))}

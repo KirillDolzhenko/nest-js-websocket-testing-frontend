@@ -1,11 +1,13 @@
 .userInfo {
     display: flex;
     align-items: center;
-    gap: 10px;
-    
-    // overflow-x: hidden;
+    gap: 7px;
+
+    overflow: hidden;
 
     &__username {
-        font-size: 1rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 0.8rem;
     }
 }

@@ -2,6 +2,8 @@
 // Default
 
 import { IDBMessage, IDBUser } from "../redux/auth";
+import { EnumChatType } from "../redux/chat";
+import { IDBContactDirect, IDBGroup, IDBGroupBasic } from "../redux/message";
 
 export interface IPropsClassName {
     className?: string;
@@ -51,13 +53,21 @@ export interface IPropsButtonAdd extends IPropsClassName {
 // ProfilePicture
 
 export interface IPropsProfilePicture extends IPropsClassName {
+    username: string,
     url?: string,
     color?: string,
-    username: string
+    letter?: string,
 }
 
-export interface IPropsUserInfo extends IPropsProfilePicture {}
+export interface IPropsUserInfo extends IPropsProfilePicture {
+    desc?: string
+}
 
+export interface IPropsGroupInfo extends IPropsClassName {
+    title: string,
+    letter?: string,
+    desc?: string
+}
 
 // Modal
 
@@ -84,6 +94,7 @@ export interface IPropsModalImage extends IPropsClassName {
 export interface IPropsMessage extends IPropsClassName {
     content: IDBMessage;
     sender: boolean;
+    chatType: EnumChatType
 }
 
 export interface IPropsMessageBlock extends IPropsClassName {
@@ -93,5 +104,16 @@ export interface IPropsMessageBlock extends IPropsClassName {
 ///
 
 export interface IPropsUserInfoMessages extends IPropsClassName {
-    users: IDBUser[]
+    userMes: IDBContactDirect[]
+}
+
+
+export interface IPropsGroupsInfoMessages extends IPropsClassName {
+    groups: IDBGroupBasic[]
+}
+
+export interface IPropsInputSelect extends IPropsClassName {
+    onChange?: (arr: string[]) => void,
+    error?: string,
+    active?: boolean
 }

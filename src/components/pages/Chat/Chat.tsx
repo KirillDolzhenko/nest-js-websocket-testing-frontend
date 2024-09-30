@@ -8,19 +8,24 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { useSocketContext } from "@/App";
 import { useEffect } from "react";
+import classNames from "classnames";
+import useSocketOnMessage from "@/components/hooks/HOKs/socket/useSocketOnMessage";
 
 export default function () {
   let chatType = useSelector((state: RootState) => state.chatSlice.chatType);
+
+  useSocketOnMessage();
 
   return (
     <div className={classes.chat}>
       <div className={classes.chat__container}>
         <ChatSidebar className={classes.chat__sidebar} />
 
-        {!chatType ? (
-          <ChatPlaceholder className={classes.chat__placeholder} />
+        {chatType ? (
+          <ChatContent className={classNames(classes.chat__content)} />
         ) : (
-          <ChatContent className={classes.chat__content} />
+          // <></>
+          <ChatPlaceholder className={classes.chat__placeholder} />
         )}
       </div>
     </div>

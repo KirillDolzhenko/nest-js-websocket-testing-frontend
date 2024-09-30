@@ -26,6 +26,13 @@
             width: 100vw;
             height: 100vh;
         }
+
+        &:has(.chat__content) {
+            & .chat__sidebar {
+                display: none;
+            }
+
+        }
     }
 }
 

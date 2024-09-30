@@ -26,6 +26,7 @@
     }
 
     &__textarea {
+        width: 100%;
         font-size: 0.8rem;
         flex: 1 1 auto;     
         height: 120px;
@@ -120,4 +121,29 @@
     &__attachment{
         opacity: 1;
     }
+}
+
+@media (max-width: 768px) {
+    .input {
+        &__content {
+            align-items: end;
+            flex-direction: column-reverse;
+        }
+    }
+    
+.emojiPicker {
+    position: relative;
+
+    & :global(.EmojiPickerReact) {
+        // background-color: rgba($color: $mainBg, $alpha: 0.8) ;
+
+        // width: 250px;
+        // height: 200px;
+        // position: absolute;
+        // left: 0;
+        // right: initial;
+        bottom: 50px;
+        right: -150px;
+    }}
+    
 }

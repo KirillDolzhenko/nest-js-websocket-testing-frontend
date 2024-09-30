@@ -5,12 +5,14 @@ import fileSlice from "./slice/fileSlice";
 import { authApi } from "./api/auth.api";
 import { filesApi } from "./api/files.api";
 import { chatApi } from "./api/chat.api";
+import { groupApi } from "./api/group.api";
 
 export const store = configureStore({
     reducer: {
         [authApi.reducerPath]: authApi.reducer,
         [filesApi.reducerPath]: filesApi.reducer,
         [chatApi.reducerPath]: chatApi.reducer,
+        [groupApi.reducerPath]: groupApi.reducer,
         fileSlice,
         authSlice,
         chatSlice
@@ -19,7 +21,8 @@ export const store = configureStore({
         getDefaultMiddleware().concat(
             authApi.middleware,
             filesApi.middleware,
-            chatApi.middleware
+            chatApi.middleware,
+            groupApi.middleware
         ),
 })
 

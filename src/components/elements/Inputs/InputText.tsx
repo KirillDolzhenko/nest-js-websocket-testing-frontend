@@ -1,6 +1,7 @@
 import { IPropsInputText } from "@/types/props/props";
 import classes from "./InputText.module.scss";
 import classNames from "classnames";
+import ErrorText from "./ErrorText/ErrorText";
 
 export default function ({
   value,
@@ -21,8 +22,7 @@ export default function ({
         {...register}
         className={classNames(className, classes.input)}
       ></input>
-
-      {<div className={classes.error}>{error}</div>}
+      {error ? <ErrorText>{error}</ErrorText> : <></>}
     </>
   );
 }

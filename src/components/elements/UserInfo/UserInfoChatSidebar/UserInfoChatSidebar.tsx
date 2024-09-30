@@ -29,7 +29,7 @@ export default function ({ className, url, color, username }: IPropsUserInfo) {
 
   return (
     <div className={classes.block}>
-      <UserInfoTemplate url={url} color={color} username={username} />
+      <UserInfoTemplate className={classes.block__user} url={url} color={color} username={username} />
       <div className={classes.block__buttons}>
         <Tooltip
           className="tooltip"

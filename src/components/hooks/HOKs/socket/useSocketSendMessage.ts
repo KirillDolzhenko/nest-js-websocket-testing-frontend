@@ -11,16 +11,18 @@ export default function () {
     // let chatType = useSelector((state:RootState) => state.chatSlice.chatType);
     
     let socket = useSocketContext();
+    let access_token = useSelector((state:RootState) => state.authSlice.tokens?.access_token);
 
     let sendMessage = useCallback(
       (message: ISendMessage) => {
-        // if (chatType == EnumChatType.DIRECT && chatData) {
-          socket?.emit("message", {
-            ...message
-          });
-        // }
+        socket?.emit("message", {
+          ...message,
+          auth: {
+            token: access_token
+          }
+        });
       },
-      [socket]
+      [socket, access_token]
     );
 
     return sendMessage

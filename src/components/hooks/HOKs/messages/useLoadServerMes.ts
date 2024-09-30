@@ -1,7 +1,9 @@
 import { useGetMessagesDirectMutation } from "@/redux/api/chat.api";
+import { useGetMessagesGroupMutation, useLazyGetMessagesGroupQuery } from "@/redux/api/group.api";
 import { setMessages } from "@/redux/slice/chatSlice";
 import { AppDispatch, RootState } from "@/redux/store";
 import { TUseLoadServerMes } from "@/types/hooks/hooks";
+import { EnumChatType } from "@/types/redux/chat";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,25 +14,56 @@ export default function ():TUseLoadServerMes {
     let chatDataId = useSelector(
       (state: RootState) => state.chatSlice.chatData?.id
     );
+    let chatType = useSelector(
+      (state: RootState) => state.chatSlice.chatType
+    );
+    
+    let [
+      getMessageGroup, 
+      { 
+        isSuccess: isSuccessGroup, 
+        isError: isErrorGroup, 
+        isLoading: isLoadingGroup, 
+        data: dataGroup 
+      }
+    ] =
+    useGetMessagesGroupMutation()
+
+    let [getMessageDirect, { isSuccess, isError, isLoading, data }] =
+      useGetMessagesDirectMutation();
 
     useEffect(() => {
-        if (chatDataId && userId) {
-          setLoadedServerMes(false);
+      console.log(chatDataId, userId, chatType)
+      if (chatDataId && userId) {
+        setLoadedServerMes(false);
+        if (chatType == EnumChatType.DIRECT) {
           getMessageDirect({
             user_sender: userId,
             user_recipient: chatDataId,
           });
-        }
-    }, [chatDataId, userId]);
-    
-    let [getMessageDirect, { isSuccess, isError, isLoading, data }] =
-        useGetMessagesDirectMutation();
-    
+        } else {
+          console.log("g")
+          getMessageGroup(chatDataId)
+        } 
+      }        
+    }, [chatDataId, userId, chatType]);
+
     useEffect(() => {
-      if (isSuccess && data) {
-        dispatch(setMessages(data.content));
+      console.log("g2")
+      if (chatType == EnumChatType.DIRECT) {
+        if (isSuccess && data) {
+          dispatch(setMessages(data.content));
+        }
+      } else if (chatType == EnumChatType.GROUP){
+        if (isSuccessGroup && dataGroup) {
+          dispatch(setMessages(dataGroup));
+        }
       }
-    }, [data]);
+    }, [data, dataGroup, isSuccess, isSuccessGroup]);
+
+    useEffect(() => {
+      console.log("LOAD")
+    }, [isLoadingGroup])
     
     let [loadedServerMes, setLoadedServerMes] = useState<boolean>(false);
 

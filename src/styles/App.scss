@@ -1,7 +1,10 @@
 @import "./null.scss";
 @import "./vars/color.scss";
+@import "./fonts/roboto.scss";
+@import "./fonts/exo2.scss";
 
 .App {
+  font-family: "Exo 2";
   text-align: center;
 }
 
@@ -67,6 +70,7 @@
 
 body {
   background-color: $mainBg;
+  overflow: hidden;
 
   
 .react-tooltip {

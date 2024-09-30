@@ -2,10 +2,17 @@ import classNames from "classnames";
 import classes from "./ProfilePicture.module.scss";
 import { IPropsClassName, IPropsProfilePicture } from "@/types/props/props";
 
-export default function ({ url, color, username }: IPropsProfilePicture) {
+export default function ({
+  className,
+  url,
+  color,
+  username = "Аноним",
+  letter,
+}: IPropsProfilePicture) {
   return (
     <span
       className={classNames(
+        className,
         // classes.settings__image,
         classes.image,
         classes[`color_${color && color.toLowerCase()}`]
@@ -15,7 +22,7 @@ export default function ({ url, color, username }: IPropsProfilePicture) {
         <img src={url} alt="image" />
       ) : (
         <span className={classes.letter}>
-          {username.substring(0, 1).toUpperCase()}
+          {letter ? letter : username.substring(0, 1).toUpperCase()}
         </span>
       )}
     </span>

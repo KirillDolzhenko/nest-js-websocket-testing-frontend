@@ -1,12 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { IDBLogOutResponse, IDBUser, IDBUserWithTokens, IRTKQueryLogIn, IRTKQuerySearchUsers, IRTKQuerySignUp, IRTKQueryUpdateProfile } from '../../types/redux/auth';
 import { baseQueryWithReauthGenerator } from './assets/baseQueryWithReauthGenerator.api';
-import { IDBContactDirect, IDBGetMessageDirect, IRTKGetMessageDirect } from '@/types/redux/message';
+import { IDBContactDirect, IDBGetMessageDirect, IDBGroup, IRTKCreateGroup, IRTKGetMessageDirect } from '@/types/redux/message';
 
 export const chatApi = createApi({
     reducerPath: 'chatApi',
     baseQuery: baseQueryWithReauthGenerator("chat"),
     tagTypes: ["chatApi"],
+    keepUnusedDataFor: 0,
     endpoints: (builder) => ({
       getMessagesDirect: builder.mutation<IDBGetMessageDirect, IRTKGetMessageDirect>({
         query: (info) => ({
@@ -23,36 +24,33 @@ export const chatApi = createApi({
           return response.data
         },
         transformErrorResponse: (response) => {
-            console.log(response)
-
             return response
         },
       }),
-
-      getContactsDirect: builder.mutation<IDBContactDirect[], void>({
+      getContactsDirect: builder.query<IDBContactDirect[], void>({
         query: () => ({
           url: `contacts/direct`,
-          method: "POST",
+          method: "GET",
           authLogic: true
         }),
         transformResponse: (response: {
           data: IDBContactDirect[]
         }) => {
-          console.log("contacts", response)
-
           return response.data
         },
+        providesTags: ["chatApi"],
         transformErrorResponse: (response) => {
             console.log(response)
 
             return response
         },
-      }),
-    }),
+      })
+    })
   })
 
 export const { 
   useGetMessagesDirectMutation,
-  useGetContactsDirectMutation
+  useGetContactsDirectQuery,
+  // useCreateGroupMutation
 } = chatApi;
   

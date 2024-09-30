@@ -1,6 +1,11 @@
 @import "../../../styles/vars/color.scss";
 
 .image {
+    container-type: inline-size;
+    user-select: none;
+
+    cursor: pointer;
+
     position: relative;
     height: 100%;
     width: 100%;
@@ -64,6 +69,17 @@
     }
 
 .letter {
+    // container-type: inline-size;
+    // container-name: container;
     line-height: 1rem;
     font-size: 1rem;
+}
+
+@container (max-width: 30px) {
+    // .image {
+    //     container: container / inline-size ;
+    // }
+    .letter {
+        font-size: 0.6rem;
+    }
 }

@@ -20,6 +20,8 @@ import { useUploadPictureMutation } from "@/redux/api/files.api";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { setPicColor, setPicProfile } from "@/redux/slice/authSlice";
+import ErrorText from "../../Inputs/ErrorText/ErrorText";
+import SuccessText from "../../Inputs/SuccessText/SuccessText";
 
 export default function ({ user }: IPropsSettingsProfile) {
   const dispatch = useDispatch<AppDispatch>();
@@ -27,21 +29,21 @@ export default function ({ user }: IPropsSettingsProfile) {
   const [activeUpload, setActiveUpload] = useState<boolean>(false);
   // const [deletedState, setDeletedState] = useState<boolean>(false);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user]);
 
-  useEffect(() => {
-    console.log(
-      {
-        username: user.username,
-        email: user.email,
-        picUrl: user.picUrl,
-        picColor: user.picColor,
-      },
-      "RHFF"
-    );
-  }, []);
+  // useEffect(() => {
+  //   console.log(
+  //     {
+  //       username: user.username,
+  //       email: user.email,
+  //       picUrl: user.picUrl,
+  //       picColor: user.picColor,
+  //     },
+  //     "RHFF"
+  //   );
+  // }, []);
 
   let {
     register: registerChangeProfile,
@@ -114,7 +116,7 @@ export default function ({ user }: IPropsSettingsProfile) {
       data.picUrl = undefined;
       removePicProfile();
     }
-
+    console.log(data);
     updateProfile(data);
   }, []);
 
@@ -377,9 +379,9 @@ export default function ({ user }: IPropsSettingsProfile) {
           {isLoadingUpdateProfile || isLoadingPicProfile ? (
             <span>Loading...</span>
           ) : isErrorUpdateProfile || isErrorPicProfile ? (
-            <span className={classes.status__error}>Error occured</span>
+            <ErrorText>Error occured</ErrorText>
           ) : isSuccessUpdateProfile ? (
-            <span className={classes.status__success}>Saved</span>
+            <SuccessText>Saved</SuccessText>
           ) : (
             ""
           )}

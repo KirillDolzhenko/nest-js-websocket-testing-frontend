@@ -1,11 +1,38 @@
 .userInfo {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    align-items: start;
+    gap: 7px;
     
-    // overflow-x: hidden;
 
     &__username {
-        font-size: 0.9rem;
+        margin-top: 3px;
+        
+        max-width: 160px;
+        line-height: 110%;
+        
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        
+        font-size: 0.8rem;
+    }
+
+    &__content {
+        display: flex;
+        align-items: start;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    &__desc {
+        font-size: 0.6rem;
+        line-height: 120%;
+
+        opacity: 0.5;
+        display: block;
+        max-width: 160px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 }

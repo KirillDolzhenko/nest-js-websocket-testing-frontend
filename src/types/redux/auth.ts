@@ -1,5 +1,6 @@
 import { FetchArgs } from "@reduxjs/toolkit/query"
 import { EnumChatType, EnumMessageType } from "./chat"
+import { IDBGroupBasic } from "./message"
 
 
 export enum EnumDBUserColor {
@@ -94,6 +95,9 @@ export interface IDBMessageText {
     recipient: IDBUser,
     recipientId: string,
     recipientType: EnumChatType,
+
+    recipientGroupId?: string,
+    recipientGroup?: IDBGroupBasic
 
     messageType: EnumMessageType.TEXT,
     content: string,

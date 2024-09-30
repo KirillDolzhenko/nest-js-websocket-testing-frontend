@@ -1,10 +1,8 @@
 @import "../../../../styles/vars/color.scss";
 
-.usersList {
+.groupsList {
     display: flex;
     flex-direction: column;
-    // gap: 5px;
-
 
     width: 100%;
 
@@ -14,6 +12,6 @@
         &:hover, &.active {
             width: 100%;
             background-color: $highlightMessage;
-        }
+        } 
     }
 }

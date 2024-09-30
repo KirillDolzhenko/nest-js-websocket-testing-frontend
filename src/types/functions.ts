@@ -6,4 +6,6 @@ export interface ISendMessage {
     
     recipient: string; 
     recipientType: EnumChatType;
+
+    // recipientGroupId?: string
 }

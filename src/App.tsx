@@ -1,17 +1,8 @@
 import "./styles/App.scss";
-import { Provider, useDispatch, useSelector } from "react-redux";
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
-import Auth from "./components/pages/Auth/Auth";
-import { AppDispatch, RootState, store } from "./redux/store";
-import { useAuthMeMutation } from "./redux/api/auth.api";
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { AppDispatch, RootState } from "./redux/store";
 import { createContext, useContext, useEffect, useState } from "react";
-import { setAccessToken, setTokens, setUser } from "./redux/slice/authSlice";
 import HOKAuthChecker from "./components/HOKs/HOKAuthChecker";
 import Profile from "./components/pages/Profile/Profile";
 import HOKAuthCheckerForAuth from "./components/HOKs/HOKAuthCheckerForAuth";
@@ -19,8 +10,7 @@ import Chat from "./components/pages/Chat/Chat";
 // import { RootState } from "@reduxjs/toolkit/query";
 
 import { Helmet } from "react-helmet";
-import { logoFire, logoPlanet } from "./config/icons";
-import Favicon from "react-favicon";
+import { logoFire } from "./config/icons";
 // export const socket = io('http://localhost:3010', {
 //   autoConnect: false,
 // });
@@ -28,8 +18,7 @@ import Favicon from "react-favicon";
 import { io, Socket } from "socket.io-client";
 import config from "./config/config";
 import { IPropsChildren } from "./types/props/props";
-import { setNewMessage } from "./redux/slice/chatSlice";
-import { IDBMessage } from "./types/redux/auth";
+import { setChatsDirect, setChatsGroup } from "./redux/slice/chatSlice";
 
 const Context = createContext<Socket | null>(null);
 
@@ -42,7 +31,6 @@ function ContextSocket({ children }: IPropsChildren) {
   let tokens = useSelector((state: RootState) => state.authSlice.tokens);
 
   useEffect(() => {
-    console.log("SOMEEEEEEEEEEEEEEEEEEE");
     if (user && tokens && tokens.access_token) {
       async function socketio(tokenStr: string) {
         let socket = io(config.websocket.url, {
@@ -96,9 +84,22 @@ export function useSocketContext() {
 }
 
 function App() {
+  let userId = useSelector((state: RootState) => state.authSlice.user?.id);
+  let username = useSelector(
+    (state: RootState) => state.authSlice.user?.username
+  );
+
+  let dispatch = useDispatch<AppDispatch>();
+
   useEffect(() => {
-    console.log("render");
-  }, []);
+    console.log(userId, "changeddd");
+    if (userId == undefined) {
+      console.log("SOMETHINGGG");
+      dispatch(setChatsDirect([]));
+      dispatch(setChatsGroup([]));
+    }
+  }, [userId]);
+
   return (
     <ContextSocket>
       <div className="App">
@@ -124,9 +125,14 @@ function App() {
             <Route
               path="/profile"
               element={
-                <HOKAuthChecker>
-                  <Profile />
-                </HOKAuthChecker>
+                <>
+                  <Helmet>
+                    <title>Profile page</title>
+                  </Helmet>
+                  <HOKAuthChecker>
+                    <Profile />
+                  </HOKAuthChecker>
+                </>
               }
             />
 
