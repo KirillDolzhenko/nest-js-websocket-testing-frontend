@@ -1,6 +1,6 @@
 import Lottie from "lottie-react";
 import classes from "./ChatPlaceholder.module.scss";
-import { lottieFire, lottieLoading } from "@/config/lotties";
+import { lottieFire } from "@/config/lotties";
 import { IPropsClassName } from "@/types/props/props";
 import classNames from "classnames";
 

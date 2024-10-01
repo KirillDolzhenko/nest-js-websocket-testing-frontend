@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { IFileSliceState } from "@/types/redux/files";
 
 
-let initialState: IFileSliceState = {
+const initialState: IFileSliceState = {
     uploadActive: false,
     uploadState: 0,
     

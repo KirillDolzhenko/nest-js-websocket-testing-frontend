@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import InputText from "../../Inputs/InputText";
 import classes from "./SignUpForm.module.scss";
 import { setTokens, setUser } from "@/redux/slice/authSlice";
@@ -7,8 +7,7 @@ import ButtonForm from "../../Buttons/ButtonForm";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSignUpMutation } from "@/redux/api/auth.api";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { RTKGetErrorMessage } from "@/redux/api/assets/RTKGetErrorMessage";
 import ErrorText from "../../Inputs/ErrorText/ErrorText";
@@ -16,9 +15,9 @@ import LoadingText from "../../Inputs/LoadingText/LoadingText";
 import SuccessText from "../../Inputs/SuccessText/SuccessText";
 
 export default function () {
-  let dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
 
-  let [
+  const [
     signup,
     {
       isError: isErrorSignUp,
@@ -42,7 +41,7 @@ export default function () {
     }
   }, [dataSignUp]);
 
-  let onSubmitSignUp = useCallback((data: SignUpSchemaType) => {
+  const onSubmitSignUp = useCallback((data: SignUpSchemaType) => {
     console.log("FFFF");
     signup(data);
   }, []);

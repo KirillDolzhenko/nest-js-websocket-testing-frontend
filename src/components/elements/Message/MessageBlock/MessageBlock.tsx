@@ -7,8 +7,8 @@ import useRenderMessagesContent from "@/components/hooks/HOKs/messages/useRender
 
 export default function MessageBlock({ content }: IPropsMessageBlock) {
   const refBlock = useRef<HTMLDivElement>(null);
-  let [loadedServerMes, setLoadedServerMes] = useLoadServerMes();
-  let renderMessagesContent = useRenderMessagesContent(content);
+  const [loadedServerMes, setLoadedServerMes] = useLoadServerMes();
+  const renderMessagesContent = useRenderMessagesContent(content);
 
   useEffect(() => {
     if (!loadedServerMes && content.length > 0) {

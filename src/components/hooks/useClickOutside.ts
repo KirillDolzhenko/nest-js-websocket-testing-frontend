@@ -1,7 +1,7 @@
 import { TUseClickOutside } from "@/types/hooks/hooks";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-let useClickOutside: TUseClickOutside = (refModal, active, setActive) => {
+const useClickOutside: TUseClickOutside = (refModal, active, setActive) => {
     
 
   useEffect(() => {

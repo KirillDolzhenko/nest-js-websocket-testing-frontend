@@ -1,4 +1,3 @@
-import { IPropsChildren } from "@/types/props/props";
 import classes from "./LoadingText.module.scss";
 
 export default function () {

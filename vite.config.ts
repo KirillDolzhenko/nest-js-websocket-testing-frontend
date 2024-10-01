@@ -1,6 +1,11 @@
+import config from './src/config/config';
+// import config from '@/config/config';
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import * as path from "path";
+import dotenv from "dotenv";
+
+dotenv.config()
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,5 +19,14 @@ export default defineConfig({
   },
   server: {
     host: true
+  },
+  base: process.env.VITE_URL_SUBDIR,
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html')
+      }
+    }
   }
 })
+

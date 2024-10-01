@@ -3,8 +3,8 @@ import svgRemove from "../assets/images/icons/delete.svg"
 import pngFire from "../assets/images/icons/fire.png"
 import icoPlanet from "../assets/images/icons/favicon2.ico";
 
-export let iconPlus = svgPlus;
-export let iconRemove = svgRemove;
+export const iconPlus = svgPlus;
+export const iconRemove = svgRemove;
 
-export let logoFire = pngFire;
-export let logoPlanet = icoPlanet;
+export const logoFire = pngFire;
+export const logoPlanet = icoPlanet;

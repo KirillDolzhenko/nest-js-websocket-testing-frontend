@@ -1,4 +1,4 @@
-import { IPropsClassName, IPropsUserInfo } from "@/types/props/props";
+import { IPropsUserInfo } from "@/types/props/props";
 import classes from "./UserInfoSmall.module.scss";
 import ProfilePictureSmall from "../../Picture/ProfilePictureSmall/ProfilePictureSmall";
 import classNames from "classnames";

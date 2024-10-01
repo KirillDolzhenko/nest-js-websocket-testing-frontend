@@ -4,7 +4,11 @@ export default {
     },
     http: {
         url: {
-            core: "http://localhost:9000"
+            core: import.meta.env.VITE_URL_HTTP
         }
+    },
+    frontend: {
+        subdir: import.meta.env.VITE_URL_SUBDIR
     }
+
 }

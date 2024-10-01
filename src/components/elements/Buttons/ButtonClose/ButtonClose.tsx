@@ -1,4 +1,4 @@
-import { IPropsButtonAdd, IPropsOnClick } from "@/types/props/props";
+import { IPropsOnClick } from "@/types/props/props";
 import classes from "./ButtonClose.module.scss";
 import { IoClose } from "react-icons/io5";
 import classNames from "classnames";

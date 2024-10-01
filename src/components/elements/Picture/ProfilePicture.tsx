@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import classes from "./ProfilePicture.module.scss";
-import { IPropsClassName, IPropsProfilePicture } from "@/types/props/props";
+import { IPropsProfilePicture } from "@/types/props/props";
 
 export default function ({
   className,

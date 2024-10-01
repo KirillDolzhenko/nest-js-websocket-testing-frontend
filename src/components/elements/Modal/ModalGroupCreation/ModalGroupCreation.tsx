@@ -32,10 +32,11 @@ export default function ({
 
   const { field } = useController({ name: "members", control });
 
+   
   const [createGroup, { isSuccess, isError, isLoading, data }] =
     useCreateGroupMutation();
 
-  let onSubmitGroup = useCallback((data: IRTKCreateGroup) => {
+  const onSubmitGroup = useCallback((data: IRTKCreateGroup) => {
     createGroup(data);
   }, []);
 

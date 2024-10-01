@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
+    "buildOrig": "tsc -b && yarn lint && vite build",
+    "build": "yarn lint && vite build",
+    "lint": "npx eslint src --fix",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -19,6 +20,7 @@
     "axios": "^1.7.7",
     "byte-size": "^9.0.0",
     "classnames": "^2.5.1",
+    "dotenv": "^16.4.5",
     "emoji-picker-react": "^4.12.0",
     "lodash": "^4.17.21",
     "lottie-react": "^2.4.0",
@@ -43,9 +45,10 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
-    "eslint": "^9.9.0",
+    "eslint": "^9.11.1",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
+    "eslint-plugin-unused-imports": "^4.1.4",
     "globals": "^15.9.0",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",

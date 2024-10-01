@@ -1,13 +1,11 @@
-import { IPropsChildren } from "@/components/HOKs/HOKAuthCheckerForAuth";
 import useClickOutside from "@/components/hooks/useClickOutside";
-import { IPropsClassName, IPropsModalImage } from "@/types/props/props";
+import { IPropsModalImage } from "@/types/props/props";
 import { IoClose, IoCopyOutline } from "react-icons/io5";
 import { MdDownload } from "react-icons/md";
 
 import classes from "./ModalImage.module.scss";
-import { useCallback, useRef } from "react";
+import { useRef } from "react";
 import useDownloadFile from "@/components/hooks/useDownloadFile";
-import { FaCopy, FaRegCopy } from "react-icons/fa";
 import classNames from "classnames";
 import { Tooltip } from "react-tooltip";
 import useCopyToBuffer from "@/components/hooks/useCopyToBuffer";
@@ -15,6 +13,7 @@ import useCopyToBuffer from "@/components/hooks/useCopyToBuffer";
 export default function ({
   url,
   active,
+   
   className,
   setActive,
 }: IPropsModalImage) {
@@ -24,9 +23,9 @@ export default function ({
 
   useClickOutside(ref, active, setActive);
 
-  let downloadFile = useDownloadFile(url);
+  const downloadFile = useDownloadFile(url);
 
-  let copyBufferUrl = useCopyToBuffer(url)
+  const copyBufferUrl = useCopyToBuffer(url)
 
   return (
     <div className={classes.modal}>

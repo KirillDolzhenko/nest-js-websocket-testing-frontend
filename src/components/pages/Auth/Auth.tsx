@@ -13,10 +13,10 @@ enum EnumToggleAuthState {
 }
 
 export default function () {
-  let user = useSelector((state: RootState) => state.authSlice.user);
-  let navigate = useNavigate();
+  const user = useSelector((state: RootState) => state.authSlice.user);
+  const navigate = useNavigate();
 
-  let [activeState, setActiveState] = useState<EnumToggleAuthState>();
+  const [activeState, setActiveState] = useState<EnumToggleAuthState>();
 
   useEffect(() => {
     console.log(user);

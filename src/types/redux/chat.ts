@@ -1,6 +1,5 @@
-import { FetchArgs } from "@reduxjs/toolkit/query"
 import { IDBMessage, IDBUser } from "./auth"
-import { IDBContactDirect, IDBGroup, IDBGroupBasic } from "./message"
+import { IDBContactDirect, IDBGroupBasic } from "./message"
 
 
 export enum EnumChatType {

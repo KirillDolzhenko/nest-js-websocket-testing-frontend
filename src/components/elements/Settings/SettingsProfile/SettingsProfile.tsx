@@ -46,7 +46,7 @@ export default function ({ user }: IPropsSettingsProfile) {
   //   );
   // }, []);
 
-  let {
+  const {
     register: registerChangeProfile,
     handleSubmit: handleSubmitChangeProfile,
     formState: { errors: errorsChangeProfile },
@@ -70,6 +70,7 @@ export default function ({ user }: IPropsSettingsProfile) {
     {
       // isError: isErrorUploadPicture,
       // isSuccess: isSuccessUploadPicture,
+       
       isLoading: isLoadingUploadPicture,
       data: dataUploadPicture,
     },
@@ -81,6 +82,7 @@ export default function ({ user }: IPropsSettingsProfile) {
       isError: isErrorUpdateProfile,
       isSuccess: isSuccessUpdateProfile,
       isLoading: isLoadingUpdateProfile,
+       
       data: dataUpdateProfile,
     },
   ] = useUpdateProfileMutation();
@@ -112,7 +114,7 @@ export default function ({ user }: IPropsSettingsProfile) {
     }
   }, [dataUploadPicture]);
 
-  let onSumbitChangeProfile = useCallback((data: IRTKQueryUpdateProfile) => {
+  const onSumbitChangeProfile = useCallback((data: IRTKQueryUpdateProfile) => {
     if (user.picUrl) {
       data.picUrl = undefined;
       removePicProfile();

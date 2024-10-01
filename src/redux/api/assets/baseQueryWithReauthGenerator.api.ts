@@ -6,11 +6,11 @@ import { removeUser, setTokens } from "../../slice/authSlice";
 import config from "@/config/config";
 
 function setTokenToHeader(args: FetchArgsWithReauth, api: BaseQueryApi) {
-    let {
+    const {
       headers = new Headers()
     } = args;
     
-    let token = (api.getState() as RootState).authSlice.tokens?.access_token;
+    const token = (api.getState() as RootState).authSlice.tokens?.access_token;
   
     if (token && headers instanceof Headers) {
       headers.set('Authorization', `Bearer ${token}`)
@@ -40,7 +40,7 @@ export const baseQueryWithReauthGenerator = (pathCore: string = "") => {
     }
   ) => {
     try {
-      let {  
+      const {  
         authLogic
       } = args;
 
@@ -54,7 +54,7 @@ export const baseQueryWithReauthGenerator = (pathCore: string = "") => {
       let responseBaseQuery = await baseQuery(args, api, extraOptions);
 
       if (authLogic && responseBaseQuery.error?.status == 401) {
-        let responseRefreshToken = await baseQuery(
+        const responseRefreshToken = await baseQuery(
           {
             url: 'user/refresh_token',
             credentials: "include"
@@ -64,7 +64,7 @@ export const baseQueryWithReauthGenerator = (pathCore: string = "") => {
         );
 
         if (responseRefreshToken?.data) {
-          let tokens = responseRefreshToken.data as IJWTTokensRefresh;
+          const tokens = responseRefreshToken.data as IJWTTokensRefresh;
           api.dispatch(setTokens(tokens.data.tokens))
 
           args = setTokenToHeader(args, api)
@@ -79,7 +79,7 @@ export const baseQueryWithReauthGenerator = (pathCore: string = "") => {
 
       return responseBaseQuery
     } catch (error) {
-      throw error
+      console.log(error) 
     }
   }
 }

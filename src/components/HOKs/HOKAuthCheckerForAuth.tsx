@@ -3,7 +3,7 @@ import Auth from "../pages/Auth/Auth";
 import { useAuthCheck } from "../hooks/HOKs/useAuthCheck";
 
 export default function () {
-  let { isSuccessLogIn, isErrorLogIn, user, access_token } = useAuthCheck();
+  const { isSuccessLogIn, isErrorLogIn, user, access_token } = useAuthCheck();
 
   if (isErrorLogIn || (!user && !access_token)) {
     return <Auth />;

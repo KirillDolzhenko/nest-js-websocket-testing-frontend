@@ -1,7 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauthGenerator } from "./assets/baseQueryWithReauthGenerator.api";
 import { IDBFile, IDBPicture, IRTKQueryUploadFile } from "@/types/redux/auth";
-import axios from "axios";
 
 export const filesApi = createApi({
     reducerPath: 'filesApi',
@@ -10,7 +9,7 @@ export const filesApi = createApi({
     endpoints: (builder) => ({
       uploadPicture: builder.mutation<IDBPicture, IRTKQueryUploadFile>({
         query: ({ file }) => {
-          let formData = new FormData();
+          const formData = new FormData();
           formData.append("file", file);
   
           return {
@@ -29,7 +28,7 @@ export const filesApi = createApi({
       }),
       uploadMessageFile: builder.mutation<IDBFile, IRTKQueryUploadFile>({
         query: ({ file }) => {
-          let formData = new FormData();
+          const formData = new FormData();
           formData.append("file", file);
   
           return {

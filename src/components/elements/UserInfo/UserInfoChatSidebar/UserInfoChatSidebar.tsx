@@ -12,13 +12,11 @@ import { AppDispatch } from "@/redux/store";
 import { removeUser } from "@/redux/slice/authSlice";
 import {
   deleteChatSettings,
-  setDirectChat,
-  setNewMessage,
 } from "@/redux/slice/chatSlice";
 
 export default function ({ className, url, color, username }: IPropsUserInfo) {
-  let [logOut, { isSuccess, isLoading, isError }] = useLogOutMutation();
-  let dispatch = useDispatch<AppDispatch>();
+  const [logOut, { isSuccess, isLoading, isError }] = useLogOutMutation();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     if (isSuccess) {

@@ -5,13 +5,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export function useAuthCheck() {
-    let dispatch = useDispatch<AppDispatch>();
-    let user = useSelector((state: RootState) => state.authSlice.user);
-    let access_token = useSelector(
+    const dispatch = useDispatch<AppDispatch>();
+    const user = useSelector((state: RootState) => state.authSlice.user);
+    const access_token = useSelector(
       (state: RootState) => state.authSlice.tokens?.access_token
     );
 
-    let [
+    const [
       authMe,
       { isError: isErrorLogIn, isSuccess: isSuccessLogIn, data: dataAuthMe },
     ] = useLazyAuthMeQuery();

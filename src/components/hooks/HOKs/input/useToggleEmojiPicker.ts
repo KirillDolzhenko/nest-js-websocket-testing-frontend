@@ -1,7 +1,7 @@
 import { TUseToggleEmojiPicker } from "@/types/hooks/hooks";
 import { useEffect } from "react";
 
-let useToggleEmojiPicker: TUseToggleEmojiPicker = (
+const useToggleEmojiPicker: TUseToggleEmojiPicker = (
     ref,
     refTextarea, 
     refEmojiToggle, 

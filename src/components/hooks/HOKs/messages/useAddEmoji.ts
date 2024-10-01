@@ -1,14 +1,15 @@
+// import { useAddEmoji } from '@/components/hooks/HOKs/messages/useAddEmoji';
 import { TUseAddEmoji } from "@/types/hooks/hooks";
 import { EmojiClickData } from "emoji-picker-react";
 import { useCallback } from "react";
 
-let hook: TUseAddEmoji = ({refTextarea, setMessage, setActiveEmoji, setCursorPos}) => {
+const useAddEmoji: TUseAddEmoji = ({refTextarea, setMessage, setActiveEmoji, setCursorPos}) => {
     
-  let addEmoji = useCallback((emoji: EmojiClickData) => {
+  const addEmoji = useCallback((emoji: EmojiClickData) => {
     if (refTextarea.current) {
-      let ref = refTextarea.current;
+      const ref = refTextarea.current;
 
-      let [selectionStart, selectionEnd] = [
+      const [selectionStart, selectionEnd] = [
         ref.selectionStart,
         ref.selectionEnd,
       ];
@@ -30,4 +31,4 @@ let hook: TUseAddEmoji = ({refTextarea, setMessage, setActiveEmoji, setCursorPos
   return addEmoji
 }
 
-export default hook;
+export default useAddEmoji;

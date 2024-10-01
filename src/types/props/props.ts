@@ -3,7 +3,7 @@
 
 import { IDBMessage, IDBUser } from "../redux/auth";
 import { EnumChatType } from "../redux/chat";
-import { IDBContactDirect, IDBGroup, IDBGroupBasic } from "../redux/message";
+import { IDBContactDirect, IDBGroupBasic } from "../redux/message";
 
 export interface IPropsClassName {
     className?: string;

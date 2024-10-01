@@ -5,22 +5,22 @@ import Message from "@components/elements/Message/Message";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import DateMessage from "@/components/elements/DateMessage/DateMessage";
-import { EnumChatType, EnumMessageType } from "@/types/redux/chat";
+import { EnumChatType } from "@/types/redux/chat";
 
-let useRenderMessagesContent: TUseRenderMessagesContent = (content) => {
-  let userId = useSelector((state: RootState) => state.authSlice.user?.id);
-  let chatType = useSelector((state: RootState) => state.chatSlice.chatType);
+const useRenderMessagesContent: TUseRenderMessagesContent = (content) => {
+  const userId = useSelector((state: RootState) => state.authSlice.user?.id);
+  const chatType = useSelector((state: RootState) => state.chatSlice.chatType);
 
-  let renderMessagesContent = useCallback<() => JSX.Element[]>(() => {
+  const renderMessagesContent = useCallback<() => JSX.Element[]>(() => {
     let lastDate = "";
-    let today = moment().format("YYYY-MM-DD");
-    let yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
+    const today = moment().format("YYYY-MM-DD");
+    const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
 
     // console.log("Render");
 
     return content.map((el) => {
-      let currentDate = moment(el.createdAt).format("YYYY-MM-DD");
-      let showDate = currentDate !== lastDate;
+      const currentDate = moment(el.createdAt).format("YYYY-MM-DD");
+      const showDate = currentDate !== lastDate;
 
       lastDate = currentDate !== lastDate ? currentDate : lastDate;
 

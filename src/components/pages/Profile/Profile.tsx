@@ -4,17 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { removeUser } from "../../../redux/slice/authSlice";
 import SettingsProfile from "@/components/elements/Settings/SettingsProfile/SettingsProfile";
-import ButtonForm from "@/components/elements/Buttons/ButtonForm";
 import { useNavigate } from "react-router-dom";
 import { MdExitToApp } from "react-icons/md";
 import { IoChatbox } from "react-icons/io5";
 import LineBottom from "@/components/elements/Lines/LineBottom";
 
 export default function () {
-  let user = useSelector((state: RootState) => state.authSlice.user);
-  let dispatch = useDispatch<AppDispatch>();
+  const user = useSelector((state: RootState) => state.authSlice.user);
+  const dispatch = useDispatch<AppDispatch>();
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <section className={classes.profile}>

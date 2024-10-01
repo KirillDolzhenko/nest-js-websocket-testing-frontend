@@ -14,15 +14,15 @@ import config from '@/config/config';
 export default function () {
     const dispatch = useDispatch<AppDispatch>();
   
-    let userId = useSelector((state: RootState) => state.authSlice.user?.id);
-    let chatDataId = useSelector(
+    const userId = useSelector((state: RootState) => state.authSlice.user?.id);
+    const chatDataId = useSelector(
       (state: RootState) => state.chatSlice.chatData?.id
     );
-    let chatType = useSelector((state: RootState) => state.chatSlice.chatType);
-    let socket = useSocketContext();
+    const chatType = useSelector((state: RootState) => state.chatSlice.chatType);
+    const socket = useSocketContext();
 
-    let chatsDirect = useSelector((state: RootState) => state.chatSlice.chatsDirect);
-    let chatsGroup = useSelector((state: RootState) => state.chatSlice.chatsGroup);
+    const chatsDirect = useSelector((state: RootState) => state.chatSlice.chatsDirect);
+    const chatsGroup = useSelector((state: RootState) => state.chatSlice.chatsGroup);
 
     useEffect(() => {
         if (socket && userId) {
@@ -65,7 +65,7 @@ export default function () {
           }) => {
             if (data.type == "message") {
               if (data.message == "Invalid token") {
-                let response: AxiosResponse<{
+                const response: AxiosResponse<{
                   data: {
                     tokens: IJWTTokens
                   }

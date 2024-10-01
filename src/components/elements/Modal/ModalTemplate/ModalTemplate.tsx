@@ -1,7 +1,6 @@
-import { IPropsClassName, IPropsModalTemplate } from "@/types/props/props";
+import { IPropsModalTemplate } from "@/types/props/props";
 import classes from "./ModalTemplate.module.scss";
-import { useEffect, useRef, useState } from "react";
-import { IoClose } from "react-icons/io5";
+import { useRef } from "react";
 import ButtonClose from "../../Buttons/ButtonClose/ButtonClose";
 import { Tooltip } from "react-tooltip";
 import LineBottom from "../../Lines/LineBottom";
@@ -14,9 +13,10 @@ export default function ({
   active,
   children,
   setActive,
+   
   overflow = false,
 }: IPropsModalTemplate) {
-  let refModal = useRef<HTMLDivElement>(null);
+  const refModal = useRef<HTMLDivElement>(null);
 
   useClickOutside(refModal, active, setActive);
 

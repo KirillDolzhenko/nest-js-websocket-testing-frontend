@@ -7,7 +7,6 @@ import HOKAuthChecker from "./components/HOKs/HOKAuthChecker";
 import Profile from "./components/pages/Profile/Profile";
 import HOKAuthCheckerForAuth from "./components/HOKs/HOKAuthCheckerForAuth";
 import Chat from "./components/pages/Chat/Chat";
-// import { RootState } from "@reduxjs/toolkit/query";
 
 import { Helmet } from "react-helmet";
 import { logoFire } from "./config/icons";
@@ -21,29 +20,19 @@ const Context = createContext<Socket | null>(null);
 function ContextSocket({ children }: IPropsChildren) {
   const [socket, setSocket] = useState<Socket>();
 
-  const dispatch = useDispatch<AppDispatch>();
-
-  let user = useSelector((state: RootState) => state.authSlice.user);
-  let tokens = useSelector((state: RootState) => state.authSlice.tokens);
+  const user = useSelector((state: RootState) => state.authSlice.user);
+  const tokens = useSelector((state: RootState) => state.authSlice.tokens);
 
   useEffect(() => {
     if (user && tokens && tokens.access_token) {
       async function socketio(tokenStr: string) {
-        let socket = io(config.websocket.url, {
+        const socket = io(config.websocket.url, {
           auth: {
             token: tokenStr,
           },
         });
 
         setSocket(socket);
-
-        // if (socket) {
-        //   console.log("YEAsssshh");
-        //   socket.on("message", (data: IDBMessage) => {
-        //     console.log("Socket message");
-        //     dispatch(setNewMessage(data));
-        //   });
-        // }
       }
 
       socketio(tokens.access_token);
@@ -53,18 +42,6 @@ function ContextSocket({ children }: IPropsChildren) {
       setSocket(socket?.disconnect());
     };
   }, [user]);
-
-  // useEffect(() => {
-  //   console.log(socket);
-  //   if (socket && socket.connected) {
-  //     console.log("WOW");
-  //     socket.on("message", (response: any) => {
-  //       console.log(response);
-  //     });
-  //   } else if (socket && !socket.connected) {
-  //     console.log("Error!!!!");
-  //   }
-  // }, [socket, socket?.connected]);
 
   return (
     <Context.Provider value={socket ? socket : null}>
@@ -80,12 +57,9 @@ export function useSocketContext() {
 }
 
 function App() {
-  let userId = useSelector((state: RootState) => state.authSlice.user?.id);
-  // let username = useSelector(
-  //   (state: RootState) => state.authSlice.user?.username
-  // );
+  const userId = useSelector((state: RootState) => state.authSlice.user?.id);
 
-  let dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     console.log(userId, "changeddd");
@@ -105,7 +79,6 @@ function App() {
         </Helmet>
         <BrowserRouter>
           <Routes>
-            {/* <Route path="*" element={<div>ererer</div>} /> */}
             <Route
               path="/auth"
               element={

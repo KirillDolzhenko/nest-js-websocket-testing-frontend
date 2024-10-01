@@ -13,8 +13,8 @@ import { RTKGetErrorMessage } from "@/redux/api/assets/RTKGetErrorMessage";
 import ErrorText from "../../Inputs/ErrorText/ErrorText";
 
 export default function () {
-  let dispatch = useDispatch<AppDispatch>();
-  let [
+  const dispatch = useDispatch<AppDispatch>();
+  const [
     login,
     {
       isError: isErrorLogIn,
@@ -25,7 +25,7 @@ export default function () {
     },
   ] = useLogInMutation();
 
-  let onSubmitLogIn = useCallback((data: LogInSchemaType) => {
+  const onSubmitLogIn = useCallback((data: LogInSchemaType) => {
     console.log(typeof data);
     login(data);
 

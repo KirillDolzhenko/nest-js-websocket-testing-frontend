@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { EnumDBUserColor, IAuthSliceState, IDBUser, IJWTTokens } from "../../types/redux/auth";
 
-let localStorageToken = localStorage.getItem("access_token");
+const localStorageToken = localStorage.getItem("access_token");
 
-let initialState: IAuthSliceState = {
+const initialState: IAuthSliceState = {
     user: null,
     tokens: {
         access_token: localStorageToken ? localStorageToken : undefined 

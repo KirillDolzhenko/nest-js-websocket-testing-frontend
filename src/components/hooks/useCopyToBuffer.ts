@@ -1,8 +1,8 @@
 import { TUseCopyToBuffer } from "@/types/hooks/hooks";
 import { useCallback } from "react";
 
-let useCopyToBuffer: TUseCopyToBuffer = (content) => {
-    let copyBufferUrl = useCallback(() => {
+const useCopyToBuffer: TUseCopyToBuffer = (content) => {
+    const copyBufferUrl = useCallback(() => {
         navigator.clipboard.writeText(content);
       }, []);
 

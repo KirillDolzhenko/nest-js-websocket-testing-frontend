@@ -1,10 +1,9 @@
 import { TUseDownloadFile } from "@/types/hooks/hooks";
-import { EnumMessageType } from "@/types/redux/chat";
 import { useCallback } from "react";
 
-let useDownloadFile: TUseDownloadFile = (content) => {
+const useDownloadFile: TUseDownloadFile = (content) => {
     
-  let downloadFile = useCallback(async () => {
+  const downloadFile = useCallback(async () => {
       try {
         const response = await fetch(content);
         const blob = await response.blob();
@@ -12,7 +11,7 @@ let useDownloadFile: TUseDownloadFile = (content) => {
 
         const a = document.createElement("a");
         a.href = blobUrl;
-        let filename = content.split("/").pop();
+        const filename = content.split("/").pop();
         if (filename) {
           a.download = filename;
         }

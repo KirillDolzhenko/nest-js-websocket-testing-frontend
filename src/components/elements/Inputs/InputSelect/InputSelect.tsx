@@ -17,7 +17,7 @@ export default function ({
   const [selectedUsers, setSelectedUsers] = useState<IDBUser[]>([]);
   const [activeList, setActiveList] = useState<boolean>(false);
 
-  let [getAllUsers, { isLoading, isError, isSuccess, data }] =
+  const [getAllUsers, { isLoading, isError, isSuccess, data }] =
     useGetAllUsersMutation();
 
   useEffect(() => {
@@ -30,11 +30,11 @@ export default function ({
     }
   }, [activeList, selectedUsers]);
 
-  let onClickUser = useCallback((el: IDBUser) => {
+  const onClickUser = useCallback((el: IDBUser) => {
     setSelectedUsers((selectedUsers) => [...selectedUsers, el]);
   }, []);
 
-  let onClickRemoveUser = useCallback((id: string) => {
+  const onClickRemoveUser = useCallback((id: string) => {
     setSelectedUsers((selectedUsers) =>
       selectedUsers.filter((el) => el.id !== id)
     );

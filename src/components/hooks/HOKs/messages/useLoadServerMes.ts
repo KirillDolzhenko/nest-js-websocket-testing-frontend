@@ -1,5 +1,5 @@
 import { useGetMessagesDirectMutation } from "@/redux/api/chat.api";
-import { useGetMessagesGroupMutation, useLazyGetMessagesGroupQuery } from "@/redux/api/group.api";
+import { useGetMessagesGroupMutation } from "@/redux/api/group.api";
 import { setMessages } from "@/redux/slice/chatSlice";
 import { AppDispatch, RootState } from "@/redux/store";
 import { TUseLoadServerMes } from "@/types/hooks/hooks";
@@ -10,15 +10,15 @@ import { useDispatch, useSelector } from "react-redux";
 export default function ():TUseLoadServerMes {
     const dispatch = useDispatch<AppDispatch>();
   
-    let userId = useSelector((state: RootState) => state.authSlice.user?.id);
-    let chatDataId = useSelector(
+    const userId = useSelector((state: RootState) => state.authSlice.user?.id);
+    const chatDataId = useSelector(
       (state: RootState) => state.chatSlice.chatData?.id
     );
-    let chatType = useSelector(
+    const chatType = useSelector(
       (state: RootState) => state.chatSlice.chatType
     );
     
-    let [
+    const [
       getMessageGroup, 
       { 
         isSuccess: isSuccessGroup, 
@@ -29,7 +29,7 @@ export default function ():TUseLoadServerMes {
     ] =
     useGetMessagesGroupMutation()
 
-    let [getMessageDirect, { isSuccess, isError, isLoading, data }] =
+    const [getMessageDirect, { isSuccess, isError, isLoading, data }] =
       useGetMessagesDirectMutation();
 
     useEffect(() => {
@@ -65,7 +65,7 @@ export default function ():TUseLoadServerMes {
       console.log("LOAD")
     }, [isLoadingGroup])
     
-    let [loadedServerMes, setLoadedServerMes] = useState<boolean>(false);
+    const [loadedServerMes, setLoadedServerMes] = useState<boolean>(false);
 
     return [loadedServerMes, setLoadedServerMes]
 };

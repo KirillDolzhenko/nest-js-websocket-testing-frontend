@@ -3,7 +3,7 @@ import { IDBMessage, IDBUser } from "../../types/redux/auth";
 import { EnumChatType, IChatSliceState } from "@/types/redux/chat";
 import { IDBContactDirect, IDBGroupBasic } from '@/types/redux/message';
 
-let initialState: IChatSliceState = {
+const initialState: IChatSliceState = {
     chatData: undefined,
     chatType: undefined,
 

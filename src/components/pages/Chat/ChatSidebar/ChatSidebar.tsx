@@ -18,21 +18,21 @@ import GroupInfoMessages from "@/components/elements/GroupInfo/GroupInfoMessages
 import { setChatsDirect, setChatsGroup } from "@/redux/slice/chatSlice";
 
 export default function ({ className }: IPropsClassName) {
-  let user = useSelector((state: RootState) => state.authSlice.user);
-  let chatsDirect = useSelector(
+  const user = useSelector((state: RootState) => state.authSlice.user);
+  const chatsDirect = useSelector(
     (state: RootState) => state.chatSlice.chatsDirect
   );
-  let chatsGroup = useSelector(
+  const chatsGroup = useSelector(
     (state: RootState) => state.chatSlice.chatsGroup
   );
 
-  let dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
 
-  let [activeModal, setActiveModal] = useState<boolean>(false);
-  let [activeModalGroup, setActiveModalGroup] = useState<boolean>(false);
+  const [activeModal, setActiveModal] = useState<boolean>(false);
+  const [activeModalGroup, setActiveModalGroup] = useState<boolean>(false);
 
-  let { data: dataDirect } = useGetContactsDirectQuery();
-  let { data: dataGroups } = useGetAllGroupsQuery();
+  const { data: dataDirect } = useGetContactsDirectQuery();
+  const { data: dataGroups } = useGetAllGroupsQuery();
 
   useEffect(() => {
     if (dataGroups) {

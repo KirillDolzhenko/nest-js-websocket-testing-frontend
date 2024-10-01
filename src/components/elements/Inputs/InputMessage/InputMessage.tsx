@@ -22,23 +22,23 @@ import { RootState } from "@/redux/store";
 import { useUploadMessageFileMutation } from "@/redux/api/files.api";
 
 export default function ({ className }: IPropsClassName) {
-  let [activeEmoji, setActiveEmoji] = useState<boolean>(false);
+  const [activeEmoji, setActiveEmoji] = useState<boolean>(false);
 
-  let [message, setMessage] = useState<string>("");
-  let [cursorPos, setCursorPos] = useState<number>(0);
+  const [message, setMessage] = useState<string>("");
+  const [cursorPos, setCursorPos] = useState<number>(0);
 
-  let ref = useRef<HTMLDivElement>(null);
-  let refTextarea = useRef<HTMLTextAreaElement>(null);
-  let refEmojiToggle = useRef<HTMLButtonElement>(null);
-  let refInputFile = useRef<HTMLInputElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const refTextarea = useRef<HTMLTextAreaElement>(null);
+  const refEmojiToggle = useRef<HTMLButtonElement>(null);
+  const refInputFile = useRef<HTMLInputElement>(null);
 
   // let chatData = useSelector((state:RootState) => state.chatSlice.chatData);
-  let chatDataId = useSelector(
+  const chatDataId = useSelector(
     (state: RootState) => state.chatSlice.chatData?.id
   );
-  let chatType = useSelector((state: RootState) => state.chatSlice.chatType);
+  const chatType = useSelector((state: RootState) => state.chatSlice.chatType);
 
-  let addEmoji = useAddEmoji({
+  const addEmoji = useAddEmoji({
     refTextarea,
     setMessage,
     setActiveEmoji,
@@ -47,7 +47,7 @@ export default function ({ className }: IPropsClassName) {
 
   useToggleEmojiPicker(ref, refTextarea, refEmojiToggle, setActiveEmoji);
 
-  let sendMessage = useSocketSendMessage();
+  const sendMessage = useSocketSendMessage();
 
   useEffect(() => {
     if (refTextarea.current) {
@@ -57,9 +57,9 @@ export default function ({ className }: IPropsClassName) {
     }
   }, [cursorPos]);
 
-  let [uploadMessageFile, { isSuccess, data }] = useUploadMessageFileMutation();
+  const [uploadMessageFile, { isSuccess, data }] = useUploadMessageFileMutation();
 
-  let uploadAttachment = useCallback(
+  const uploadAttachment = useCallback(
     (e: SyntheticEvent<HTMLInputElement, Event>) => {
       if (
         e.target &&

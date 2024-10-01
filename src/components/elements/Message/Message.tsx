@@ -18,11 +18,11 @@ export default function ({
   sender,
   chatType,
 }: IPropsMessage) {
-  let [activeModal, setActiveModal] = useState<boolean>();
+  const [activeModal, setActiveModal] = useState<boolean>();
 
-  let downloadFile = useDownloadFile(content.content);
+  const downloadFile = useDownloadFile(content.content);
 
-  let copyToBufferMessage = useCopyToBuffer(content.content.trim());
+  const copyToBufferMessage = useCopyToBuffer(content.content.trim());
 
   return (
     <>

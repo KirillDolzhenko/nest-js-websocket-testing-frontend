@@ -1,4 +1,4 @@
-import { IPropsModalFindUser, IPropsModalTemplate } from "@/types/props/props";
+import { IPropsModalFindUser } from "@/types/props/props";
 import classes from "./ModalFindUser.module.scss";
 import ModalTemplate from "../ModalTemplate/ModalTemplate";
 import InputText from "../../Inputs/InputText";
@@ -14,7 +14,6 @@ import { debounce } from "lodash";
 import { useSearchUsersMutation } from "@/redux/api/auth.api";
 import { IDBUser, IRTKQuerySearchUsers } from "@/types/redux/auth";
 import { RTKGetErrorMessage } from "@/redux/api/assets/RTKGetErrorMessage";
-import UserInfoTemplate from "../../UserInfo/UserInfoTemplate/UserInfoTemplate";
 import UserInfoSmall from "../../UserInfo/UserInfoSmall/UserInfoSmall";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
@@ -37,7 +36,7 @@ export default function ({
     { data, isSuccess, isLoading, isError, error: errorSearch },
   ] = useSearchUsersMutation();
 
-  let onChangeInput = useCallback(
+  const onChangeInput = useCallback(
     (request: IRTKQuerySearchUsers) => {
       if (request.query) {
         searchUsers(request);
@@ -52,7 +51,7 @@ export default function ({
     setErrorSearchState(errorSearch);
   }, [errorSearch]);
 
-  let debouceQuery = useCallback(debounce(onChangeInput, 500), [onChangeInput]);
+  const debouceQuery = useCallback(debounce(onChangeInput, 500), [onChangeInput]);
 
   useEffect(() => {
     const subscription = watch((value) => {
@@ -78,7 +77,7 @@ export default function ({
   //
   //
 
-  let dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
 
   return (
     <ModalTemplate
