@@ -8,7 +8,7 @@ export default {
         }
     },
     frontend: {
-        subdir: import.meta.env.VITE_URL_SUBDIR
+        subdir: import.meta.env.VITE_URL_SUBDIR,
     }
 
 }

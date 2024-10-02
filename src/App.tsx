@@ -77,7 +77,7 @@ function App() {
           <meta charSet="utf-8" />
           <link rel="icon" href={logoFire} />
         </Helmet>
-        <BrowserRouter>
+        <BrowserRouter basename={config.frontend.subdir}>
           <Routes>
             <Route
               path="/auth"
