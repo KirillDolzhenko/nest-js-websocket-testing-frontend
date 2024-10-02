@@ -156,7 +156,7 @@ export const authApi = createApi({
   })
 
 export const { 
-  useLazyAuthMeQuery, 
+  useAuthMeQuery, 
   useUpdateProfileMutation,
   useLogInMutation, 
   useSignUpMutation,
@@ -164,6 +164,6 @@ export const {
   useLogOutMutation,
   useSearchUsersMutation,
   useRemovePicProfileMutation,
-  useGetAllUsersMutation
+  useGetAllUsersMutation,
 } = authApi;
   

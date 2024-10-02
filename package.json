@@ -38,6 +38,8 @@
     "react-tooltip": "^5.28.0",
     "sass": "^1.77.8",
     "socket.io-client": "^4.7.5",
+    "vite-plugin-svgr": "^4.2.0",
+    "vite-svg-loader": "^5.1.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

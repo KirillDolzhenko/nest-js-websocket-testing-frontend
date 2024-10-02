@@ -1,4 +1,4 @@
-import { useLazyAuthMeQuery } from "@/redux/api/auth.api";
+import { useAuthMeQuery } from "@/redux/api/auth.api";
 import { setTokens, setUser } from "@/redux/slice/authSlice";
 import { AppDispatch, RootState } from "@/redux/store";
 import { useEffect } from "react";
@@ -11,19 +11,23 @@ export function useAuthCheck() {
       (state: RootState) => state.authSlice.tokens?.access_token
     );
 
-    const [
-      authMe,
-      { isError: isErrorLogIn, isSuccess: isSuccessLogIn, data: dataAuthMe },
-    ] = useLazyAuthMeQuery();
+    const {
+      data: dataAuthMe,
+      isLoading: isErrorLogIn,
+      isSuccess: isSuccessLogIn,
+      refetch
+    } = useAuthMeQuery();
 
     useEffect(() => {
       if (!user && access_token) {
-        authMe();
+        refetch();
+        console.log("REFETCHH")
       }
     }, [user, access_token]);
 
     useEffect(() => {
       if (dataAuthMe) {
+        console.log(dataAuthMe)
         dispatch(setUser(dataAuthMe.user));
         dispatch(setTokens(dataAuthMe.tokens));
       }

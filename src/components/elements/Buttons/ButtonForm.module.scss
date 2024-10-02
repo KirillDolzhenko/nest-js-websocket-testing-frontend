@@ -1,6 +1,7 @@
 @import "../../../styles/vars/color.scss";
 
 .button {
+    user-select: none;
     font-size: 1rem;
     padding: 5px 15px;
     // background-color: $modalBg;

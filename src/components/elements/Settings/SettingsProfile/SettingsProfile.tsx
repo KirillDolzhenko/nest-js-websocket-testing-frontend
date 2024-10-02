@@ -70,7 +70,7 @@ export default function ({ user }: IPropsSettingsProfile) {
     {
       // isError: isErrorUploadPicture,
       // isSuccess: isSuccessUploadPicture,
-       
+
       isLoading: isLoadingUploadPicture,
       data: dataUploadPicture,
     },
@@ -82,7 +82,7 @@ export default function ({ user }: IPropsSettingsProfile) {
       isError: isErrorUpdateProfile,
       isSuccess: isSuccessUpdateProfile,
       isLoading: isLoadingUpdateProfile,
-       
+
       data: dataUpdateProfile,
     },
   ] = useUpdateProfileMutation();
@@ -95,6 +95,12 @@ export default function ({ user }: IPropsSettingsProfile) {
       isLoading: isLoadingPicProfile,
     },
   ] = useRemovePicProfileMutation();
+
+  useEffect(() => {
+    if (dataUpdateProfile) {
+      console.log(dataUpdateProfile);
+    }
+  }, [dataUpdateProfile]);
 
   const { field } = useController({
     name: "picUrl",
