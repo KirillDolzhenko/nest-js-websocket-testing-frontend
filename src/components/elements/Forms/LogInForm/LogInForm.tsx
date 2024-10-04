@@ -11,6 +11,8 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { RTKGetErrorMessage } from "@/redux/api/assets/RTKGetErrorMessage";
 import ErrorText from "../../Inputs/ErrorText/ErrorText";
+import LoadingText from "../../Inputs/LoadingText/LoadingText";
+import SuccessText from "../../Inputs/SuccessText/SuccessText";
 
 export default function () {
   const dispatch = useDispatch<AppDispatch>();
@@ -18,8 +20,8 @@ export default function () {
     login,
     {
       isError: isErrorLogIn,
-      // isSuccess: isSuccessLogIn,
-      // isLoading: isLoadingLogIn,
+      isSuccess: isSuccessLogIn,
+      isLoading: isLoadingLogIn,
       data: dataLogIn,
       error,
     },
@@ -68,10 +70,13 @@ export default function () {
         error={errorsLogIn.password?.message}
       />
       <ButtonForm className={classes.auth__button}>Enter</ButtonForm>
-      {errorsLogIn.root?.message || error ? (
-        <ErrorText>
-          {errorsLogIn.root?.message || RTKGetErrorMessage(error)}
-        </ErrorText>
+
+      {isLoadingLogIn ? (
+        <LoadingText />
+      ) : isSuccessLogIn ? (
+        <SuccessText>You successfully log in</SuccessText>
+      ) : isErrorLogIn ? (
+        <ErrorText>{RTKGetErrorMessage(error)}</ErrorText>
       ) : (
         <></>
       )}

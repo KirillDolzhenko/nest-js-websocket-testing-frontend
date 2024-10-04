@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom";
 import Auth from "../pages/Auth/Auth";
 import { useAuthCheck } from "../hooks/HOKs/useAuthCheck";
 import WhiteText from "../elements/Inputs/WhiteText/WhiteText";
+import ChatPlaceholder from "../pages/Chat/ChatPlaceholder/ChatPlaceholder";
 
 export default function () {
   const { isSuccessLogIn, isErrorLogIn, user, access_token } = useAuthCheck();
@@ -11,6 +12,12 @@ export default function () {
   } else if (isSuccessLogIn || user) {
     return <Navigate to="/profile" />;
   } else {
-    return <WhiteText>Loading...</WhiteText>;
+    return (
+      <ChatPlaceholder>
+        <>
+          <mark>Please</mark> wait! Chat is <mark>loading...</mark>
+        </>
+      </ChatPlaceholder>
+    );
   }
 }
