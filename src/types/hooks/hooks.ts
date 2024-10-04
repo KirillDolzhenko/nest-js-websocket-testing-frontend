@@ -41,3 +41,13 @@ export type TUseDownloadFile = (
 export type TUseCopyToBuffer = (  
     content: string
 ) => () => void
+
+// LogOut 
+
+export type TUseLogOut = ( 
+) => {
+    func: () => void;
+    isLoading: boolean,
+    isSuccess: boolean,
+    isError: boolean,
+}

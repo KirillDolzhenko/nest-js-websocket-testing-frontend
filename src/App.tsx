@@ -62,9 +62,7 @@ function App() {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    console.log(userId, "changeddd");
     if (userId == undefined) {
-      console.log("SOMETHINGGG");
       dispatch(setChatsDirect([]));
       dispatch(setChatsGroup([]));
     }
@@ -84,7 +82,7 @@ function App() {
               element={
                 <>
                   <Helmet>
-                    <title>Авторизация</title>
+                    <title>Authorization</title>
                   </Helmet>
                   <HOKAuthCheckerForAuth />
                 </>
@@ -96,7 +94,7 @@ function App() {
               element={
                 <>
                   <Helmet>
-                    <title>Profile page</title>
+                    <title>Profile</title>
                   </Helmet>
                   <HOKAuthChecker>
                     <Profile />
@@ -127,7 +125,7 @@ function App() {
                 <HOKAuthChecker>
                   <>
                     <Helmet>
-                      <title>Мой профиль</title>
+                      <title>Loading...</title>
                     </Helmet>
                     <Navigate to="/profile" />
                   </>

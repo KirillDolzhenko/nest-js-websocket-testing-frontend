@@ -21,7 +21,11 @@ export default function () {
           <ChatContent className={classNames(classes.chat__content)} />
         ) : (
           // <></>
-          <ChatPlaceholder className={classes.chat__placeholder} />
+          <ChatPlaceholder className={classes.chat__placeholder}>
+            <>
+              <mark>Hi!</mark> Сhoose someone to write a <mark>message!</mark>
+            </>
+          </ChatPlaceholder>
         )}
       </div>
     </div>

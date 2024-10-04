@@ -1,0 +1,9 @@
+
+@mixin ffNew($name, $filename1p, $filename2p, $fontWeight) {
+    @font-face {
+        font-family: $name;
+        src: url("/public/fonts/#{$name}/#{$filename1p}-#{$filename2p}.ttf");
+        
+        font-weight: $fontWeight;
+    }
+}

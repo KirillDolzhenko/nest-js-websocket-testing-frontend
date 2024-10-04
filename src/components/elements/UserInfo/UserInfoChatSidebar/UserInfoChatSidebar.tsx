@@ -5,29 +5,20 @@ import { FaPowerOff } from "react-icons/fa";
 import { MdModeEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
-import { useLogOutMutation } from "@/redux/api/auth.api";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux/store";
-import { removeUser } from "@/redux/slice/authSlice";
-import {
-  deleteChatSettings,
-} from "@/redux/slice/chatSlice";
+import useLogOut from "@/components/hooks/HOKs/useLogOut";
+import classNames from "classnames";
 
 export default function ({ className, url, color, username }: IPropsUserInfo) {
-  const [logOut, { isSuccess, isLoading, isError }] = useLogOutMutation();
-  const dispatch = useDispatch<AppDispatch>();
-
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(removeUser());
-      dispatch(deleteChatSettings());
-    }
-  }, [isSuccess]);
+  const { func: logOut, isError } = useLogOut();
 
   return (
-    <div className={classes.block}>
-      <UserInfoTemplate className={classes.block__user} url={url} color={color} username={username} />
+    <div className={classNames(classes.block, className)}>
+      <UserInfoTemplate
+        className={classes.block__user}
+        url={url}
+        color={color}
+        username={username}
+      />
       <div className={classes.block__buttons}>
         <Tooltip
           className="tooltip"

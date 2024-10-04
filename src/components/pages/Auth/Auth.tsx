@@ -19,8 +19,6 @@ export default function () {
   const [activeState, setActiveState] = useState<EnumToggleAuthState>();
 
   useEffect(() => {
-    console.log(user);
-
     if (user) {
       navigate("/profile");
     }

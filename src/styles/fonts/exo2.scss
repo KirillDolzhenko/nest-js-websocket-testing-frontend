@@ -1,1 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+@import "../mixins";
+ 
+@include ffNew("exo2", "Exo2", "Black", 800);
+@include ffNew("exo2", "Exo2", "ExtraBold", 800);
+@include ffNew("exo2", "Exo2", "Bold", 700);
+@include ffNew("exo2", "Exo2", "SemiBold", 600);
+@include ffNew("exo2", "Exo2", "Medium", 500);
+@include ffNew("exo2", "Exo2", "Regular", 400);
+@include ffNew("exo2", "Exo2", "Light", 300);
+@include ffNew("exo2", "Exo2", "Thin", 100);

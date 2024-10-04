@@ -75,7 +75,7 @@ export default function () {
         placeholder="Password"
         error={errorsSignUp.password?.message}
       />
-      <ButtonForm type="submit">Registrate</ButtonForm>
+      <ButtonForm type="submit">Register</ButtonForm>
 
       {isLoadingSignUp ? (
         <LoadingText />

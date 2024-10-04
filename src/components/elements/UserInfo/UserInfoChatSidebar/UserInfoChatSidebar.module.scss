@@ -13,6 +13,7 @@
         align-items: center;
 
         & button, a {
+            user-select: none;
             width: 15px;
             height: 15px;
 

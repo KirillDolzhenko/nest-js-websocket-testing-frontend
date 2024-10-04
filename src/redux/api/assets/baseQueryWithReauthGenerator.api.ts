@@ -12,6 +12,8 @@ function setTokenToHeader(args: FetchArgsWithReauth, api: BaseQueryApi) {
     
     const token = (api.getState() as RootState).authSlice.tokens?.access_token;
   
+    console.log("TOKEN - ", token)
+
     if (token && headers instanceof Headers) {
       headers.set('Authorization', `Bearer ${token}`)
     } 
@@ -44,11 +46,13 @@ export const baseQueryWithReauthGenerator = (pathCore: string = "") => {
         authLogic
       } = args;
 
-      args.url = `${pathCore}/${args.url}` 
+      args.url = `${pathCore}/${args.url}`;
 
       if (authLogic) {
         args = setTokenToHeader(args, api)
       }
+
+      console.log(args, "ARGS")
 
       // Обработка отправки токена, если запрос в этом нуждается;
       let responseBaseQuery = await baseQuery(args, api, extraOptions);
@@ -72,7 +76,7 @@ export const baseQueryWithReauthGenerator = (pathCore: string = "") => {
           
         } else {
           api.dispatch(removeUser())
-
+          
           throw "Invalid token"
         }
       }

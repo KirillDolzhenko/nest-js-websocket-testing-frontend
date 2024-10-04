@@ -103,6 +103,7 @@ export const authApi = createApi({
         transformResponse: (response: {
           data: IDBUser
         }) => response.data,
+        invalidatesTags: ["userAuth"],
         transformErrorResponse: (response) => {
             return response
         },
@@ -114,6 +115,7 @@ export const authApi = createApi({
           authLogic: true,
           credentials: "include"
         }),
+        // invalidatesTags: ["userAuth"],
         transformResponse: (response: IDBLogOutResponse) => response.data.success,
         transformErrorResponse: (response) => {
             return response

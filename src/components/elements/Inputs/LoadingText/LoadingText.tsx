@@ -1,5 +1,5 @@
-import classes from "./LoadingText.module.scss";
+import WhiteText from "../WhiteText/WhiteText";
 
 export default function () {
-  return <div className={classes.loading}>Loading...</div>;
+  return <WhiteText>Loading...</WhiteText>;
 }

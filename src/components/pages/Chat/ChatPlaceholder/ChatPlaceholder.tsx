@@ -1,10 +1,10 @@
 import Lottie from "lottie-react";
 import classes from "./ChatPlaceholder.module.scss";
 import { lottieFire } from "@/config/lotties";
-import { IPropsClassName } from "@/types/props/props";
+import { IPropsChildren, IPropsClassName } from "@/types/props/props";
 import classNames from "classnames";
 
-export default function ({ className }: IPropsClassName) {
+export default function ({ className, children }: IPropsChildren) {
   return (
     <div className={classNames(className, classes.chatPlaceholder)}>
       <div className={classes.chatPlaceholder__content}>
@@ -17,10 +17,7 @@ export default function ({ className }: IPropsClassName) {
             height: "100px",
           }}
         />
-        <div className={classes.chatPlaceholder__message}>
-          <mark>Привет!</mark> Выбери контакт, чтобы написать{" "}
-          <mark>сообщение!</mark>
-        </div>
+        <div className={classes.chatPlaceholder__message}>{children}</div>
       </div>
     </div>
   );

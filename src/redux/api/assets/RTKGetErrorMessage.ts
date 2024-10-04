@@ -1,5 +1,7 @@
 export function RTKGetErrorMessage(error: unknown): string {
 
+  console.log(error)
+  
   if (
     error instanceof Object &&
     "data" in error &&

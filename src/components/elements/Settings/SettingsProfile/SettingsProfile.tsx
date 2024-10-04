@@ -17,15 +17,21 @@ import {
 } from "@/validators/changeProfile.validator";
 import { EnumDBUserColor, IRTKQueryUpdateProfile } from "@/types/redux/auth";
 import { useUploadPictureMutation } from "@/redux/api/files.api";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store";
 import { setPicColor, setPicProfile } from "@/redux/slice/authSlice";
 import ErrorText from "../../Inputs/ErrorText/ErrorText";
 import SuccessText from "../../Inputs/SuccessText/SuccessText";
 import LoadingText from "../../Inputs/LoadingText/LoadingText";
+import WhiteText from "../../Inputs/WhiteText/WhiteText";
+// import { RootState } from "@reduxjs/toolkit/query";
 
 export default function ({ user }: IPropsSettingsProfile) {
   const dispatch = useDispatch<AppDispatch>();
+
+  const userPic = useSelector(
+    (state: RootState) => state.authSlice.user?.picUrl
+  );
 
   const [activeUpload, setActiveUpload] = useState<boolean>(false);
   // const [deletedState, setDeletedState] = useState<boolean>(false);
@@ -51,6 +57,7 @@ export default function ({ user }: IPropsSettingsProfile) {
     handleSubmit: handleSubmitChangeProfile,
     formState: { errors: errorsChangeProfile },
     control,
+    watch,
   } = useForm<ChangeProfileSchemaType>({
     resolver: zodResolver(ChangeProfileSchema),
     defaultValues: {
@@ -61,9 +68,9 @@ export default function ({ user }: IPropsSettingsProfile) {
     },
   });
 
-  useEffect(() => {
-    console.log(errorsChangeProfile);
-  }, [errorsChangeProfile]);
+  // useEffect(() => {
+  //   console.log(errorsChangeProfile);
+  // }, [errorsChangeProfile]);
 
   const [
     uploadPicture,
@@ -71,7 +78,7 @@ export default function ({ user }: IPropsSettingsProfile) {
       // isError: isErrorUploadPicture,
       // isSuccess: isSuccessUploadPicture,
 
-      isLoading: isLoadingUploadPicture,
+      // isLoading: isLoadingUploadPicture,
       data: dataUploadPicture,
     },
   ] = useUploadPictureMutation();
@@ -96,11 +103,11 @@ export default function ({ user }: IPropsSettingsProfile) {
     },
   ] = useRemovePicProfileMutation();
 
-  useEffect(() => {
-    if (dataUpdateProfile) {
-      console.log(dataUpdateProfile);
-    }
-  }, [dataUpdateProfile]);
+  // useEffect(() => {
+  //   if (dataUpdateProfile) {
+  //     console.log(dataUpdateProfile);
+  //   }
+  // }, [dataUpdateProfile]);
 
   const { field } = useController({
     name: "picUrl",
@@ -108,10 +115,8 @@ export default function ({ user }: IPropsSettingsProfile) {
   });
 
   useEffect(() => {
-    if (user.picUrl) {
-      field.onChange(user.picUrl);
-    }
-  }, [user.picUrl]);
+    field.onChange(userPic ? userPic : "");
+  }, [userPic]);
 
   useEffect(() => {
     if (dataUploadPicture) {
@@ -121,13 +126,28 @@ export default function ({ user }: IPropsSettingsProfile) {
   }, [dataUploadPicture]);
 
   const onSumbitChangeProfile = useCallback((data: IRTKQueryUpdateProfile) => {
-    if (user.picUrl) {
-      data.picUrl = undefined;
-      removePicProfile();
-    }
-    console.log(data);
     updateProfile(data);
   }, []);
+
+  const [changed, setChanged] = useState<boolean>(false);
+
+  const formChanges = watch();
+
+  useEffect(() => {
+    console.log("Changes", formChanges);
+    console.log("User", user);
+
+    if (
+      formChanges.email !== user.email ||
+      formChanges.username !== user.username ||
+      formChanges.picColor !== user.picColor ||
+      formChanges.picUrl !== user.picUrl
+    ) {
+      setChanged(true);
+    } else {
+      setChanged(false);
+    }
+  }, [formChanges, user]);
 
   return (
     <section className={classes.settings}>
@@ -165,6 +185,7 @@ export default function ({ user }: IPropsSettingsProfile) {
                           e.target.files[0] &&
                           e.target.files[0].size < 5000000
                         ) {
+                          console.log("999999999999999");
                           uploadPicture({ file: e.target.files[0] });
                         }
                       }}
@@ -314,7 +335,9 @@ export default function ({ user }: IPropsSettingsProfile) {
 
         <ButtonForm type="submit">Change</ButtonForm>
         <span className={classes.status}>
-          {isLoadingUpdateProfile || isLoadingPicProfile ? (
+          {changed ? (
+            <WhiteText>Unsaved changes</WhiteText>
+          ) : isLoadingUpdateProfile || isLoadingPicProfile ? (
             <LoadingText />
           ) : isErrorUpdateProfile || isErrorPicProfile ? (
             <ErrorText>Error occured</ErrorText>

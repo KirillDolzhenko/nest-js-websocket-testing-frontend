@@ -18,27 +18,38 @@ const useRenderMessagesContent: TUseRenderMessagesContent = (content) => {
 
     // console.log("Render");
 
-    return content.map((el) => {
-      const currentDate = moment(el.createdAt).format("YYYY-MM-DD");
-      const showDate = currentDate !== lastDate;
+    if (content.length) {
+      return content.map((el) => {
+        const currentDate = moment(el.createdAt).format("YYYY-MM-DD");
+        const showDate = currentDate !== lastDate;
 
-      lastDate = currentDate !== lastDate ? currentDate : lastDate;
+        lastDate = currentDate !== lastDate ? currentDate : lastDate;
 
-      return (
-        <>
-          {showDate && (
-            <DateMessage key={currentDate}>
-              {currentDate == today
-                ? "Today"
-                : currentDate == yesterday
-                ? "Yesterday"
-                : moment(el.createdAt).format("LL")}
-            </DateMessage>
-          )}
-          {<Message chatType={chatType as EnumChatType} key={el.id} content={el} sender={el.sender.id == userId} />}
-        </>
-      );
-    });
+        return (
+          <>
+            {showDate && (
+              <DateMessage key={currentDate}>
+                {currentDate == today
+                  ? "Today"
+                  : currentDate == yesterday
+                  ? "Yesterday"
+                  : moment(el.createdAt).format("LL")}
+              </DateMessage>
+            )}
+            {
+              <Message
+                chatType={chatType as EnumChatType}
+                key={el.id}
+                content={el}
+                sender={el.sender.id == userId}
+              />
+            }
+          </>
+        );
+      });
+    } else {
+      return <DateMessage>So far, it's empty :(</DateMessage>;
+    }
   }, [content]);
 
   return renderMessagesContent;

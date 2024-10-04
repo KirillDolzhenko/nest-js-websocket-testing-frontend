@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import Auth from "../pages/Auth/Auth";
 import { useAuthCheck } from "../hooks/HOKs/useAuthCheck";
+import WhiteText from "../elements/Inputs/WhiteText/WhiteText";
 
 export default function () {
   const { isSuccessLogIn, isErrorLogIn, user, access_token } = useAuthCheck();
@@ -10,6 +11,6 @@ export default function () {
   } else if (isSuccessLogIn || user) {
     return <Navigate to="/profile" />;
   } else {
-    return <>Загрузка...</>;
+    return <WhiteText>Loading...</WhiteText>;
   }
 }

@@ -1,7 +1,8 @@
+import { RTKGetErrorMessage } from "@/redux/api/assets/RTKGetErrorMessage";
 import { useAuthMeQuery } from "@/redux/api/auth.api";
 import { setTokens, setUser } from "@/redux/slice/authSlice";
 import { AppDispatch, RootState } from "@/redux/store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export function useAuthCheck() {
@@ -11,25 +12,42 @@ export function useAuthCheck() {
       (state: RootState) => state.authSlice.tokens?.access_token
     );
 
+    const [inited, setInited] = useState<boolean>(false);
+
     const {
       data: dataAuthMe,
-      isLoading: isErrorLogIn,
+      error,
+      isLoading,
+      isError: isErrorLogIn,
       isSuccess: isSuccessLogIn,
-      refetch
+      refetch,
+      
     } = useAuthMeQuery();
+
+    useEffect(() => {
+      if (inited === false) {
+        setInited(true)
+      }
+    }, [])
 
     useEffect(() => {
       if (!user && access_token) {
         refetch();
-        console.log("REFETCHH")
-      }
+      } 
     }, [user, access_token]);
 
     useEffect(() => {
-      if (dataAuthMe) {
-        console.log(dataAuthMe)
+      if (isErrorLogIn) {
+        console.log(dataAuthMe, isErrorLogIn, RTKGetErrorMessage(error));
+      }
+    }, [isErrorLogIn])
+
+    useEffect(() => {
+      if (dataAuthMe && inited) {
         dispatch(setUser(dataAuthMe.user));
         dispatch(setTokens(dataAuthMe.tokens));
+      } else if (inited === false) {
+        setInited(true)
       }
     }, [dataAuthMe]);
 
