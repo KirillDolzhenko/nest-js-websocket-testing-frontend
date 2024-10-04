@@ -1,4 +1,3 @@
-import { RTKGetErrorMessage } from "@/redux/api/assets/RTKGetErrorMessage";
 import { useAuthMeQuery } from "@/redux/api/auth.api";
 import { setTokens, setUser } from "@/redux/slice/authSlice";
 import { AppDispatch, RootState } from "@/redux/store";
@@ -35,11 +34,6 @@ export function useAuthCheck() {
         refetch();
       } 
     }, [user, access_token]);
-
-    useEffect(() => {
-      if (isErrorLogIn) {
-      }
-    }, [isErrorLogIn])
 
     useEffect(() => {
       if (dataAuthMe && inited) {

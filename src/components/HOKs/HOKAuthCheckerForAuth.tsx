@@ -1,7 +1,6 @@
 import { Navigate } from "react-router-dom";
 import Auth from "../pages/Auth/Auth";
 import { useAuthCheck } from "../hooks/HOKs/useAuthCheck";
-import WhiteText from "../elements/Inputs/WhiteText/WhiteText";
 import ChatPlaceholder from "../pages/Chat/ChatPlaceholder/ChatPlaceholder";
 
 export default function () {

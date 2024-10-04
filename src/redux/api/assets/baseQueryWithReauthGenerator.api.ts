@@ -79,6 +79,7 @@ export const baseQueryWithReauthGenerator = (pathCore: string = "") => {
 
       return responseBaseQuery
     } catch (error) {
+      console.log(error)
     }
   }
 }
