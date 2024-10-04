@@ -13,19 +13,15 @@ import useCopyToBuffer from "@/components/hooks/useCopyToBuffer";
 export default function ({
   url,
   active,
-   
   className,
   setActive,
 }: IPropsModalImage) {
   const ref = useRef<HTMLDivElement>(null);
-
-  console.log("fddf");
-
-  useClickOutside(ref, active, setActive);
-
+  
   const downloadFile = useDownloadFile(url);
-
   const copyBufferUrl = useCopyToBuffer(url)
+  
+  useClickOutside(ref, active, setActive);
 
   return (
     <div className={classes.modal}>

@@ -33,7 +33,6 @@ export default function ():TUseLoadServerMes {
       useGetMessagesDirectMutation();
 
     useEffect(() => {
-      console.log(chatDataId, userId, chatType)
       if (chatDataId && userId) {
         setLoadedServerMes(false);
         if (chatType == EnumChatType.DIRECT) {
@@ -42,14 +41,12 @@ export default function ():TUseLoadServerMes {
             user_recipient: chatDataId,
           });
         } else {
-          console.log("g")
           getMessageGroup(chatDataId)
         } 
       }        
     }, [chatDataId, userId, chatType]);
 
     useEffect(() => {
-      console.log("g2")
       if (chatType == EnumChatType.DIRECT) {
         if (isSuccess && data) {
           dispatch(setMessages(data.content));
@@ -60,10 +57,6 @@ export default function ():TUseLoadServerMes {
         }
       }
     }, [data, dataGroup, isSuccess, isSuccessGroup]);
-
-    useEffect(() => {
-      console.log("LOAD")
-    }, [isLoadingGroup])
     
     const [loadedServerMes, setLoadedServerMes] = useState<boolean>(false);
 

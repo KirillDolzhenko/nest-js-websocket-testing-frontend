@@ -34,24 +34,7 @@ export default function ({ user }: IPropsSettingsProfile) {
   );
 
   const [activeUpload, setActiveUpload] = useState<boolean>(false);
-  // const [deletedState, setDeletedState] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   console.log(user);
-  // }, [user]);
-
-  // useEffect(() => {
-  //   console.log(
-  //     {
-  //       username: user.username,
-  //       email: user.email,
-  //       picUrl: user.picUrl,
-  //       picColor: user.picColor,
-  //     },
-  //     "RHFF"
-  //   );
-  // }, []);
-
+ 
   const {
     register: registerChangeProfile,
     handleSubmit: handleSubmitChangeProfile,
@@ -68,16 +51,11 @@ export default function ({ user }: IPropsSettingsProfile) {
     },
   });
 
-  // useEffect(() => {
-  //   console.log(errorsChangeProfile);
-  // }, [errorsChangeProfile]);
-
   const [
     uploadPicture,
     {
       // isError: isErrorUploadPicture,
       // isSuccess: isSuccessUploadPicture,
-
       // isLoading: isLoadingUploadPicture,
       data: dataUploadPicture,
     },
@@ -89,25 +67,15 @@ export default function ({ user }: IPropsSettingsProfile) {
       isError: isErrorUpdateProfile,
       isSuccess: isSuccessUpdateProfile,
       isLoading: isLoadingUpdateProfile,
-
-      data: dataUpdateProfile,
     },
   ] = useUpdateProfileMutation();
 
   const [
-    removePicProfile,
     {
       isError: isErrorPicProfile,
-      // isSuccess: isSuccessPicProfile,
       isLoading: isLoadingPicProfile,
     },
   ] = useRemovePicProfileMutation();
-
-  // useEffect(() => {
-  //   if (dataUpdateProfile) {
-  //     console.log(dataUpdateProfile);
-  //   }
-  // }, [dataUpdateProfile]);
 
   const { field } = useController({
     name: "picUrl",
@@ -134,8 +102,6 @@ export default function ({ user }: IPropsSettingsProfile) {
   const formChanges = watch();
 
   useEffect(() => {
-    console.log("Changes", formChanges);
-    console.log("User", user);
 
     if (
       formChanges.email !== user.email ||
@@ -151,7 +117,6 @@ export default function ({ user }: IPropsSettingsProfile) {
 
   return (
     <section className={classes.settings}>
-      {/* <h3>Profile settings</h3> */}
       <form
         onSubmit={handleSubmitChangeProfile(onSumbitChangeProfile)}
         className={classes.settings__form}
@@ -185,7 +150,6 @@ export default function ({ user }: IPropsSettingsProfile) {
                           e.target.files[0] &&
                           e.target.files[0].size < 5000000
                         ) {
-                          console.log("999999999999999");
                           uploadPicture({ file: e.target.files[0] });
                         }
                       }}
@@ -200,7 +164,6 @@ export default function ({ user }: IPropsSettingsProfile) {
                       type="button"
                       onClick={() => {
                         dispatch(setPicProfile(undefined));
-                        // setDeletedState(true);
                       }}
                       className={classes.image__delete}
                     ></button>

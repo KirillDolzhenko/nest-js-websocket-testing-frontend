@@ -26,10 +26,6 @@ export default function ({ className }: IPropsClassName) {
     (state: RootState) => state.chatSlice.chatMessages
   );
 
-  // useEffect(() => {
-  //   console.log("updated", chatMessages, chatType);
-  // }, [chatMessages]);
-
   return (
     <div className={classNames(classes.chatContent, className)}>
       <div className={classes.chatContent__header}>

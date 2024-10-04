@@ -19,8 +19,6 @@ export const authApi = createApi({
           data: IDBUserWithTokens
         }) => response.data,
         transformErrorResponse: (response) => {
-            console.log(response)
-
             return response
         },
       }),
@@ -34,8 +32,6 @@ export const authApi = createApi({
           data: IJWTTokensRefresh
         }) => response.data,
         transformErrorResponse: (response) => {
-            console.log(response)
-
             return response
         },
       }),
@@ -51,12 +47,7 @@ export const authApi = createApi({
         }),
         transformResponse: (response: {
           data: IDBUserWithTokens
-        }) => response.data,
-        transformErrorResponse: (response) => {
-            console.log(response)
-        
-            return response
-        },
+        }) => response.data
       }),
       signUp: builder.mutation<IDBUserWithTokens, IRTKQuerySignUp>({
         query: ({username, email, password}) => ({
@@ -88,11 +79,7 @@ export const authApi = createApi({
         invalidatesTags: ["userAuth"],
         transformResponse: (response: {
           data: IDBUser
-        }) => response.data,
-        transformErrorResponse: (response) => {
-            console.log(response)
-            return response
-        },
+        }) => response.data
       }),
       removePicProfile: builder.mutation<IDBUser, void>({
         query: () => ({

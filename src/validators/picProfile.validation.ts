@@ -3,8 +3,6 @@ import { z } from "zod";
 export const FileSchema = z.object({
     file: z.any()
     .refine((file: File) => {
-        console.log(file)
-        
         return file
     }, "File is required")
     // .refine(

@@ -42,15 +42,8 @@ export default function () {
   }, [dataSignUp]);
 
   const onSubmitSignUp = useCallback((data: SignUpSchemaType) => {
-    console.log("FFFF");
     signup(data);
   }, []);
-
-  useEffect(() => {
-    // if (isErrorSignUp) {
-    console.log("error", isErrorSignUp);
-    // }
-  }, [isErrorSignUp]);
 
   return (
     <form

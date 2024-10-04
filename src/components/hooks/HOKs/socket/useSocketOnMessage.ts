@@ -27,7 +27,6 @@ export default function () {
     useEffect(() => {
         if (socket && userId) {
           socket.on("message", (data: IDBMessage) => {
-            console.log(data, "MESSSSSAGEEE")
 
             if (chatType == data.recipientType) {
               if (chatType == EnumChatType.DIRECT) {

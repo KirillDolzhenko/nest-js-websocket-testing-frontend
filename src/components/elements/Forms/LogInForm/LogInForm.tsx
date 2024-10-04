@@ -28,22 +28,12 @@ export default function () {
   ] = useLogInMutation();
 
   const onSubmitLogIn = useCallback((data: LogInSchemaType) => {
-    console.log(typeof data);
     login(data);
-
-    console.log("l", data);
   }, []);
 
-  useEffect(() => {
-    console.log(error, "ERRRORROROROR");
-  }, [error]);
 
   useEffect(() => {
-    console.log(dataLogIn);
-
     if (dataLogIn) {
-      console.log(dataLogIn);
-
       dispatch(setUser(dataLogIn.user));
       dispatch(setTokens(dataLogIn.tokens));
     }

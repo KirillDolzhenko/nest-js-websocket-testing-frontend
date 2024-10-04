@@ -39,8 +39,6 @@ const chatSlice = createSlice({
         },
 
         setGroupChat(state, action: PayloadAction<IDBGroupBasic>) {
-           console.log("setGroupChat")
-           
             state.chatType = EnumChatType.GROUP;
             state.chatData = action.payload;
             state.chatMessages = [];

@@ -37,12 +37,7 @@ export const chatApi = createApi({
         }) => {
           return response.data
         },
-        providesTags: ["chatApi"],
-        transformErrorResponse: (response) => {
-            console.log(response)
-
-            return response
-        },
+        providesTags: ["chatApi"]
       })
     })
   })

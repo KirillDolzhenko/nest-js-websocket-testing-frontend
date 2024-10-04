@@ -25,8 +25,6 @@ export default function ({
       getAllUsers({
         arrId: selectedUsers.map((el) => el.id),
       });
-
-      // console.log(selectedUsers.map((el) => el.id));
     }
   }, [activeList, selectedUsers]);
 

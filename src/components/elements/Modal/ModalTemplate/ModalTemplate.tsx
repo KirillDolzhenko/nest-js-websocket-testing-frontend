@@ -13,30 +13,10 @@ export default function ({
   active,
   children,
   setActive,
-   
-  overflow = false,
 }: IPropsModalTemplate) {
   const refModal = useRef<HTMLDivElement>(null);
 
   useClickOutside(refModal, active, setActive);
-
-  // useEffect(() => {
-  //   function checkClick(e: MouseEvent) {
-  //     console.log(refModal.current, e.target instanceof Node, active);
-  //     if (
-  //       refModal.current &&
-  //       e.target instanceof Node &&
-  //       active &&
-  //       !refModal.current.contains(e.target)
-  //     ) {
-  //       setActive(false);
-  //     }
-  //   }
-
-  //   document.addEventListener("click", checkClick);
-
-  //   return () => document.removeEventListener("click", checkClick);
-  // }, [active]);
 
   return (
     <div className={classNames(classes.modal__container, className)}>

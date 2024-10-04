@@ -15,14 +15,11 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         setUser(state, action: PayloadAction<IDBUser>) {
-            console.log("swt")
             state.user = action.payload;
         },
 
         setTokens(state, action: PayloadAction<IJWTTokens>) {
             state.tokens = action.payload; 
-
-            // console.log(action.payload.access_token, "AAACC")
 
             localStorage.setItem("access_token", action.payload.access_token);
         },
@@ -37,11 +34,9 @@ const authSlice = createSlice({
         },
         
         removeUser(state) {
-            console.log("RM")
             state.user = null;
             state.tokens = null;
             localStorage.removeItem("access_token");   
-            console.log(state)         
         },
 
         setPicProfile(state, action: PayloadAction<string | undefined>) {

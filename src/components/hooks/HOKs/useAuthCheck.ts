@@ -38,7 +38,6 @@ export function useAuthCheck() {
 
     useEffect(() => {
       if (isErrorLogIn) {
-        console.log(dataAuthMe, isErrorLogIn, RTKGetErrorMessage(error));
       }
     }, [isErrorLogIn])
 

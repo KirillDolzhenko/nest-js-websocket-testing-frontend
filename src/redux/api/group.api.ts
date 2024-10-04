@@ -22,14 +22,10 @@ export const groupApi = createApi({
           transformResponse: (response: {
             data: IDBGroup
           }) => {
-            console.log("group", response)
-
             return response.data
           },
           invalidatesTags: ["groupApi"],
           transformErrorResponse: (response) => {
-              console.log(response)
-
               return response
           },
         }),
@@ -45,12 +41,7 @@ export const groupApi = createApi({
 
             return response.data
           },
-          providesTags: ["groupApi"],
-          transformErrorResponse: (response) => {
-              console.log(response)
-
-              return response
-          },
+          providesTags: ["groupApi"]
         }),
         getMessagesGroup: builder.mutation<IDBMessage[], string>({
           query: (id) => ({
@@ -61,15 +52,8 @@ export const groupApi = createApi({
           transformResponse: (response: {
             data: IDBMessage[]
           }) => {
-            // console.log("contacts", response)
-  
             return response.data
           },
-          transformErrorResponse: (response) => {
-            console.log(response)
-
-            return response
-      },
     })
   })
 })

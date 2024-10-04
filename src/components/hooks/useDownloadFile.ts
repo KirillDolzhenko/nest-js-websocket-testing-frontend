@@ -18,7 +18,6 @@ const useDownloadFile: TUseDownloadFile = (content) => {
         
         a.click();
       } catch (err) {
-        console.log(err);
       }
     
   }, [content]);

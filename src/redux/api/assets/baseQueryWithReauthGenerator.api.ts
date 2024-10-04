@@ -11,8 +11,6 @@ function setTokenToHeader(args: FetchArgsWithReauth, api: BaseQueryApi) {
     } = args;
     
     const token = (api.getState() as RootState).authSlice.tokens?.access_token;
-  
-    console.log("TOKEN - ", token)
 
     if (token && headers instanceof Headers) {
       headers.set('Authorization', `Bearer ${token}`)
@@ -52,8 +50,6 @@ export const baseQueryWithReauthGenerator = (pathCore: string = "") => {
         args = setTokenToHeader(args, api)
       }
 
-      console.log(args, "ARGS")
-
       // Обработка отправки токена, если запрос в этом нуждается;
       let responseBaseQuery = await baseQuery(args, api, extraOptions);
 
@@ -76,14 +72,13 @@ export const baseQueryWithReauthGenerator = (pathCore: string = "") => {
           
         } else {
           api.dispatch(removeUser())
-          
+
           throw "Invalid token"
         }
       }
 
       return responseBaseQuery
     } catch (error) {
-      console.log(error) 
     }
   }
 }

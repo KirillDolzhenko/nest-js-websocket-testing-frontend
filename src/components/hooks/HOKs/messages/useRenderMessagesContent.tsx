@@ -16,8 +16,6 @@ const useRenderMessagesContent: TUseRenderMessagesContent = (content) => {
     const today = moment().format("YYYY-MM-DD");
     const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
 
-    // console.log("Render");
-
     if (content.length) {
       return content.map((el) => {
         const currentDate = moment(el.createdAt).format("YYYY-MM-DD");

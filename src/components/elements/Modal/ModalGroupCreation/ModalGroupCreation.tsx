@@ -42,7 +42,6 @@ export default function ({
 
   useEffect(() => {
     if (isSuccess && data) {
-      console.log("RESPONSE", data);
       setActive(false);
     }
   }, [data]);
@@ -70,9 +69,6 @@ export default function ({
           </div>
 
           <ButtonForm
-            onClick={() => {
-              console.log("FFF", getValues());
-            }}
             type="submit"
           >
             Create

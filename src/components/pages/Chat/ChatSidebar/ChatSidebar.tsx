@@ -46,10 +46,6 @@ export default function ({ className }: IPropsClassName) {
     }
   }, [dataDirect]);
 
-  useEffect(() => {
-    // console.log("UPD", chatsGroup, chatsDirect);
-  }, [chatsGroup, chatsDirect]);
-
   return (
     <div className={classNames(classes.chatSidebar, className)}>
       <div className={classes.chatSidebar__logo}>
